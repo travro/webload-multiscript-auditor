@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using WMSA_Project.Models;
-using WMSA_Project.Services;
+using WMSA_Project.ModelFactories;
 
-namespace WMSA_Project.Services
+namespace WMSA_Project.ModelFactories
 {
     public static class RequestFactory
     {        public static List<Request> GetRequestFromXElement(XElement xElement)

@@ -8,7 +8,7 @@ using System.Xml;
 using System.Xml.Linq;
 using WMSA_Project.Models;
 
-namespace WMSA_Project.Services
+namespace WMSA_Project.ModelFactories
 {
     public static class ScriptFactory
     {

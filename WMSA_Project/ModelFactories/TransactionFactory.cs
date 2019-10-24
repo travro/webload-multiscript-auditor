@@ -6,7 +6,7 @@ using WMSA_Project.Models;
 using System;
 using System.Collections.Generic;
 
-namespace WMSA_Project.Services
+namespace WMSA_Project.ModelFactories
 {
     public static class TransactionFactory
     {
@@ -22,14 +22,16 @@ namespace WMSA_Project.Services
                 .Value
                 .Contains("BeginTransaction::"));
 
-            
+            //build list
             foreach (var jsPBE in jsParentBlockElements)
             {
                 var transaction = new Transaction(ParseTransactionName(jsPBE));
                 transaction.Requests = RequestFactory.GetRequestFromXElement(jsPBE);
+                transactions.Add(transaction);
             }
             return transactions;
         }
+        #region helpermethods
         private static string ParseTransactionName(XElement element)
         {
             string itemName = element
@@ -44,5 +46,6 @@ namespace WMSA_Project.Services
             }
             else return "Transaction";
         }
+        #endregion
     }
 }

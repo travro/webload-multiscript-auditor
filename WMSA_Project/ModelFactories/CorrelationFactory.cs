@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WMSA_Project.Models;
 using System.Xml.Linq;
 
-namespace WMSA_Project.Services
+namespace WMSA_Project.ModelFactories
 {
     public static class CorrelationFactory
     {
@@ -85,7 +85,6 @@ namespace WMSA_Project.Services
                     {
                         quoteStack.Pop();
                         secondParamEndingIndex = j;
-                        //argList.Add(buildingString.ToString());
                         argArray[2] = buildingString.ToString();
                         buildingString.Clear();
                         break;
@@ -100,7 +99,6 @@ namespace WMSA_Project.Services
                 }
             }
 
-            //argList.Insert(1, line.Substring(secondParamStartingIndex, secondParamEndingIndex - secondParamStartingIndex));
 
             argArray[1] = line.Substring(secondParamStartingIndex, secondParamEndingIndex - secondParamStartingIndex);
 
