@@ -55,11 +55,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ScriptControl.xaml.cs">
+      <DependentUpon>ScriptControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Script.cs" />
     <Compile Include="ModelFactories\CorrelationListFactory.cs" />
     <Compile Include="ModelFactories\RequestListFactory.cs" />
     <Compile Include="ModelFactories\ScriptFactory.cs" />
     <Compile Include="ModelFactories\TransactionListFactory.cs" />
+    <Page Include="Controls\ScriptControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -104,7 +111,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controls\" />
     <Folder Include="DAL\" />
     <Folder Include="Windows\" />
   </ItemGroup>

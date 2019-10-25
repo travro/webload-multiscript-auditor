@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="WMSA_Project.Controls.ScriptControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WMSA_Project.Controls"
+             mc:Ignorable="d" 
+             d:DesignWidth="330" d:DesignHeight="450" Background="LightGray">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <Button HorizontalAlignment="Right" Foreground="White" Background="DarkRed">X</Button>
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <TextBlock Background="LightPink">LM: 19.3.0.0-211</TextBlock>
+            <TextBlock >AdminGenTask_12Oct19</TextBlock>
+            <TextBlock>10/12/2019</TextBlock>
+        </StackPanel>
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="Transaction_Stack"/>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
