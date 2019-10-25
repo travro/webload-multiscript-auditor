@@ -56,10 +56,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Script.cs" />
-    <Compile Include="ModelFactories\CorrelationFactory.cs" />
-    <Compile Include="ModelFactories\RequestFactory.cs" />
+    <Compile Include="ModelFactories\CorrelationListFactory.cs" />
+    <Compile Include="ModelFactories\RequestListFactory.cs" />
     <Compile Include="ModelFactories\ScriptFactory.cs" />
-    <Compile Include="ModelFactories\TransactionFactory.cs" />
+    <Compile Include="ModelFactories\TransactionListFactory.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

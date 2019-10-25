@@ -8,11 +8,12 @@ using System.Xml.Linq;
 
 namespace WMSA_Project.ModelFactories
 {
-    public static class CorrelationFactory
+    public static class CorrelationListFactory
     {
         public static List<Correlation> GetCorrelationsFromXElement(XElement xElement)
-        {       
+        {
             var correlations = new List<Correlation>();
+            string[] corArgs;
 
             using (System.IO.StringReader reader = new System.IO.StringReader(xElement.Value))
             {
@@ -22,16 +23,19 @@ namespace WMSA_Project.ModelFactories
                     if (line == null) break;
                     if (line.Contains("setCorrelation"))
                     {
-                        string name = Parse(line, Ordinal.First) ?? "[Name]";
-                        string extractionLogic = Parse(line, Ordinal.Second) ?? "[ExtractionLogic]";
-                        string originalValue = Parse(line, Ordinal.Third) ?? "[OriginalValue]";
-                        correlations.Add(new Correlation(name, extractionLogic, originalValue));
+                        corArgs = Parse(line);
+                        correlations.Add(new Correlation()
+                        {                            
+                            Rule = corArgs[0],
+                            ExtractionLogic = corArgs[1],
+                            OriginalValue = corArgs[2]
+                        });
                     }
                 }
             }
             return correlations;
         }
-        private static string Parse(string line, Ordinal ord)
+        private static string[] Parse(string line)
         {
             //Capture outermost parenthesis
             Stack<char> quoteStack = new Stack<char>();
@@ -56,7 +60,6 @@ namespace WMSA_Project.ModelFactories
                     {
                         quoteStack.Pop();
                         secondParamStartingIndex = i;
-                        //argList.Add(buildingString.ToString());
                         argArray[0] = buildingString.ToString();
                         buildingString.Clear();
                         break;
@@ -102,20 +105,7 @@ namespace WMSA_Project.ModelFactories
 
             argArray[1] = line.Substring(secondParamStartingIndex, secondParamEndingIndex - secondParamStartingIndex);
 
-            switch (ord)
-            {
-                case Ordinal.First: return (argArray[0]);
-                case Ordinal.Second: return (argArray[1]);
-                case Ordinal.Third: return (argArray[2]);
-                default: return "--error--";
-            }
+            return argArray;
         }
-
-        public enum Ordinal
-        {
-            First = 1,
-            Second = 2,
-            Third = 3
-        };
     }
 }

@@ -12,7 +12,7 @@ namespace WMSA_Project.ModelFactories
 {
     public static class ScriptFactory
     {
-        public static Script BuildScriptFromFile(string filePath)
+        public static Script GetScriptFromFilePath(string filePath)
         {
             var script = new Script()
             {
@@ -26,7 +26,7 @@ namespace WMSA_Project.ModelFactories
                     using (XmlReader _xReader = XmlReader.Create(_fStream))
                     {
                         XDocument _XDoc = XDocument.Load(_xReader);
-                        script.Transactions = TransactionFactory.GetTransactionsFromXDoc(_XDoc);
+                        script.Transactions = TransactionListFactory.GetTransactionsFromXDoc(_XDoc);
                     }
                 }
             }

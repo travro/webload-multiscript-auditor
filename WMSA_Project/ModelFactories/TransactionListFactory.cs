@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace WMSA_Project.ModelFactories
 {
-    public static class TransactionFactory
+    public static class TransactionListFactory
     {
         public static List<Transaction> GetTransactionsFromXDoc(XDocument xDoc)
         {
@@ -26,7 +26,7 @@ namespace WMSA_Project.ModelFactories
             foreach (var jsPBE in jsParentBlockElements)
             {
                 var transaction = new Transaction(ParseTransactionName(jsPBE));
-                transaction.Requests = RequestFactory.GetRequestFromXElement(jsPBE);
+                transaction.Requests = RequestListFactory.GetRequestsFromXElement(jsPBE);
                 transactions.Add(transaction);
             }
             return transactions;

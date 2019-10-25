@@ -10,8 +10,9 @@ using WMSA_Project.ModelFactories;
 
 namespace WMSA_Project.ModelFactories
 {
-    public static class RequestFactory
-    {        public static List<Request> GetRequestFromXElement(XElement xElement)
+    public static class RequestListFactory
+    {
+        public static List<Request> GetRequestsFromXElement(XElement xElement)
         {
             var requests = new List<Request>();
 
@@ -39,7 +40,7 @@ namespace WMSA_Project.ModelFactories
                             Verb = ParseRequestVerb(httpEl),
                             Parameters = ParseRequestParamters(httpEl),
                             Visible = true,
-                            Correlations = CorrelationFactory.GetCorrelationsFromXElement(nodeScriptEl)
+                            Correlations = CorrelationListFactory.GetCorrelationsFromXElement(nodeScriptEl)
                         });
                     }
                     else if (httpEl == httpHeaderElements.First())
