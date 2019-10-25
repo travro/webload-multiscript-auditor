@@ -26,7 +26,7 @@ namespace WMSA_Project.ModelFactories
             foreach (var jsPBE in jsParentBlockElements)
             {
                 var transaction = new Transaction(ParseTransactionName(jsPBE));
-                transaction.Requests = RequestListFactory.GetRequestsFromXElement(jsPBE);
+                transaction.Requests = RequestListFactory.GetRequestsFromXElement(jsPBE, false);
                 transactions.Add(transaction);
             }
             return transactions;

@@ -12,7 +12,7 @@ namespace WMSA_Project.ModelFactories
 {
     public static class RequestListFactory
     {
-        public static List<Request> GetRequestsFromXElement(XElement xElement)
+        public static List<Request> GetRequestsFromXElement(XElement xElement, bool addNonVisibles = true)
         {
             var requests = new List<Request>();
 
@@ -31,6 +31,7 @@ namespace WMSA_Project.ModelFactories
                     .First()
                     .Element("NodeScript") ?? new XElement("NodeScript");
 
+                //the first request value in the string is the only visible value in the Webload IDE
                 foreach (var httpEl in httpHeaderElements)
                 { 
                     if (httpEl == httpHeaderElements.First() && nodeScriptEl.Value.Contains("setCorr"))
@@ -54,12 +55,15 @@ namespace WMSA_Project.ModelFactories
                     }
                     else
                     {
-                        requests.Add(new Request()
+                        if (addNonVisibles)
                         {
-                            Verb = ParseRequestVerb(httpEl),
-                            Parameters = ParseRequestParamters(httpEl),
-                            Visible = false
-                        });
+                            requests.Add(new Request()
+                            {
+                                Verb = ParseRequestVerb(httpEl),
+                                Parameters = ParseRequestParamters(httpEl),
+                                Visible = false
+                            }); 
+                        }
                     }
                 }
             }
