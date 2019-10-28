@@ -9,17 +9,17 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
         <Button HorizontalAlignment="Right" Foreground="White" Background="DarkRed">X</Button>
-        <StackPanel Grid.Row="1" Orientation="Vertical">
-            <TextBlock Background="LightPink">LM: 19.3.0.0-211</TextBlock>
-            <TextBlock >AdminGenTask_12Oct19</TextBlock>
-            <TextBlock>10/12/2019</TextBlock>
+        <StackPanel Grid.Row="1" Orientation="Vertical" x:Name="Stack_Attributes">
+            <TextBlock Background="LightPink" x:Name="TextBlock_TestGroup">LM: 19.3.0.0-211</TextBlock>
+            <TextBlock x:Name="TextBlock_ScriptName">AdminGenTask_12Oct19</TextBlock>
+            <TextBlock x:Name="TextBlock_ScriptDate">10/12/2019</TextBlock>
         </StackPanel>
         <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
-            <StackPanel x:Name="Transaction_Stack"/>
+            <StackPanel x:Name="Stack_Transactions"/>
         </ScrollViewer>
     </Grid>
 </UserControl>
