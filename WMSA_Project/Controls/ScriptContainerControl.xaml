@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="WMSA_Project.Controls.ScriptContainerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WMSA_Project.Controls"
+             mc:Ignorable="d" 
+             Height="600" Width="432" BorderThickness="1" BorderBrush="Black">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Height" Value="20"/>
+                <Setter Property="Width" Value="14"/>
+                <Setter Property="Background" Value="LightGray"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Foreground" Value="Black"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button IsEnabled="True" x:Name="Btn_Exit" Click="Btn_Exit_Click" Background="LightPink" Foreground="White" 
+                    Visibility="Hidden">x</Button>
+        </StackPanel>
+        <DockPanel Grid.Row="1" x:Name="DckPnl_Main">
+            <Button DockPanel.Dock="Left" x:Name="Btn_Left" Height="auto" Visibility="Hidden" Click="Btn_Left_Click">+</Button>  
+            <Button DockPanel.Dock="Right" x:Name="Btn_Right" Height="auto" Visibility="Hidden" Click="Btn_Right_Click">+</Button>
+            <ContentControl  x:Name="CntCtrl_Main">
+                <Button x:Name="Btn_Add" Click="Btn_Add_Click">+</Button>
+            </ContentControl>
+        </DockPanel>
+    </Grid>
+</UserControl>

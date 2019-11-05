@@ -24,17 +24,21 @@ namespace WMSA_Project.Controls
         public ScriptControl(Script script)
         {
             InitializeComponent();
-            //foreach(var t in script.Transactions)
-            //{
-            //    Stack_Transactions.Children.Add(new Expander()
-            //    {
-            //        Header = t.Name,
-            //        Content = t.Requests,
-            //        IsExpanded = false,
-            //        Background = Brushes.LightPink,
-            //        FontSize = 14
-            //    });
-            //}
+
+            foreach (var t in script.Transactions)
+            {
+                Stack_Transactions.Children.Add(new Expander()
+                {
+                    Header = t.Name,
+                    Content = t.Requests,
+                    IsExpanded = false,
+                    Background = Brushes.LightPink,
+                    FontSize = 14
+                });
+            }
+            Script = script;
         }
+
+        public Script Script { get; }
     }
 }

@@ -8,11 +8,9 @@
              d:DesignWidth="330" d:DesignHeight="450" Background="LightGray">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button HorizontalAlignment="Right" Foreground="White" Background="DarkRed">X</Button>
         <StackPanel Grid.Row="1" Orientation="Vertical" x:Name="Stack_Attributes">
             <TextBlock Background="LightPink" x:Name="TextBlock_TestGroup">LM: 19.3.0.0-211</TextBlock>
             <TextBlock x:Name="TextBlock_ScriptName">AdminGenTask_12Oct19</TextBlock>
