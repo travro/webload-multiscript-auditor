@@ -1,0 +1,29 @@
+﻿<Window x:Class="WMSA_Project.Windows.ImportScriptWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WMSA_Project.Windows"
+        mc:Ignorable="d"
+        Title="Import Script" Height="517.6" Width="788.8" WindowStyle="ToolWindow">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+        </Grid.Resources>
+        <StackPanel Grid.Row="0">
+            <ContentControl x:Name="Content_Control" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="Btn_Back" Click="Btn_Back_Click"  Visibility="Collapsed" >Back</Button>
+            <Button x:Name="Btn_Next" Click="Btn_Next_Click">Next</Button>
+            <Button x:Name="Btn_Imprt" Click="Btn_Imprt_Click" Visibility="Collapsed" IsEnabled="False">Import</Button>
+            <Button x:Name="Btn_Cancel" Click="Btn_Cancel_Click" IsCancel="True">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>
