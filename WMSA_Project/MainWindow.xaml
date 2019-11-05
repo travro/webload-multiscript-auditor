@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMSA_Project"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" WindowStyle="ToolWindow">
-    <Grid>
-        
+        Title="MainWindow" Height="900" Width="auto" WindowStyle="ToolWindow" Background="LightCyan">
+    <Grid Width="auto">
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="268*"/>
+            <ColumnDefinition Width="129*"/>
+        </Grid.ColumnDefinitions>-->
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <StackPanel x:Name="StkPnl_Main" Orientation="Horizontal"/>
+        </ScrollViewer>
     </Grid>
 </Window>
