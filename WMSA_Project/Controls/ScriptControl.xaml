@@ -8,15 +8,15 @@
              d:DesignWidth="330" d:DesignHeight="450" Background="LightGray">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1" Orientation="Vertical" x:Name="Stack_Attributes">
+        <StackPanel Grid.Row="0" Orientation="Vertical" x:Name="Stack_Attributes">
             <TextBlock Background="LightPink" x:Name="TextBlock_TestGroup">LM: 19.3.0.0-211</TextBlock>
             <TextBlock x:Name="TextBlock_ScriptName">AdminGenTask_12Oct19</TextBlock>
             <TextBlock x:Name="TextBlock_ScriptDate">10/12/2019</TextBlock>
         </StackPanel>
-        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel x:Name="Stack_Transactions"/>
         </ScrollViewer>
     </Grid>
