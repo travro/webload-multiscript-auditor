@@ -12,7 +12,7 @@
             <ColumnDefinition Width="129*"/>
         </Grid.ColumnDefinitions>-->
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <StackPanel x:Name="StkPnl_Main" Orientation="Horizontal"/>
+            <StackPanel x:Name="StkPnl_Main" Orientation="Horizontal" HorizontalAlignment="Center"/>
         </ScrollViewer>
     </Grid>
 </Window>

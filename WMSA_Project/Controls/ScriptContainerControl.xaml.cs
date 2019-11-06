@@ -15,28 +15,28 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WMSA_Project.Controls;
 using WMSA_Project.Models;
+using WMSA_Project.Models.Repositories;
+using WMSA_Project.Windows;
 
 namespace WMSA_Project.Controls
 {
     /// <summary>
     /// Interaction logic for ScriptContainerControl.xaml
     /// </summary>
-    public partial class ScriptContainerControl : UserControl, INotifyPropertyChanged
+    public partial class ScriptContainerControl : UserControl
     {
         private ScriptControl _container;
+        private ScriptRepository _repo;
 
-        public ScriptContainerControl()
+        public ScriptContainerControl(ScriptRepository repo)
         {
             InitializeComponent();
+            _repo = repo;
+            //The first Script container control will not show it's exit button, but subsequent controls will
+            if (_repo.GetCount() > 1) { Btn_Exit.Visibility = Visibility.Visible; }
+
+
         }
-
-        public event EventHandler<ScriptContainerEventArgs> LeftButtonPressed;
-        public event EventHandler<ScriptContainerEventArgs> AddButtonPressed;
-        public event EventHandler<ScriptContainerEventArgs> RightButtonPressed;
-        public event EventHandler<ScriptContainerEventArgs> ExitButtonPressed;
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public ScriptControl Container
         {
@@ -47,8 +47,7 @@ namespace WMSA_Project.Controls
             set
             {
                 _container = value;
-                CntCtrl_Main.Content = _container;  //<-- uncomment this if autobiding does not work
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Container"));
+                CntCtrl_Main.Content = _container;
                 Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Visible;
             }
         }
@@ -56,34 +55,44 @@ namespace WMSA_Project.Controls
         #region handlers
         private void Btn_Add_Click(object sender, RoutedEventArgs e)
         {
-            AddButtonPressed?.Invoke(this, new ScriptContainerEventArgs(""));
+            var importScrptWin = new ImportScriptWindow();
+            importScrptWin.Closed += CheckScriptOnClose;
+            importScrptWin.Show();
         }
 
         private void Btn_Left_Click(object sender, RoutedEventArgs e)
         {
-            LeftButtonPressed?.Invoke(this, new ScriptContainerEventArgs(""));
+            _repo.AddBefore(this, new ScriptContainerControl(_repo));
         }
 
         private void Btn_Right_Click(object sender, RoutedEventArgs e)
         {
-            RightButtonPressed?.Invoke(this, new ScriptContainerEventArgs(""));
+            _repo.AddAfter(this, new ScriptContainerControl(_repo));
         }
 
         private void Btn_Exit_Click(object sender, RoutedEventArgs e)
         {
-            //raise removal event
-            ExitButtonPressed?.Invoke(this, new ScriptContainerEventArgs(""));
+            if (_repo.GetCount() > 1)
+            {
+                _repo.Remove(this);
+            }
+            else
+            {
+                CntCtrl_Main.Content = Btn_Add;
+                Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Hidden;
+            }
+
         }
         #endregion
 
-        #region helpermethods        
+        #region helpermethods
+        private void CheckScriptOnClose(object sender, EventArgs args)
+        {
+            if ((sender as ImportScriptWindow).Script != null)
+            {
+                Container = new ScriptControl((sender as ImportScriptWindow).Script);
+            }
+        }
         #endregion
-    }
-
-    public class ScriptContainerEventArgs : EventArgs
-    {
-        public string Value { get; set; }
-
-        public ScriptContainerEventArgs(string args) { Value = args; }
     }
 }
