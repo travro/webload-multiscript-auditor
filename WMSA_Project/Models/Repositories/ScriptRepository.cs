@@ -5,7 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WMSA_Project.Models.ModelFactories;
+using WMSA_Project.Models.Factories;
 using WMSA_Project.Models;
 using WMSA_Project.Controls;
 using WMSA_Project.Windows;
