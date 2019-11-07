@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using WMSA_Project.Models;
 
-namespace WMSA_Project.Models.Interfaces
+namespace WMSA_Project.Controls.Interfaces
 {
-    public interface IScriptImport
+    public interface IScriptImportControl
     {
         event EventHandler<ScriptReadyEventArgs> ScriptReady;
         Script GetScript();

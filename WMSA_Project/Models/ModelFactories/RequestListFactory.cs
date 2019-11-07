@@ -10,7 +10,7 @@ using WMSA_Project.Models.ModelFactories;
 
 namespace WMSA_Project.Models.ModelFactories
 {
-    public static class RequestListFactory
+    internal static class RequestListFactory
     {
         public static List<Request> GetRequestsFromXElement(XElement xElement, bool addNonVisibles = true)
         {

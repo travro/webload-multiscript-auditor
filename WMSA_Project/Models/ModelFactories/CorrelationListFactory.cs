@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace WMSA_Project.Models.ModelFactories
 {
-    public static class CorrelationListFactory
+    internal static class CorrelationListFactory
     {
         public static List<Correlation> GetCorrelationsFromXElement(XElement xElement)
         {
@@ -27,8 +27,7 @@ namespace WMSA_Project.Models.ModelFactories
                         correlations.Add(new Correlation()
                         {                            
                             Rule = corArgs[0],
-                            ExtractionLogic = corArgs[1],
-                            OriginalValue = corArgs[2]
+                            OriginalValue = corArgs[1]
                         });
                     }
                 }
@@ -39,14 +38,12 @@ namespace WMSA_Project.Models.ModelFactories
         {
             //Capture outermost parenthesis
             Stack<char> quoteStack = new Stack<char>();
-            int secondParamStartingIndex = 0;
-            int secondParamEndingIndex = 0;
             List<string> argList = new List<string>();
-            string[] argArray = new string[] { "--no argument captured--", "--no argument captured--", "--no argument captured--" };
+            string[] argArray = new string[] { "--no argument captured--", "--no argument captured--" };
             StringBuilder buildingString = new StringBuilder();
 
 
-            //get the first correlation argument
+            //get rule
             for (int i = 0; i < line.Length; i++)
             {
                 if (line[i] == '\"')
@@ -59,7 +56,6 @@ namespace WMSA_Project.Models.ModelFactories
                     else
                     {
                         quoteStack.Pop();
-                        secondParamStartingIndex = i;
                         argArray[0] = buildingString.ToString();
                         buildingString.Clear();
                         break;
@@ -74,7 +70,7 @@ namespace WMSA_Project.Models.ModelFactories
                 }
             }
 
-            //get the third
+            //get original value
             for (int j = line.Length - 1; j >= 0; j--)
             {
                 if (line[j] == '\"')
@@ -87,8 +83,7 @@ namespace WMSA_Project.Models.ModelFactories
                     else
                     {
                         quoteStack.Pop();
-                        secondParamEndingIndex = j;
-                        argArray[2] = buildingString.ToString();
+                        argArray[1] = buildingString.ToString();
                         buildingString.Clear();
                         break;
                     }
@@ -101,10 +96,6 @@ namespace WMSA_Project.Models.ModelFactories
                     }
                 }
             }
-
-
-            argArray[1] = line.Substring(secondParamStartingIndex, secondParamEndingIndex - secondParamStartingIndex);
-
             return argArray;
         }
     }

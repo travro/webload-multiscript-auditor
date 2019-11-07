@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace WMSA_Project.Models.ModelFactories
 {
-    public static class TransactionListFactory
+    internal static class TransactionListFactory
     {
         public static List<Transaction> GetTransactionsFromXDoc(XDocument xDoc)
         {

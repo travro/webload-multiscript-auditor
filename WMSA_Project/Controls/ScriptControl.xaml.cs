@@ -27,14 +27,35 @@ namespace WMSA_Project.Controls
 
             foreach (var t in script.Transactions)
             {
-                Stack_Transactions.Children.Add(new Expander()
+
+                var xpndr = new Expander()
                 {
                     Header = t.Name,
                     Content = t.Requests,
                     IsExpanded = false,
                     Background = Brushes.LightPink,
                     FontSize = 14
-                });
+                };
+
+                var reqStack = new StackPanel()
+                {
+                    Orientation = Orientation.Vertical
+                };
+
+                if (t.Requests != null)
+                {
+                    foreach (var r in t.Requests)
+                    {
+                        reqStack.Children.Add(new TextBlock()
+                        {
+                            Text = r.Verb + " " + r.Parameters
+                        });
+                    }
+                }
+                xpndr.Content = reqStack;
+
+                Stack_Transactions.Children.Add(xpndr);               
+
             }
             Script = script;
         }

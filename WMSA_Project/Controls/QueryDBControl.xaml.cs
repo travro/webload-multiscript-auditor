@@ -20,7 +20,7 @@ namespace WMSA_Project.Controls
     /// <summary>
     /// Interaction logic for QueryDBControl.xaml
     /// </summary>
-    public partial class QueryDBControl : UserControl,IScriptImport
+    public partial class QueryDBControl : UserControl,IScriptImportControl
     {
         public QueryDBControl()
         {

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WMSA_Project.Controls"
              mc:Ignorable="d" 
-             Height="600" Width="432" BorderThickness="1" BorderBrush="Black">
+             Height="900" Width="600" BorderThickness="1" BorderBrush="Black">
     <Grid>
         <Grid.Resources>
             <Style TargetType="Button">

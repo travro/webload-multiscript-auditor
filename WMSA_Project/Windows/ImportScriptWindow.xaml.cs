@@ -24,7 +24,7 @@ namespace WMSA_Project.Windows
     public partial class ImportScriptWindow : Window
     {
         SelectScriptPathControl _selectPathCtrl;  
-        IScriptImport _scriptImportCtrl;
+        IScriptImportControl _scriptImportCtrl;
 
         public ImportScriptWindow()
         {

@@ -71,7 +71,7 @@
     <Compile Include="Controls\SelectScriptPathControl.xaml.cs">
       <DependentUpon>SelectScriptPathControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Interfaces\IScriptImport.cs" />
+    <Compile Include="Controls\Interfaces\IScriptImportControl.cs" />
     <Compile Include="Models\Repositories\ScriptRepository.cs" />
     <Compile Include="Models\Script.cs" />
     <Compile Include="Models\ModelFactories\CorrelationListFactory.cs" />

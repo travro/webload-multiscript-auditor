@@ -14,15 +14,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WMSA_Project.Models;
-using WMSA_Project.Models.Interfaces;
 using WMSA_Project.Models.ModelFactories;
+using WMSA_Project.Controls.Interfaces;
 
 namespace WMSA_Project.Controls
 {
     /// <summary>
     /// Interaction logic for SelectFileControl.xaml
     /// </summary>
-    public partial class SelectFileControl : UserControl, IScriptImport
+    public partial class SelectFileControl : UserControl, IScriptImportControl
     {
         public SelectFileControl()
         {
