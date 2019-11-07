@@ -6,7 +6,7 @@ using WMSA_Project.Models;
 using System;
 using System.Collections.Generic;
 
-namespace WMSA_Project.Models.ModelFactories
+namespace WMSA_Project.Models.Factories
 {
     internal static class TransactionListFactory
     {

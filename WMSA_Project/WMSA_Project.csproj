@@ -74,10 +74,10 @@
     <Compile Include="Controls\Interfaces\IScriptImportControl.cs" />
     <Compile Include="Models\Repositories\ScriptRepository.cs" />
     <Compile Include="Models\Script.cs" />
-    <Compile Include="Models\ModelFactories\CorrelationListFactory.cs" />
-    <Compile Include="Models\ModelFactories\RequestListFactory.cs" />
-    <Compile Include="Models\ModelFactories\ScriptFactory.cs" />
-    <Compile Include="Models\ModelFactories\TransactionListFactory.cs" />
+    <Compile Include="Models\Factories\CorrelationListFactory.cs" />
+    <Compile Include="Models\Factories\RequestListFactory.cs" />
+    <Compile Include="Models\Factories\ScriptFactory.cs" />
+    <Compile Include="Models\Factories\TransactionListFactory.cs" />
     <Compile Include="Windows\ImportScriptWindow.xaml.cs">
       <DependentUpon>ImportScriptWindow.xaml</DependentUpon>
     </Compile>

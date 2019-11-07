@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using WMSA_Project.Models;
-using WMSA_Project.Models.ModelFactories;
 
-namespace WMSA_Project.Models.ModelFactories
+namespace WMSA_Project.Models.Factories
 {
     internal static class RequestListFactory
     {

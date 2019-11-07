@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WMSA_Project.Models;
 using System.Xml.Linq;
 
-namespace WMSA_Project.Models.ModelFactories
+namespace WMSA_Project.Models.Factories
 {
     internal static class CorrelationListFactory
     {
