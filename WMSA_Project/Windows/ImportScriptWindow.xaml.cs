@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WMSA_Project.Controls;
 using WMSA_Project.Models;
-using WMSA_Project.Models.Interfaces;
+using WMSA_Project.Controls.Interfaces;
 
 namespace WMSA_Project.Windows
 {
