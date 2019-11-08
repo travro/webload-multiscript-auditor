@@ -24,6 +24,9 @@ namespace WMSA_Project.Controls
         public ScriptControl(Script script)
         {
             InitializeComponent();
+            TxtBlck_TestGroup.Text = script.TestName + " | " + script.BuildVersion;
+            TxtBlk_ScriptName.Text = script.Name;
+            TxtBlck_ScriptDate.Text = script.RecordedDate.ToShortDateString();
 
             foreach (var t in script.Transactions)
             {
