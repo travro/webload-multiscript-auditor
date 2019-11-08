@@ -40,14 +40,8 @@ namespace WMSA_Project.Controls.AttributeControls
             get { return (ScriptAttribute)GetValue(AttributeProperty); }
             set { SetValue(AttributeProperty, value); }
         }
-        public static readonly DependencyProperty AttributeProperty = DependencyProperty.Register("Attribute", typeof(ScriptAttribute), typeof(ScriptAttributesControl));
 
-        public bool AddButtonVisible
-        {
-            get { return (bool)GetValue(AddButtonCollapsedProperty); }
-            set { SetValue(AddButtonCollapsedProperty, value); }
-        }
-        public static readonly DependencyProperty AddButtonCollapsedProperty = DependencyProperty.Register("AddButtonVisible", typeof(bool), typeof(ScriptAttributesControl));
+        public static readonly DependencyProperty AttributeProperty = DependencyProperty.Register("Attribute", typeof(ScriptAttribute), typeof(ScriptAttributesControl));
 
         public string DefaultValue { get; }
         public string SelectedValue
@@ -69,6 +63,11 @@ namespace WMSA_Project.Controls.AttributeControls
         public void Clear()
         {
             SelectedValue = DefaultValue;
+        }
+        
+        public bool IsValid()
+        {
+            return (SelectedValue != null && SelectedValue != "" && SelectedValue != DefaultValue);
         }
 
         #region handlers

@@ -5,20 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WMSA_Project.Controls.AttributeControls"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="500">
+             d:DesignHeight="30" d:DesignWidth="500" Margin="0">
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis"/>  
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
-    <Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" x:Name="Text_Block" HorizontalAlignment="Left" Margin="15,0,0,0.4" Text="{Binding SelectedValue}"/>
-            <Button Grid.Column="1" x:Name="Btn_Select" Content="Select" Click="Select_Button_Click"/>
-            <Button Grid.Column="2" x:Name="Btn_Add" Content="Add" Click="Add_Button_Click" Visibility="{Binding Path=AddButtonVisible, Converter={StaticResource BoolToVis}}"/>
-        </Grid>
-    </Grid>
+    <DockPanel LastChildFill="True">
+        <Button DockPanel.Dock="Right"  x:Name="Btn_Add" Content="Add" Click="Add_Button_Click"/>
+        <Button DockPanel.Dock="Right" x:Name="Btn_Select" Content="Select" Click="Select_Button_Click"/>
+        <TextBlock DockPanel.Dock="Right"  x:Name="Text_Block" HorizontalAlignment="Left" Margin="15,0,0,0.4" Text="{Binding SelectedValue}"/>
+    </DockPanel>
 </UserControl>
+<!--Visibility="{Binding Path=ShowAddButton, Converter={StaticResource BoolToVis} }"-->
