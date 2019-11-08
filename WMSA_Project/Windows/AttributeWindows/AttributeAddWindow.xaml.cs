@@ -26,5 +26,14 @@ namespace WMSA_Project.Windows.AttributeWindows
         }
 
         public event EventHandler<ClosedWithAttributeEventArgs> ClosedWithAttribute;
+
+        private void Btn_Close_Click(object sender, RoutedEventArgs e)
+        {
+            ClosedWithAttribute?.Invoke(this, new ClosedWithAttributeEventArgs()
+            {
+                SelectedValue = Txt_Box.Text
+            });
+            Close();
+        }
     }
 }
