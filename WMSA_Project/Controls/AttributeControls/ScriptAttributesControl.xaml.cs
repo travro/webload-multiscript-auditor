@@ -17,7 +17,7 @@ using WMSA_Project.Models;
 using WMSA_Project.Windows.AttributeWindows;
 using WMSA_Project.Windows.Interfaces;
 
-namespace WMSA_Project.Controls.AttributeControlers
+namespace WMSA_Project.Controls.AttributeControls
 {
     /// <summary>
     /// Interaction logic for ScriptAttributeControl1.xaml
@@ -78,7 +78,7 @@ namespace WMSA_Project.Controls.AttributeControlers
             {
                 _scriptAttWindow = new AttributeListWindow(Attribute);
                 _scriptAttWindow.ClosedWithAttribute += UpdateSelectedValue;
-                _scriptAttWindow.Show();
+                _scriptAttWindow.ShowDialog();
             }
             catch (Exception scriptItemException)
             {
@@ -87,9 +87,9 @@ namespace WMSA_Project.Controls.AttributeControlers
         }
         private void Add_Button_Click(object sender, RoutedEventArgs e)
         {
-            //_scriptAttWindow = new thing
+            _scriptAttWindow = new AttributeAddWindow();
             _scriptAttWindow.ClosedWithAttribute += UpdateSelectedValue;
-            _scriptAttWindow.Show();
+            _scriptAttWindow.ShowDialog();
         }
         #endregion handlers
         #region helpermethods 

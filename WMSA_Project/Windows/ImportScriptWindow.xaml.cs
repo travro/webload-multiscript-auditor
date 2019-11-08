@@ -12,9 +12,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using WMSA_Project.Controls;
+using WMSA_Project.Controls.ImportControls;
 using WMSA_Project.Models;
 using WMSA_Project.Controls.Interfaces;
+
 
 namespace WMSA_Project.Windows
 {
@@ -39,12 +40,12 @@ namespace WMSA_Project.Windows
         {          
             if (_selectPathCtrl.Strategy == ScriptImportStrategy.FromProjFile)
             {
-                _scriptImportCtrl = new SelectFileControl();
+                _scriptImportCtrl = new ScriptByFileControl();
                 _scriptImportCtrl.ScriptReady += ((object ctrlSender, ScriptReadyEventArgs args) => { Btn_Imprt.IsEnabled = true; });
             }
             else
             {
-                _scriptImportCtrl = new QueryDBControl();
+                _scriptImportCtrl = new ScriptByDBControl();
                 _scriptImportCtrl.ScriptReady += ((object ctrlSender, ScriptReadyEventArgs args) => { Btn_Imprt.IsEnabled = true; });
             }
             Content_Control.Content = _scriptImportCtrl;

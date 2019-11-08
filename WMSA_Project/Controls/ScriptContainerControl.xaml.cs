@@ -57,7 +57,7 @@ namespace WMSA_Project.Controls
         {
             var importScrptWin = new ImportScriptWindow();
             importScrptWin.Closed += CheckScriptOnClose;
-            importScrptWin.Show();
+            importScrptWin.ShowDialog();
         }
 
         private void Btn_Left_Click(object sender, RoutedEventArgs e)

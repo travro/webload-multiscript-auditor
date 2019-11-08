@@ -9,7 +9,7 @@ namespace WMSA_Project.Windows.Interfaces
     public interface IScriptAttributeWindow
     {
         event EventHandler<ClosedWithAttributeEventArgs> ClosedWithAttribute;
-        void Show();
+        bool? ShowDialog();
     }
 
     public class ClosedWithAttributeEventArgs: EventArgs

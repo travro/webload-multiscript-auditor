@@ -15,14 +15,14 @@ using System.Windows.Shapes;
 using WMSA_Project.Models;
 using WMSA_Project.Controls.Interfaces;
 
-namespace WMSA_Project.Controls
+namespace WMSA_Project.Controls.ImportControls
 {
     /// <summary>
     /// Interaction logic for QueryDBControl.xaml
     /// </summary>
-    public partial class QueryDBControl : UserControl,IScriptImportControl
+    public partial class ScriptByDBControl : UserControl,IScriptImportControl
     {
-        public QueryDBControl()
+        public ScriptByDBControl()
         {
             InitializeComponent();
         }

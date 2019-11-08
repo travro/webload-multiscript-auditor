@@ -57,11 +57,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\AttributeControlers\ScriptAttributesControl.xaml.cs">
+    <Compile Include="Controls\AttributeControls\ScriptAttributesControl.xaml.cs">
       <DependentUpon>ScriptAttributesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\QueryDBControl.xaml.cs">
-      <DependentUpon>QueryDBControl.xaml</DependentUpon>
+    <Compile Include="Controls\ImportControls\ScriptByDBControl.xaml.cs">
+      <DependentUpon>ScriptByDBControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ScriptContainerControl.xaml.cs">
       <DependentUpon>ScriptContainerControl.xaml</DependentUpon>
@@ -69,10 +69,10 @@
     <Compile Include="Controls\ScriptControl.xaml.cs">
       <DependentUpon>ScriptControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SelectFileControl.xaml.cs">
-      <DependentUpon>SelectFileControl.xaml</DependentUpon>
+    <Compile Include="Controls\ImportControls\ScriptByFileControl.xaml.cs">
+      <DependentUpon>ScriptByFileControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SelectScriptPathControl.xaml.cs">
+    <Compile Include="Controls\ImportControls\SelectScriptPathControl.xaml.cs">
       <DependentUpon>SelectScriptPathControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Interfaces\IScriptImportControl.cs" />
@@ -96,11 +96,11 @@
       <DependentUpon>ImportScriptWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Interfaces\IScriptAttributeWindow.cs" />
-    <Page Include="Controls\AttributeControlers\ScriptAttributesControl.xaml">
+    <Page Include="Controls\AttributeControls\ScriptAttributesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\QueryDBControl.xaml">
+    <Page Include="Controls\ImportControls\ScriptByDBControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,11 +112,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SelectFileControl.xaml">
+    <Page Include="Controls\ImportControls\ScriptByFileControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SelectScriptPathControl.xaml">
+    <Page Include="Controls\ImportControls\SelectScriptPathControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

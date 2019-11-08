@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WMSA_Project.Controls
+namespace WMSA_Project.Controls.ImportControls
 {
     /// <summary>
     /// Interaction logic for SelectScriptPathControl.xaml

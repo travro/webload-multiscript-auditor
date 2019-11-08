@@ -52,7 +52,7 @@ namespace WMSA_Project.DAL
         {
             ObservableCollection<string> list = new ObservableCollection<string>();
 
-            using (var cmd = new SqlCommand("SELECT DISTINCT script_name FROM Scripts INNER JOIN Tests " +
+            using (var cmd = new SqlCommand("USE WLScriptsDB SELECT DISTINCT script_name FROM Scripts INNER JOIN Tests " +
                 "ON Tests.id = Scripts.test_id WHERE Tests.test_name = @testName", cnn))
             {
                 cmd.Parameters.AddWithValue("@testName", testName);
@@ -77,7 +77,7 @@ namespace WMSA_Project.DAL
         public static int GetTestId(string testName, string buildVersion, SqlConnection cnn)
         {
             object id;
-            using (var cmd = new SqlCommand("SELECT id FROM Tests WHERE test_name = @testName and build_version = @buildVersion", cnn))
+            using (var cmd = new SqlCommand("USE WLScriptsDB SELECT id FROM Tests WHERE test_name = @testName and build_version = @buildVersion", cnn))
             {
                 cmd.Parameters.AddRange(new SqlParameter[]
                 {
@@ -92,7 +92,7 @@ namespace WMSA_Project.DAL
         public static int PushNewTest(string testName, string buildVersion, SqlConnection cnn)
         {
             object id;
-            using (var cmd = new SqlCommand("INSERT INTO Tests values (@testName, @buildVersion)", cnn))
+            using (var cmd = new SqlCommand("USE WLScriptsDB INSERT INTO Tests values (@testName, @buildVersion)", cnn))
             {
                 cmd.Parameters.AddRange(new SqlParameter[]
                 {
@@ -114,7 +114,7 @@ namespace WMSA_Project.DAL
         public static int PushNewScript(Script script, string scriptName, DateTime dt, int testId, SqlConnection cnn, SqlTransaction sqlTrn)
         {
             object scriptId;
-            using (var cmd = new SqlCommand("INSERT INTO Scripts OUTPUT INSERTED.ID VALUES (@scriptName, @recordingDate, @testId) ", cnn, sqlTrn))
+            using (var cmd = new SqlCommand("USE WLScriptsDBINSERT INTO Scripts OUTPUT INSERTED.ID VALUES (@scriptName, @recordingDate, @testId) ", cnn, sqlTrn))
             {
                 cmd.Parameters.AddRange(new SqlParameter[]
                 {
@@ -140,7 +140,7 @@ namespace WMSA_Project.DAL
         private static int GetTestId(string transactionName, SqlConnection cnn, SqlTransaction sqlTrn)
         {
             object transNameScopeId;
-            using (var cmd = new SqlCommand("SELECT id FROM TransactionNames WHERE trans_name = @transName", cnn, sqlTrn))
+            using (var cmd = new SqlCommand("USE WLScriptsDB SELECT id FROM TransactionNames WHERE trans_name = @transName", cnn, sqlTrn))
             {
                 cmd.Parameters.AddWithValue("@transName", transactionName);
 
@@ -148,7 +148,7 @@ namespace WMSA_Project.DAL
 
                 if (transNameScopeId == null)
                 {
-                    cmd.CommandText = "INSERT INTO TransactionNames (trans_name) OUTPUT INSERTED.ID VALUES (@transName)";
+                    cmd.CommandText = "USE WLScriptsDB INSERT INTO TransactionNames (trans_name) OUTPUT INSERTED.ID VALUES (@transName)";
                     transNameScopeId = cmd.ExecuteScalar();
                 }
             }
@@ -169,7 +169,7 @@ namespace WMSA_Project.DAL
                     foreach (var transaction in transactions)
                     {
                         cmd.Parameters["@transNameId"].Value = GetTestId(transaction.Name, cnn, sqlTrn);
-                        cmd.CommandText = "INSERT INTO Transactions (trans_nm_id, script_id) OUTPUT INSERTED.ID VALUES (@transNameId, @scriptId)";
+                        cmd.CommandText = "USE WLScriptsDB INSERT INTO Transactions (trans_nm_id, script_id) OUTPUT INSERTED.ID VALUES (@transNameId, @scriptId)";
 
                         object transactionScopeId = cmd.ExecuteScalar();
 
@@ -188,7 +188,7 @@ namespace WMSA_Project.DAL
 
         private static void PushNewRequests(IEnumerable<Request> requests, int transId, SqlConnection sqlConnection, SqlTransaction sqlTransaction)
         {
-            using (var cmd = new SqlCommand("INSERT INTO Requests OUTPUT INSERTED.ID VALUES (@requestVerbId, @requestParams, @transId)", sqlConnection, sqlTransaction))
+            using (var cmd = new SqlCommand("USE WLScriptsDB INSERT INTO Requests OUTPUT INSERTED.ID VALUES (@requestVerbId, @requestParams, @transId)", sqlConnection, sqlTransaction))
             {
                 cmd.Parameters.AddRange(new SqlParameter[]
                 {
@@ -234,7 +234,7 @@ namespace WMSA_Project.DAL
             {
                 cmd = new SqlCommand();
                 cmd.Connection = cnn;
-                cmd.CommandText = "INSERT INTO Correlations VALUES (@rule, @originalVal, @reqId)";
+                cmd.CommandText = "USE WLScriptsDB INSERT INTO Correlations VALUES (@rule, @originalVal, @reqId)";
                 cmd.Parameters.AddRange(new SqlParameter[]
                 {
                     new SqlParameter(){ ParameterName = "@rule", SqlDbType = SqlDbType.NVarChar, Value = correlation.Rule },
