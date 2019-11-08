@@ -60,6 +60,9 @@
     <Compile Include="Controls\AttributeControls\ScriptAttributesControl.xaml.cs">
       <DependentUpon>ScriptAttributesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ImportControls\DBQueryControl.xaml.cs">
+      <DependentUpon>DBQueryControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ImportControls\ScriptByDBControl.xaml.cs">
       <DependentUpon>ScriptByDBControl.xaml</DependentUpon>
     </Compile>
@@ -97,6 +100,10 @@
     </Compile>
     <Compile Include="Windows\Interfaces\IScriptAttributeWindow.cs" />
     <Page Include="Controls\AttributeControls\ScriptAttributesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ImportControls\DBQueryControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
