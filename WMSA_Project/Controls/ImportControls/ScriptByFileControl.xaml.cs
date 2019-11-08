@@ -27,23 +27,44 @@ namespace WMSA_Project.Controls.ImportControls
     /// </summary>
     public partial class ScriptByFileControl : UserControl, IScriptImportControl
     {
+        string _scriptTestName;
+        string _scriptBuildVers;
+        string _scriptScriptName;
+        DateTime _scriptDate;
+        bool _attributesReady = false;
+
         public ScriptByFileControl()
         {
             InitializeComponent();
-            SAC_Test.PropertyChanged += CheckSacEnableStatus;
-            SAC_Build.PropertyChanged += CheckSacEnableStatus;
-            SAC_Script.PropertyChanged += CheckPushStatus;
-            Dt_Pckr.SelectedDateChanged += CheckPushStatus;
-
+            DBQ_Ctrl.AttributesReady += OnAttributesReady;
         }
 
         public event EventHandler<ScriptReadyEventArgs> ScriptReady;
 
         public string FilePath { get; set; }
+        public bool AttributesReady
+        {
+            get { return _attributesReady; }
+            private set
+            {
+                _attributesReady = value;
+                OnScriptReady();
+            }
+
+        }
 
         public Script GetScript()
         {
-            return ScriptFactory.GetScriptFromFilePath(FilePath);
+            var script = ScriptFactory.GetScriptFromFilePath(FilePath);
+
+            if(_scriptTestName != null && _scriptBuildVers != null && _scriptScriptName != null && _scriptDate != null)
+            {
+                script.TestName = _scriptTestName;
+                script.BuildVersion = _scriptBuildVers;
+                script.Name = _scriptScriptName;
+                script.RecordedDate = _scriptDate;
+            }
+            return script;
         }
 
         #region handlers
@@ -67,51 +88,26 @@ namespace WMSA_Project.Controls.ImportControls
                     MessageBox.Show(openFileException.ToString());
                 }
             }
+            OnScriptReady();
         }
         #endregion
         #region helpermethods
-
-
-        private void CheckSacEnableStatus(object sender, PropertyChangedEventArgs args)
+        private void OnAttributesReady(object sender, AttributesReadyEventArgs args)
         {
-            if (sender == SAC_Test)
-            {
-                SAC_Build.Clear();
-            }
-            if (sender == SAC_Build)
-            {
-                SAC_Script.Clear();
-            }
+            _scriptTestName = args.SelectedTestName;
+            _scriptBuildVers = args.SelectedBuildVersion;
+            _scriptScriptName = args.SelectedScriptName;
+            _scriptDate = args.SelectedDate;
 
-            if (SacIsValid(SAC_Test) && SacIsValid(SAC_Build))
-            {
-                SAC_Script.Clear();
-                //calls to SQL DB
-                AttributesRepository.Repository.BuildScriptCollection(SAC_Test.SelectedValue);
-                SAC_Script.IsEnabled = true;
-            }
-            else
-            {
-                SAC_Script.IsEnabled = false;
-                Dt_Pckr.SelectedDate = null;
-            }
-        }
-        private bool SacIsValid(ScriptAttributesControl control)
-        {
-            return (control != null && control.SelectedValue != null && control.SelectedValue != control.DefaultValue);
-        }
-
-        private void CheckPushStatus(object sender, EventArgs args)
-        {
-            if (SacIsValid(SAC_Test) && SacIsValid(SAC_Build) && SacIsValid(SAC_Script) && Dt_Pckr.SelectedDate != null && FilePath != null )
-            {
-                OnScriptReady();
-            }
+            AttributesReady = true;
         }
 
         private void OnScriptReady()
         {
-            ScriptReady?.Invoke(this, new ScriptReadyEventArgs() { Message = "Script is Ready" });
+            if (FilePath != null && FilePath != "" && AttributesReady)
+            {
+                ScriptReady?.Invoke(this, new ScriptReadyEventArgs() { Message = "Script is Ready" }); 
+            }
         }
         #endregion
 

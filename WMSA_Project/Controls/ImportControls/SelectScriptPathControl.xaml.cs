@@ -25,18 +25,12 @@ namespace WMSA_Project.Controls.ImportControls
             InitializeComponent();
         }
 
-        public ScriptImportStrategy Strategy
-        {
-            get { return (ScriptImportStrategy)GetValue(SelectionProperty); }
-            set { SetValue(SelectionProperty, value); }
-        }
-
-        public static readonly DependencyProperty SelectionProperty = DependencyProperty.Register("ScriptOptionSelected", typeof(ScriptImportStrategy), typeof(SelectScriptPathControl));
+        public ScriptImportStrategy Strategy { get; set; } = ScriptImportStrategy.FromProjFile;
 
         private void RdBtn_File_Checked(object sender, RoutedEventArgs e)
         {
             Strategy = ScriptImportStrategy.FromProjFile;
-        }        
+        }
 
         private void RdBtn_DB_Checked(object sender, RoutedEventArgs e)
         {
