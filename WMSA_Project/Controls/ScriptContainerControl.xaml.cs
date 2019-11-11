@@ -78,6 +78,7 @@ namespace WMSA_Project.Controls
             }
             else
             {
+                Container = null;
                 CntCtrl_Main.Content = Btn_Add;
                 Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Hidden;
             }
@@ -88,11 +89,17 @@ namespace WMSA_Project.Controls
         #region helpermethods
         private void CheckScriptOnClose(object sender, EventArgs args)
         {
-            if ((sender as ImportScriptWindow).Script != null)
+            var script = (sender as ImportScriptWindow).Script;
+
+            if (script != null && _repo.CanBeAddedToList(script))
             {
                 Container = new ScriptControl((sender as ImportScriptWindow).Script);
             }
+            else
+            {
+                MessageBox.Show("This script's transactions do not match the transactions of the first script you added");
+            }
+            #endregion
         }
-        #endregion
     }
 }

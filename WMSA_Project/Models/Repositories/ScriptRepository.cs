@@ -9,6 +9,7 @@ using WMSA_Project.Models.Factories;
 using WMSA_Project.Models;
 using WMSA_Project.Controls;
 using WMSA_Project.Windows;
+using WMSA_Project.Utilities;
 
 namespace WMSA_Project.Models.Repositories
 {
@@ -73,6 +74,20 @@ namespace WMSA_Project.Models.Repositories
             _linkedList.Remove(_linkedList.Find(node));
             OnCollectionChanged();
         }
+        public bool CanBeAddedToList(Script newScript)
+        {
+            var scc = _linkedList.First.Value as ScriptContainerControl;
+
+            if (_linkedList.Count >= 1 && scc.Container != null)
+            {
+                return ScriptTransactionsComparer.CompareAll(scc.Container.Script, newScript);
+            }
+            else
+            {
+                return true;
+            }
+        }
+        
         private void OnCollectionChanged()
         {
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
