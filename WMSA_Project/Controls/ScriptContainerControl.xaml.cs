@@ -32,9 +32,8 @@ namespace WMSA_Project.Controls
         {
             InitializeComponent();
             _repo = repo;
-            //The first Script container control will not show it's exit button, but subsequent controls will
-            if (_repo.GetCount() > 1) { Btn_Exit.Visibility = Visibility.Visible; }
-        }
+            if (_repo.GetCount() >= 1) { Btn_Exit.Visibility = Visibility.Visible; }
+        }        
 
         public ScriptControl Container
         {
@@ -77,7 +76,7 @@ namespace WMSA_Project.Controls
             else
             {
                 Container = null;
-                CntCtrl_Main.Content = Btn_Add;
+                CntCtrl_Main.ClearValue(ContentProperty);
                 Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Hidden;
             }            
         }
@@ -94,7 +93,7 @@ namespace WMSA_Project.Controls
             }
             else
             {
-                MessageBox.Show("This script's transactions do not match the transactions of the first script you added");
+                MessageBox.Show("This script's transactions do not match those of the script(s) currently loaded");
             }
             #endregion
         }
