@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMSA_Project.Windows"
         mc:Ignorable="d"
-        Title="Import Script" Height="517.6" Width="788.8" WindowStyle="ToolWindow">
+        Title="Import Script" Height="517.6" Width="788.8" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="8*"/>
