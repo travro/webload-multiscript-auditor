@@ -17,7 +17,7 @@ namespace WMSA_Project.Models.Repositories
     {
         private LinkedList<ScriptContainerControl> _linkedList;
         private static ScriptRepository _repository;
-        private ScriptContainerControl _scriptCntnrCtrl;
+        private ScriptContainerControl _sccStarter;
 
         private ScriptRepository()
         {
@@ -25,11 +25,11 @@ namespace WMSA_Project.Models.Repositories
              * add new SCC to LL with handlers for buttons
              */
             _linkedList = new LinkedList<ScriptContainerControl>();
-            _scriptCntnrCtrl = new ScriptContainerControl(this);
+            _sccStarter = new ScriptContainerControl(this);
 
             //add first SCC to linkedlist
-            _linkedList.AddFirst(_scriptCntnrCtrl);
-            
+            _linkedList.AddFirst(_sccStarter);
+
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
@@ -38,13 +38,13 @@ namespace WMSA_Project.Models.Repositories
         {
             get
             {
-                if(_repository == null)
+                if (_repository == null)
                 {
-                    _repository = new ScriptRepository();                     
+                    _repository = new ScriptRepository();
                 }
                 return _repository;
             }
-            
+
         }
         public List<ScriptContainerControl> SCCList => _linkedList.ToList();
 
@@ -74,20 +74,24 @@ namespace WMSA_Project.Models.Repositories
             _linkedList.Remove(_linkedList.Find(node));
             OnCollectionChanged();
         }
-        public bool CanBeAddedToList(Script newScript)
+        public bool CanAdd(Script newScript, ScriptContainerControl sccCaller)
         {
-            var scc = _linkedList.First.Value as ScriptContainerControl;
-
-            if (_linkedList.Count >= 1 && scc.Container != null)
-            {
-                return ScriptTransactionsComparer.CompareAll(scc.Container.Script, newScript);
-            }
+            if (sccCaller == _sccStarter) return true;
+            else if (_linkedList.Count == 1) return true;
             else
             {
-                return true;
+                var sccFirst = _linkedList.First(scc => scc.Container != null);
+
+                if (sccFirst != null && sccFirst.Container.Script != null)
+                {
+                    return ScriptTransactionsComparer.CompareAll(newScript, sccFirst.Container.Script);
+                }
+                return false;
             }
+
+
         }
-        
+
         private void OnCollectionChanged()
         {
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));

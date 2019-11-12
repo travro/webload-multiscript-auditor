@@ -34,8 +34,6 @@ namespace WMSA_Project.Controls
             _repo = repo;
             //The first Script container control will not show it's exit button, but subsequent controls will
             if (_repo.GetCount() > 1) { Btn_Exit.Visibility = Visibility.Visible; }
-
-
         }
 
         public ScriptControl Container
@@ -81,8 +79,7 @@ namespace WMSA_Project.Controls
                 Container = null;
                 CntCtrl_Main.Content = Btn_Add;
                 Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Hidden;
-            }
-
+            }            
         }
         #endregion
 
@@ -91,7 +88,7 @@ namespace WMSA_Project.Controls
         {
             var script = (sender as ImportScriptWindow).Script;
 
-            if (script != null && _repo.CanBeAddedToList(script))
+            if (script != null && _repo.CanAdd(script, this))
             {
                 Container = new ScriptControl((sender as ImportScriptWindow).Script);
             }
