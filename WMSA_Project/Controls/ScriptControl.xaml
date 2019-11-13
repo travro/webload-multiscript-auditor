@@ -5,19 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WMSA_Project.Controls"
              mc:Ignorable="d" 
-             d:DesignWidth="330" d:DesignHeight="450" Background="LightGray">
+             Background="LightGray">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Vertical" x:Name="Stack_Attributes">
-            <TextBlock Background="LightPink" x:Name="TxtBlck_TestGroup">LM: 19.3.0.0-211</TextBlock>
-            <TextBlock x:Name="TxtBlk_ScriptName">AdminGenTask_12Oct19</TextBlock>
-            <TextBlock x:Name="TxtBlck_ScriptDate">10/12/2019</TextBlock>
+            <TextBlock Background="SteelBlue" x:Name="TxtBlck_TestGroup" Foreground="White">AdminGenTask | 19.3.0.0-211 | 10\30\2019</TextBlock>
         </StackPanel>
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <StackPanel x:Name="Stack_Transactions"/>
-        </ScrollViewer>
+        <StackPanel Grid.Row="1" x:Name="Stack_Transactions"/>
     </Grid>
 </UserControl>

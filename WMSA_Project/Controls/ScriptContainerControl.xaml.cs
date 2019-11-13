@@ -43,9 +43,9 @@ namespace WMSA_Project.Controls
             }
             set
             {
-                _container = value;
-                CntCtrl_Main.Content = _container;
+                CntCtrl_Main.Content = _container = value; ;
                 Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Visible;
+                _repo.OnNodeContainterChanged(this, new PropertyChangedEventArgs("Container"));
             }
         }
 
@@ -69,16 +69,17 @@ namespace WMSA_Project.Controls
 
         private void Btn_Exit_Click(object sender, RoutedEventArgs e)
         {
+            Container = null;
+
             if (_repo.GetCount() > 1)
             {
-                _repo.Remove(this);
+                _repo.Remove(this);                
             }
             else
-            {
-                Container = null;
+            {                
                 CntCtrl_Main.ClearValue(ContentProperty);
-                Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Hidden;
-            }            
+                Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Collapsed;
+            }
         }
         #endregion
 

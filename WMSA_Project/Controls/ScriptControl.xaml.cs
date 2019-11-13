@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WMSA_Project.Models;
+using WMSA_Project.Utilities;
 
 namespace WMSA_Project.Controls
 {
@@ -21,48 +22,75 @@ namespace WMSA_Project.Controls
     /// </summary>
     public partial class ScriptControl : UserControl
     {
+        private Script _originalScript;
+        private Script _currentScript;
         public ScriptControl(Script script)
         {
             InitializeComponent();
-            TxtBlck_TestGroup.Text = script.TestName + " | " + script.BuildVersion;
-            TxtBlk_ScriptName.Text = script.Name;
-            TxtBlck_ScriptDate.Text = script.RecordedDate.ToShortDateString();
+            TxtBlck_TestGroup.Text = $"{script.Name} | {script.BuildVersion} | {script.RecordedDate.ToShortDateString()}";
+            TxtBlck_TestGroup.Background = LabelColor = ColorDispenser.Dispenser.GetNextColor();
+            _originalScript = Script = script;
+        }
 
+        public Script Script
+        {
+            get { return _currentScript; }
+            set { _currentScript = value; /*BuildExpanders(value); */}
+        }
+
+        public SolidColorBrush LabelColor { get; set; }
+        public StackPanel StrackTransactions
+        {
+            get; set;
+        }
+        public static readonly DependencyProperty StackPanelProperty = DependencyProperty.Register("StrackTransactions", typeof(StackPanel), typeof(ScriptControl));
+
+        #region helpermethods
+        private void BuildExpanders(Script script)
+        {
             foreach (var t in script.Transactions)
             {
-
-                var xpndr = new Expander()
+                var transExpander = new Expander()
                 {
                     Header = t.Name,
                     Content = t.Requests,
-                    IsExpanded = false,
-                    Background = Brushes.LightPink,
-                    FontSize = 14
+                    IsExpanded = true,
+                    Background = Brushes.LightGray,
+                    FontSize = 12,
                 };
 
-                var reqStack = new StackPanel()
-                {
-                    Orientation = Orientation.Vertical
-                };
+                var reqTree = new TreeView();
 
                 if (t.Requests != null)
                 {
                     foreach (var r in t.Requests)
                     {
-                        reqStack.Children.Add(new TextBlock()
+                        var reqTreeViewItem = new TreeViewItem()
                         {
-                            Text = r.Verb + " " + r.Parameters
-                        });
+                            IsExpanded = false,
+                            Header = r.GetInfoString(),
+                            FontSize = 11,                            
+                        };
+
+                        if (r.Correlations != null)
+                        {
+                            foreach (var c in r.Correlations)
+                            {
+                                var corrTreeViewItem = new TreeViewItem()
+                                {
+                                    Header = c.GetInfoString(),
+                                    FontSize = 11
+                                };
+                                reqTreeViewItem.Items.Add(corrTreeViewItem);
+                            }
+                        }
+                        reqTree.Items.Add(reqTreeViewItem);
                     }
                 }
-                xpndr.Content = reqStack;
-
-                Stack_Transactions.Children.Add(xpndr);               
-
+                transExpander.Content = reqTree;
+                Stack_Transactions.Children.Add(transExpander);
             }
-            Script = script;
         }
-
-        public Script Script { get; }
+        #endregion
     }
 }

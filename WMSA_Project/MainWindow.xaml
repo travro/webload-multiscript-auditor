@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMSA_Project"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="auto" WindowStyle="ToolWindow" Background="LightSeaGreen">
+        Title="MainWindow" Height="900" Width="auto" Background="WhiteSmoke">
     <Grid Width="auto">
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="8*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!--<Grid.ColumnDefinitions>
@@ -16,9 +16,9 @@
             <ColumnDefinition Width="129*"/>
         </Grid.ColumnDefinitions>-->
         <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <StackPanel x:Name="StkPnl_Main" Orientation="Horizontal" HorizontalAlignment="Center"/>
+            <StackPanel x:Name="StkPnl_Main" Orientation="Horizontal" HorizontalAlignment="Left" Width="auto"/>
         </ScrollViewer>
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer Grid.Row="1" Background="White">
             xxx
         </ScrollViewer>
     </Grid>

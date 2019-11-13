@@ -45,7 +45,7 @@ namespace WMSA_Project
 
             foreach (var scc in ScriptRepository.Repository.SCCList)
             {
-                StkPnl_Main.Children.Add(scc);
+                StkPnl_Main.Children.Add(scc);                
             }
         }
         #endregion
