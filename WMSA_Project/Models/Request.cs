@@ -39,5 +39,10 @@ namespace WMSA_Project.Models
         {
             return (Verb == request.Verb && Parameters.Equals(request.Parameters, System.StringComparison.OrdinalIgnoreCase));
         }
+
+        public string GetInfoString()
+        {
+            return $"{Verb.ToString()}: {Parameters}";
+        }
     }
 }

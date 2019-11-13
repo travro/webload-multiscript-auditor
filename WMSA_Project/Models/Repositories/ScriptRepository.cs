@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 using WMSA_Project.Models.Factories;
 using WMSA_Project.Models;
 using WMSA_Project.Controls;
-using WMSA_Project.Windows;
 using WMSA_Project.Utilities;
+using WMSA_Project.Utilities.Factories;
+using WMSA_Project.Windows;
 
 namespace WMSA_Project.Models.Repositories
 {
@@ -21,15 +22,9 @@ namespace WMSA_Project.Models.Repositories
 
         private ScriptRepository()
         {
-            /**
-             * add new SCC to LL with handlers for buttons
-             */
             _linkedList = new LinkedList<ScriptContainerControl>();
             _sccStarter = new ScriptContainerControl(this);
-
-            //add first SCC to linkedlist
             _linkedList.AddFirst(_sccStarter);
-
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
@@ -44,14 +39,13 @@ namespace WMSA_Project.Models.Repositories
                 }
                 return _repository;
             }
-
         }
         public List<ScriptContainerControl> SCCList => _linkedList.ToList();
 
         #region handlers        
-        public void OnContainerScriptAdded(object sender, PropertyChangedEventArgs args)
+        public void OnNodeContainterChanged(object sender, PropertyChangedEventArgs args)
         {
-            OnCollectionChanged();
+            StackPanelFactory.ProvideStackPanels(this);
         }
         #endregion
         #region helpermethods
@@ -60,20 +54,24 @@ namespace WMSA_Project.Models.Repositories
             _linkedList.AddBefore(_linkedList.Find(node), newNode);
             OnCollectionChanged();
         }
+
         public void AddAfter(ScriptContainerControl node, ScriptContainerControl newNode)
         {
             _linkedList.AddAfter(_linkedList.Find(node), newNode);
             OnCollectionChanged();
         }
+
         public int GetCount()
         {
             return _linkedList.Count;
         }
+
         public void Remove(ScriptContainerControl node)
         {
             _linkedList.Remove(_linkedList.Find(node));
             OnCollectionChanged();
         }
+
         public bool CanAdd(Script newScript, ScriptContainerControl sccCaller)
         {
             if (sccCaller == _sccStarter) return true;
@@ -84,12 +82,10 @@ namespace WMSA_Project.Models.Repositories
 
                 if (sccFirst != null && sccFirst.Container.Script != null)
                 {
-                    return ScriptTransactionsComparer.CompareAll(newScript, sccFirst.Container.Script);
+                    return ScriptTransactionsComparer.CompareCount(newScript, sccFirst.Container.Script);
                 }
                 return false;
             }
-
-
         }
 
         private void OnCollectionChanged()

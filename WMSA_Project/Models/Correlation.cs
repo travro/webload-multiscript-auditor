@@ -11,5 +11,10 @@
             Rule = rule;
             OriginalValue = originalValue;
         }
+
+        public string GetInfoString()
+        {
+            return $"{Rule}: {OriginalValue}";
+        }
     }
 }
