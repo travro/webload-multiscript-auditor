@@ -17,16 +17,15 @@ namespace WMSA_Project.Utilities
             _brushes = new Queue<SolidColorBrush>(
                 new List<SolidColorBrush>
                 {
-                  //  Brushes.AliceBlue,
-                  //  Brushes.AntiqueWhite,
-                    Brushes.Aqua,
-                   // Brushes.Aquamarine,
-                  //  Brushes.Azure,
-                    Brushes.Beige,
-                  //  Brushes.Bisque,
-                  //  Brushes.Blue,
-                   // Brushes.BurlyWood,
-                    Brushes.GreenYellow
+                  Brushes.Coral,
+                  Brushes.Blue,
+                  Brushes.Goldenrod,
+                  Brushes.Green,
+                  Brushes.Salmon,
+                  Brushes.Gray,
+                  Brushes.SeaGreen,
+                  Brushes.SteelBlue,
+                  Brushes.Pink
                 });
         }
         public static ColorDispenser Dispenser
