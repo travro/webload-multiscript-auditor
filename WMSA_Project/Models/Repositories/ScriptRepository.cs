@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WMSA_Project.Models.Factories;
 using WMSA_Project.Models;
 using WMSA_Project.Controls;
@@ -16,8 +17,8 @@ namespace WMSA_Project.Models.Repositories
 {
     public sealed class ScriptRepository : INotifyCollectionChanged
     {
-        private LinkedList<ScriptContainerControl> _linkedList;
         private static ScriptRepository _repository;
+        private LinkedList<ScriptContainerControl> _linkedList;
         private ScriptContainerControl _sccStarter;
 
         private ScriptRepository()
@@ -42,22 +43,39 @@ namespace WMSA_Project.Models.Repositories
         }
         public List<ScriptContainerControl> SCCList => _linkedList.ToList();
 
-        #region handlers        
+        #region handlers
+
         public void OnNodeContainterChanged(object sender, PropertyChangedEventArgs args)
         {
             StackPanelFactory.ProvideStackPanels(this);
         }
         #endregion
         #region helpermethods
-        public void AddBefore(ScriptContainerControl node, ScriptContainerControl newNode)
+        public void AddScriptTo(ScriptContainerControl node)
         {
-            _linkedList.AddBefore(_linkedList.Find(node), newNode);
+            var importScrptWin = new ImportScriptWindow();
+            importScrptWin.ClosedWithScript += (object sender, ClosedWithScriptEventArgs args) =>
+            {
+                if (args.ScriptOnClose != null && CanAdd(args.ScriptOnClose, node))
+                {
+                    node.Container = new ScriptControl(args.ScriptOnClose);
+                }
+                else
+                {
+                    MessageBox.Show("This script's transactions do not match those of the script(s) currently loaded");
+                }
+            };
+            importScrptWin.ShowDialog();
+        }
+        public void AddContainerBefore(ScriptContainerControl node)
+        {
+            _linkedList.AddBefore(_linkedList.Find(node), new ScriptContainerControl(this));
             OnCollectionChanged();
         }
 
-        public void AddAfter(ScriptContainerControl node, ScriptContainerControl newNode)
+        public void AddContainerAfter(ScriptContainerControl node)
         {
-            _linkedList.AddAfter(_linkedList.Find(node), newNode);
+            _linkedList.AddAfter(_linkedList.Find(node), new ScriptContainerControl(this));
             OnCollectionChanged();
         }
 
@@ -93,6 +111,5 @@ namespace WMSA_Project.Models.Repositories
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
         #endregion
-
     }
 }

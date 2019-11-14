@@ -24,7 +24,7 @@ namespace WMSA_Project.Windows
     /// </summary>
     public partial class ImportScriptWindow : Window
     {
-        SelectScriptPathControl _selectPathCtrl;  
+        SelectScriptPathControl _selectPathCtrl;
         IScriptImportControl _scriptImportCtrl;
 
         public ImportScriptWindow()
@@ -33,11 +33,13 @@ namespace WMSA_Project.Windows
             Content_Control.Content = _selectPathCtrl = new SelectScriptPathControl();
         }
 
+        public event EventHandler<ClosedWithScriptEventArgs> ClosedWithScript;
+
         public Script Script { get; private set; }
 
         #region handlers
         private void Btn_Next_Click(object sender, RoutedEventArgs e)
-        {          
+        {
             if (_selectPathCtrl.Strategy == ScriptImportStrategy.FromProjFile)
             {
                 _scriptImportCtrl = new ScriptByFileControl();
@@ -49,7 +51,7 @@ namespace WMSA_Project.Windows
                 _scriptImportCtrl.ScriptReady += ((object ctrlSender, ScriptReadyEventArgs args) => { Btn_Imprt.IsEnabled = true; });
             }
             Content_Control.Content = _scriptImportCtrl;
-            Btn_Imprt.Visibility =  Btn_Back.Visibility = Visibility.Visible;
+            Btn_Imprt.Visibility = Btn_Back.Visibility = Visibility.Visible;
             Btn_Next.Visibility = Visibility.Collapsed;
         }
 
@@ -77,14 +79,26 @@ namespace WMSA_Project.Windows
             }
             finally
             {
-                Close();
+                OnClosedWithScript();
             }
         }
         #endregion
-
         #region helpermethods
+        private void OnClosedWithScript()
+        {
+            ClosedWithScript?.Invoke(this, new ClosedWithScriptEventArgs()
+            {
+                ScriptOnClose = Script
+            });
+            Close();
+        }
         #endregion
-
-
     }
+
+    public class ClosedWithScriptEventArgs : EventArgs
+    {
+        public Script ScriptOnClose { get; set; }
+    }
+
+
 }

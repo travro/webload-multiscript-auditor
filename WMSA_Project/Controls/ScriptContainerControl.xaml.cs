@@ -52,19 +52,17 @@ namespace WMSA_Project.Controls
         #region handlers
         private void Btn_Add_Click(object sender, RoutedEventArgs e)
         {
-            var importScrptWin = new ImportScriptWindow();
-            importScrptWin.Closed += CheckScriptOnClose;
-            importScrptWin.ShowDialog();
+            _repo.AddScriptTo(this);
         }
 
         private void Btn_Left_Click(object sender, RoutedEventArgs e)
         {
-            _repo.AddBefore(this, new ScriptContainerControl(_repo));
+            _repo.AddContainerBefore(this);
         }
 
         private void Btn_Right_Click(object sender, RoutedEventArgs e)
         {
-            _repo.AddAfter(this, new ScriptContainerControl(_repo));
+            _repo.AddContainerAfter(this);
         }
 
         private void Btn_Exit_Click(object sender, RoutedEventArgs e)
@@ -84,19 +82,6 @@ namespace WMSA_Project.Controls
         #endregion
 
         #region helpermethods
-        private void CheckScriptOnClose(object sender, EventArgs args)
-        {
-            var script = (sender as ImportScriptWindow).Script;
-
-            if (script != null && _repo.CanAdd(script, this))
-            {
-                Container = new ScriptControl((sender as ImportScriptWindow).Script);
-            }
-            else
-            {
-                MessageBox.Show("This script's transactions do not match those of the script(s) currently loaded");
-            }
-            #endregion
-        }
+        #endregion
     }
 }
