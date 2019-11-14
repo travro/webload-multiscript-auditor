@@ -45,10 +45,7 @@ namespace WMSA_Project.Models.Repositories
 
         #region handlers
 
-        public void OnNodeContainterChanged(object sender, PropertyChangedEventArgs args)
-        {
-            StackPanelFactory.ProvideStackPanels(this);
-        }
+
         #endregion
         #region helpermethods
         public void AddScriptTo(ScriptContainerControl node)
@@ -59,6 +56,7 @@ namespace WMSA_Project.Models.Repositories
                 if (args.ScriptOnClose != null && CanAdd(args.ScriptOnClose, node))
                 {
                     node.Container = new ScriptControl(args.ScriptOnClose);
+                    OnNodeContainterChanged();
                 }
                 else
                 {
@@ -86,11 +84,18 @@ namespace WMSA_Project.Models.Repositories
 
         public void Remove(ScriptContainerControl node)
         {
-            _linkedList.Remove(_linkedList.Find(node));
-            OnCollectionChanged();
+            if (GetCount() > 1)
+            {
+                _linkedList.Remove(_linkedList.Find(node));
+                OnCollectionChanged();
+            }
+            else
+            {
+                node.Reset();
+            }
         }
 
-        public bool CanAdd(Script newScript, ScriptContainerControl sccCaller)
+        private bool CanAdd(Script newScript, ScriptContainerControl sccCaller)
         {
             if (sccCaller == _sccStarter) return true;
             else if (_linkedList.Count == 1) return true;
@@ -105,7 +110,10 @@ namespace WMSA_Project.Models.Repositories
                 return false;
             }
         }
-
+        private void OnNodeContainterChanged()
+        {
+            StackPanelFactory.ProvideStackPanels(this);
+        }
         private void OnCollectionChanged()
         {
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));

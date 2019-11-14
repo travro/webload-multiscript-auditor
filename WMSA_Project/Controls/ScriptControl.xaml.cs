@@ -35,7 +35,7 @@ namespace WMSA_Project.Controls
         public Script Script
         {
             get { return _currentScript; }
-            set { _currentScript = value; /*BuildExpanders(value); */}
+            set { _currentScript = value; BuildExpanders(value);}
         }
 
         public SolidColorBrush LabelColor { get; set; }

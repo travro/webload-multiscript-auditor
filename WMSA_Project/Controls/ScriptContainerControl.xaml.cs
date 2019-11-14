@@ -13,10 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WMSA_Project.Controls;
-using WMSA_Project.Models;
 using WMSA_Project.Models.Repositories;
-using WMSA_Project.Windows;
 
 namespace WMSA_Project.Controls
 {
@@ -33,19 +30,15 @@ namespace WMSA_Project.Controls
             InitializeComponent();
             _repo = repo;
             if (_repo.GetCount() >= 1) { Btn_Exit.Visibility = Visibility.Visible; }
-        }        
+        }
 
         public ScriptControl Container
         {
-            get
-            {
-                return _container;
-            }
+            get { return _container; }
             set
             {
                 CntCtrl_Main.Content = _container = value; ;
                 Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Visible;
-                _repo.OnNodeContainterChanged(this, new PropertyChangedEventArgs("Container"));
             }
         }
 
@@ -67,21 +60,17 @@ namespace WMSA_Project.Controls
 
         private void Btn_Exit_Click(object sender, RoutedEventArgs e)
         {
-            Container = null;
-
-            if (_repo.GetCount() > 1)
-            {
-                _repo.Remove(this);                
-            }
-            else
-            {                
-                CntCtrl_Main.ClearValue(ContentProperty);
-                Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Collapsed;
-            }
+            _repo.Remove(this);
         }
         #endregion
 
         #region helpermethods
+        public void Reset()
+        {
+            Container = null;
+            CntCtrl_Main.ClearValue(ContentProperty);
+            Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Collapsed;
+        }
         #endregion
     }
 }
