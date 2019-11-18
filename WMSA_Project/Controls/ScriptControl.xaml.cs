@@ -35,62 +35,12 @@ namespace WMSA_Project.Controls
         public Script Script
         {
             get { return _currentScript; }
-            set { _currentScript = value; BuildExpanders(value);}
+            set { _currentScript = value; /*BuildExpanders(value)*/;}
         }
 
-        public SolidColorBrush LabelColor { get; set; }
-        public StackPanel StrackTransactions
-        {
-            get; set;
-        }
-        public static readonly DependencyProperty StackPanelProperty = DependencyProperty.Register("StrackTransactions", typeof(StackPanel), typeof(ScriptControl));
-
-        #region helpermethods
-        private void BuildExpanders(Script script)
-        {
-            foreach (var t in script.Transactions)
-            {
-                var transExpander = new Expander()
-                {
-                    Header = t.Name,
-                    Content = t.Requests,
-                    IsExpanded = true,
-                    Background = Brushes.LightGray,
-                    FontSize = 12,
-                };
-
-                var reqTree = new TreeView();
-
-                if (t.Requests != null)
-                {
-                    foreach (var r in t.Requests)
-                    {
-                        var reqTreeViewItem = new TreeViewItem()
-                        {
-                            IsExpanded = false,
-                            Header = r.GetInfoString(),
-                            FontSize = 11,                            
-                        };
-
-                        if (r.Correlations != null)
-                        {
-                            foreach (var c in r.Correlations)
-                            {
-                                var corrTreeViewItem = new TreeViewItem()
-                                {
-                                    Header = c.GetInfoString(),
-                                    FontSize = 11
-                                };
-                                reqTreeViewItem.Items.Add(corrTreeViewItem);
-                            }
-                        }
-                        reqTree.Items.Add(reqTreeViewItem);
-                    }
-                }
-                transExpander.Content = reqTree;
-                Stack_Transactions.Children.Add(transExpander);
-            }
-        }
+        public SolidColorBrush LabelColor { get; set; }     
+        
+        #region helpermethods       
         #endregion
     }
 }
