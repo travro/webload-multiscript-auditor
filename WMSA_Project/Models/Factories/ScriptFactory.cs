@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using WMSA_Project.Models;
+using WMSA_Project.Controls;
 
 namespace WMSA_Project.Models.Factories
 {
@@ -35,6 +36,11 @@ namespace WMSA_Project.Models.Factories
                 throw fileStreamException;
             }
             return script;
+        }
+
+        public static Script GetComparativeScriptFromControls(ScriptControl baseControl, ScriptControl leftControl = null, ScriptControl rightControl = null)
+        {
+            return baseControl.Script;
         }
     }
 }
