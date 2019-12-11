@@ -112,7 +112,7 @@ namespace WMSA_Project.Models.Repositories
         }
         private void OnNodeContainterChanged()
         {
-            StackPanelFactory.ProvideStackPanels(this);
+            StackPanelFactory.BuildStackPanels(this);
         }
         private void OnCollectionChanged()
         {
