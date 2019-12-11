@@ -22,25 +22,17 @@ namespace WMSA_Project.Controls
     /// </summary>
     public partial class ScriptControl : UserControl
     {
-        private Script _originalScript;
-        private Script _currentScript;
         public ScriptControl(Script script)
         {
             InitializeComponent();
             TxtBlck_TestGroup.Text = $"{script.Name} | {script.BuildVersion} | {script.RecordedDate.ToShortDateString()}";
             TxtBlck_TestGroup.Background = LabelColor = ColorDispenser.Dispenser.GetNextColor();
-            _originalScript = Script = script;
+            Script = script;
         }
-
-        public Script Script
-        {
-            get { return _currentScript; }
-            set { _currentScript = value; /*BuildExpanders(value)*/;}
-        }
-
+        public Script Script { get; set; }
+        public ScriptControl PrevComparison { get; set; }
+        public ScriptControl NextComparison { get; set; }
         public SolidColorBrush LabelColor { get; set; }     
         
-        #region helpermethods       
-        #endregion
     }
 }
