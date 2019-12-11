@@ -8,8 +8,8 @@
         Title="MainWindow" Height="900" Width="auto" Background="WhiteSmoke">
     <Grid Width="auto">
         <Grid.RowDefinitions>
-            <RowDefinition Height="8*"/>
             <RowDefinition Height="*"/>
+            <!--<RowDefinition Height="*"/>-->
         </Grid.RowDefinitions>
         <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="268*"/>
@@ -18,8 +18,8 @@
         <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <StackPanel x:Name="StkPnl_Main" Orientation="Horizontal" HorizontalAlignment="Left" Width="auto"/>
         </ScrollViewer>
-        <ScrollViewer Grid.Row="1" Background="White">
+        <!--<ScrollViewer Grid.Row="1" Background="White">
             xxx
-        </ScrollViewer>
+        </ScrollViewer>-->
     </Grid>
 </Window>
