@@ -41,7 +41,7 @@ namespace WMSA_Project.Models.Repositories
                 return _repository;
             }
         }
-        public List<ScriptContainerControl> SCCList => _linkedList.ToList();
+        public List<ScriptContainerControl> ScriptContainerList => _linkedList.ToList();
 
         #region handlers
 
@@ -56,7 +56,7 @@ namespace WMSA_Project.Models.Repositories
                 if (args.ScriptOnClose != null && CanAdd(args.ScriptOnClose, node))
                 {
                     node.Container = new ScriptControl(args.ScriptOnClose);
-                    OnNodeContainterChanged();
+                    OnNodeContainerChanged();
                 }
                 else
                 {
@@ -110,7 +110,7 @@ namespace WMSA_Project.Models.Repositories
                 return false;
             }
         }
-        private void OnNodeContainterChanged()
+        private void OnNodeContainerChanged()
         {
             StackPanelFactory.BuildStackPanels(this);
         }

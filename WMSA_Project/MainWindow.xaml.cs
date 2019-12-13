@@ -27,7 +27,7 @@ namespace WMSA_Project
         {
             InitializeComponent();
 
-            foreach (var scc in ScriptRepository.Repository.SCCList)
+            foreach (var scc in ScriptRepository.Repository.ScriptContainerList)
             {
                 StkPnl_Main.Children.Add(scc);
             }
@@ -43,7 +43,7 @@ namespace WMSA_Project
         {
             StkPnl_Main.Children.Clear();
 
-            foreach (var scc in ScriptRepository.Repository.SCCList)
+            foreach (var scc in ScriptRepository.Repository.ScriptContainerList)
             {
                 StkPnl_Main.Children.Add(scc);                
             }

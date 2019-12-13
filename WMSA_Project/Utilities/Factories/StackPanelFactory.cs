@@ -15,7 +15,7 @@ namespace WMSA_Project.Utilities.Factories
         {
             LinkedList<ScriptContainerControl> sccLinkList = new LinkedList<ScriptContainerControl>();
 
-            IEnumerable<ScriptContainerControl> validContainers = repo.SCCList.Where((scc) => scc.Container != null && scc.Container.Script != null);
+            IEnumerable<ScriptContainerControl> validContainers = repo.ScriptContainerList.Where((sCL) => sCL.Container != null && sCL.Container.Script != null);
             foreach (ScriptContainerControl scc in validContainers)
             {
                 sccLinkList.AddLast(scc);
@@ -39,18 +39,9 @@ namespace WMSA_Project.Utilities.Factories
         {
             if (node == null) return;
 
-            ScriptControl thisContainer = node.Value.Container;
-            
-            
-            //FIX: These cannot be null
-
-            /**
-             * 
-             * Must resolve null nodes
-             * 
-             * */
-            ScriptControl previousContainer = node.Previous.Value.Container;
-            ScriptControl nextContainer = node.Next.Value.Container;
+            var thisContainer = node.Value.Container;
+            var previousContainer = (node.Previous != null)? node.Previous.Value.Container: null;
+            var nextContainer = (node.Next != null) ? node.Next.Value.Container : null;
 
             if (previousContainer != thisContainer.PrevComparison || nextContainer != thisContainer.NextComparison)
             {
@@ -61,8 +52,8 @@ namespace WMSA_Project.Utilities.Factories
             BuildComparativePanels(node.Next);
         }
         private static void BuildPanels(ScriptControl scriptControl, Script optionalScript = null)
-        {           
-            Script scriptToUse = (optionalScript != null)? optionalScript: scriptControl.Script;
+        {
+            Script scriptToUse = (optionalScript != null) ? optionalScript : scriptControl.Script;
             scriptControl.Stack_Transactions.Children.Clear();
 
             foreach (var t in scriptToUse.Transactions)
@@ -107,7 +98,7 @@ namespace WMSA_Project.Utilities.Factories
                 transExpander.Content = reqTree;
                 scriptControl.Stack_Transactions.Children.Add(transExpander);
             }
-        } 
+        }
         #endregion
     }
 }
