@@ -25,7 +25,6 @@ namespace WMSA_Project.Utilities.Factories
 
         #region helpermethods
 
-
         private static void BuildComparisons(LinkedList<ScriptContainerControl> sccLinkList)
         {
             if (sccLinkList.Count == 1)

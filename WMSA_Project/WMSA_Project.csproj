@@ -89,6 +89,7 @@
     <Compile Include="Models\Factories\ScriptFactory.cs" />
     <Compile Include="Models\Factories\TransactionListFactory.cs" />
     <Compile Include="Models\ScriptAttribute.cs" />
+    <Compile Include="Models\UnmatchedRequest.cs" />
     <Compile Include="Utilities\ColorDispenser.cs" />
     <Compile Include="Utilities\Factories\StackPanelFactory.cs" />
     <Compile Include="Utilities\ScriptTransactionComparer.cs" />

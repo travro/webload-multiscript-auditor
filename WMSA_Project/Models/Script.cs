@@ -35,5 +35,33 @@ namespace WMSA_Project.Models
         {
             return Transactions.Exists(element => element.Name == s);
         }
+
+        public Script Clone()
+        {
+            var cloneScript = new Script(TestName, BuildVersion, Name, RecordedDate);
+            cloneScript.Transactions = new List<Transaction>();
+
+            Transactions.ForEach((t) =>
+            {
+                var trans = new Transaction(t.Name);
+
+                t.Requests.ForEach((r) =>
+                {
+                    var req = new Request(r.Verb, r.Parameters, r.Visible);
+
+                    if (r.Correlations != null)
+                    {
+                        req.Correlations = new List<Correlation>();
+                        r.Correlations.ForEach((c) => req.Correlations.Add(new Correlation(c.Rule, c.OriginalValue)));
+                    }
+
+                    trans.Requests.Add(req);
+                });
+
+                cloneScript.Transactions.Add(trans);
+            });
+
+            return cloneScript;
+        }
     }
 }

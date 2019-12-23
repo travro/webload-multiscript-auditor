@@ -40,7 +40,25 @@ namespace WMSA_Project.Models.Factories
 
         public static Script GetComparativeScriptFromControls(ScriptControl baseControl, ScriptControl leftControl = null, ScriptControl rightControl = null)
         {
-            return baseControl.Script;
+            return baseControl.Script.Clone();
+            
+            //var cloneScript = baseControl.Script.Clone();
+            
+            /*baseControl.Script.Transactions.ForEach((t) =>
+            {
+                if (leftControl != null)
+                {
+                    var otherT = leftControl.Script.Transactions.First((leftT) => leftT.Name == t.Name);
+                    //SomeStaticClass.InsertComparativeData(t, oT);
+                }
+                
+                if(rightControl != null)
+                {
+                    var otherT = rightControl.Script.Transactions.First((rightT) => rightT.Name == t.Name);
+                    //SomeStaticClass.InsertComparativeData(t, oT);
+                }
+
+            });*/
         }
     }
 }
