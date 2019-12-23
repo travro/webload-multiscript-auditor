@@ -6,7 +6,7 @@
         public string Rule { get; set; }
         public string OriginalValue { get; set; }
         public Correlation() { }
-        public Correlation(string rule, string extractionLogic, string originalValue)
+        public Correlation(string rule, string originalValue)
         {
             Rule = rule;
             OriginalValue = originalValue;
