@@ -86,7 +86,16 @@ namespace WMSA_Project.Models.Repositories
         {
             if (GetCount() > 1)
             {
-                _linkedList.Remove(_linkedList.Find(node));
+                if (node.ContainsScript())
+                {
+                    _linkedList.Remove(_linkedList.Find(node));
+                    OnNodeContainerChanged();
+                }
+                else
+                {
+                    _linkedList.Remove(_linkedList.Find(node));
+                }
+
                 OnCollectionChanged();
             }
             else
@@ -105,7 +114,7 @@ namespace WMSA_Project.Models.Repositories
 
                 if (sccFirst != null && sccFirst.Container.Script != null)
                 {
-                    return ScriptTransactionsComparer.CompareCount(newScript, sccFirst.Container.Script);
+                    return ScriptTransactionsComparer.CompareEach(newScript, sccFirst.Container.Script);
                 }
                 return false;
             }

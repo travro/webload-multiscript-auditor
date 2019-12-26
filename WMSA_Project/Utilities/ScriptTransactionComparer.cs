@@ -1,4 +1,7 @@
-﻿using WMSA_Project.Models;
+﻿using System.Linq;
+using System.Windows.Media;
+using WMSA_Project.Models;
+
 
 namespace WMSA_Project.Utilities
 {
@@ -29,6 +32,30 @@ namespace WMSA_Project.Utilities
         public static bool CompareAll(Script scriptLeft, Script scriptRight)
         {
             return (CompareCount(scriptLeft, scriptRight) && CompareEach(scriptLeft, scriptRight)) ? true : false;
+        }
+
+        public static void MatchRequests(Transaction baseTrans, Transaction compTrans, SolidColorBrush compColor)
+        {
+            compTrans.Requests.ForEach((compReq) =>
+            {
+                /*
+                 
+                 FIX First() method throws an exception and does not simply return null if no match is found.
+                 */
+
+                var validRequest = baseTrans.Requests.FirstOrDefault((baseReq) => baseReq.Equals(compReq) && baseReq.Matched == false);               
+
+
+                if (validRequest != null)
+                {
+                    validRequest.Matched = true;
+                }
+                else
+                {
+                    baseTrans.UnmatchedRequests.Add(new UnmatchedRequest(compTrans.Script, compColor, compReq.Verb, compReq.Parameters, compReq.Visible));
+                }
+            });
+            baseTrans.Requests.ForEach((baseReq) => baseReq.Matched = false);
         }
     }
 }

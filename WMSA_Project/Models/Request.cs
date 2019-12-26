@@ -12,19 +12,20 @@ namespace WMSA_Project.Models
         public RequestVerb Verb { get; set; }
         public string Parameters { get; set; }
         public bool Visible { get; set; }
-        public List<Correlation> Correlations { get; set; }
+        public bool Matched { get; set; }
+        public List<Correlation> Correlations { get; set; }        
 
         public Request()
-        { 
+        {
+            Matched = false;
         }
-
         public Request(RequestVerb verb, string parameters, bool visible)
         {
             Verb = verb;
             Parameters = parameters;
             Visible = visible;
+            Matched = false;
         }
-
         public string GetRequestString()
         {
             return Verb.ToString() + " " + Parameters;

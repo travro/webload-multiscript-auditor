@@ -13,7 +13,6 @@ namespace WMSA_Project.Models
         public string BuildVersion { get; set; }
         public string Name { get; set; }
         public DateTime RecordedDate { get; set; }
-
         public List<Transaction> Transactions { get; set; }
 
         public Script()
@@ -27,15 +26,8 @@ namespace WMSA_Project.Models
             Name = name;
             RecordedDate = dateTime;
         }
-        public bool Contains(Transaction t)
-        {
-            return Transactions.Exists(element => element.Name == t.Name);
-        }
-        public bool Contains(string s)
-        {
-            return Transactions.Exists(element => element.Name == s);
-        }
-
+        public bool Contains(Transaction t) => Transactions.Exists(element => element.Name == t.Name);
+        public bool Contains(string s) => Transactions.Exists(element => element.Name == s);
         public Script Clone()
         {
             var cloneScript = new Script(TestName, BuildVersion, Name, RecordedDate);
@@ -63,5 +55,6 @@ namespace WMSA_Project.Models
 
             return cloneScript;
         }
+        public void ClearUnmatchedRequests() => Transactions.ForEach((t) => t.UnmatchedRequests.Clear());
     }
 }

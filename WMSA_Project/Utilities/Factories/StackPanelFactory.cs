@@ -29,6 +29,7 @@ namespace WMSA_Project.Utilities.Factories
         {
             if (sccLinkList.Count == 1)
             {
+                sccLinkList.First.Value.Container.Script.ClearUnmatchedRequests();
                 BuildPanels(sccLinkList.First.Value.Container);
                 return;
             }
@@ -46,16 +47,16 @@ namespace WMSA_Project.Utilities.Factories
             {
                 thisContainer.PrevComparison = previousContainer;
                 thisContainer.NextComparison = nextContainer;
-                BuildPanels(thisContainer, ScriptFactory.GetComparativeScriptFromControls(thisContainer, previousContainer, nextContainer));
+                thisContainer.Script =  ScriptFactory.GetComparativeScriptFromControls(thisContainer, previousContainer, nextContainer);
+                BuildPanels(thisContainer);
             }
             BuildComparativePanels(node.Next);
         }
-        private static void BuildPanels(ScriptControl scriptControl, Script optionalScript = null)
+        private static void BuildPanels(ScriptControl scriptControl)
         {
-            Script scriptToUse = (optionalScript != null) ? optionalScript : scriptControl.Script;
             scriptControl.Stack_Transactions.Children.Clear();
 
-            foreach (var t in scriptToUse.Transactions)
+            foreach (var t in scriptControl.Script.Transactions)
             {
                 var transExpander = new Expander()
                 {
@@ -94,6 +95,22 @@ namespace WMSA_Project.Utilities.Factories
                         reqTree.Items.Add(reqTreeViewItem);
                     }
                 }
+
+                if(t.UnmatchedRequests != null && t.UnmatchedRequests.Count > 0)
+                {
+                    foreach(var unReq in t.UnmatchedRequests)
+                    {
+                        var unReqTreeViewItem = new TreeViewItem()
+                        {
+                            IsExpanded = false,
+                            Header = unReq.GetInfoString(),
+                            FontSize = 11,
+                            Foreground = unReq.SourceColor
+                        };
+                        reqTree.Items.Add(unReqTreeViewItem);
+                    }
+                }
+
                 transExpander.Content = reqTree;
                 scriptControl.Stack_Transactions.Children.Add(transExpander);
             }
