@@ -10,7 +10,7 @@ namespace WMSA_Project.Models.Factories
 {
     internal static class TransactionListFactory
     {
-        public static List<Transaction> GetTransactionsFromXDoc(XDocument xDoc)
+        public static List<Transaction> GetTransactionsFromXDoc(XDocument xDoc, Script script)
         {
             var transactions = new List<Transaction>();
             var jsParentBlockElements = xDoc
@@ -25,7 +25,7 @@ namespace WMSA_Project.Models.Factories
             //build list
             foreach (var jsPBE in jsParentBlockElements)
             {
-                var transaction = new Transaction(ParseTransactionName(jsPBE));
+                var transaction = new Transaction(ParseTransactionName(jsPBE), script);
                 transaction.Requests = RequestListFactory.GetRequestsFromXElement(jsPBE, false);
                 transactions.Add(transaction);
             }
