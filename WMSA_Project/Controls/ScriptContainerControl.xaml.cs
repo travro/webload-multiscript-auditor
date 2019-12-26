@@ -71,6 +71,17 @@ namespace WMSA_Project.Controls
             CntCtrl_Main.ClearValue(ContentProperty);
             Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Collapsed;
         }
+        public bool ContainsScript()
+        {
+            if (Container != null)
+            {
+                return (Container.Script != null)? true: false;
+            }
+            else
+            {
+                return false;
+            }
+        }
         #endregion
     }
 }
