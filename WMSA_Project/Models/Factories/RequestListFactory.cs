@@ -98,6 +98,7 @@ namespace WMSA_Project.Models.Factories
             filteredUrl = filteredUrl.ReplaceInBounds("[BrokerSessionId]", "api/sumtSocial/communities/");
             filteredUrl = filteredUrl.ReplaceInBounds("[BrokerSessionId]", "api/sumtSocial/communities/", "/");
             filteredUrl = filteredUrl.ReplaceInBounds("[BrokerSessionId]", "api/social/discuss");
+            filteredUrl = filteredUrl.ReplaceInBounds("[TenantKey]", "contentengine/TCAPI/", "/");
 
             return filteredUrl;
         }
