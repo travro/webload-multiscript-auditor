@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMSA_Project"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="auto" Background="WhiteSmoke">
+        Title="Webload Script Tool" Height="900" Width="auto" Background="WhiteSmoke">
     <Grid Width="auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

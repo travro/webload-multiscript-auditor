@@ -18,10 +18,18 @@ namespace WMSA_Project.Utilities
                   Brushes.Goldenrod,
                   Brushes.Green,
                   Brushes.Salmon,
-                  Brushes.Gray,
                   Brushes.SeaGreen,
                   Brushes.SteelBlue,
-                  Brushes.Pink
+                  Brushes.Pink,
+                  Brushes.DarkTurquoise,
+                  Brushes.DeepPink,
+                  Brushes.Gold,
+                  Brushes.LawnGreen,
+                  Brushes.SandyBrown,
+                  Brushes.Violet,
+                  Brushes.Lime,
+                  Brushes.Peru,
+                  Brushes.HotPink
                 });
         }
         public static ColorDispenser Dispenser

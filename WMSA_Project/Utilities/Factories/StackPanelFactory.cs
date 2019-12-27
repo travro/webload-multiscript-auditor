@@ -60,11 +60,12 @@ namespace WMSA_Project.Utilities.Factories
             {
                 var transExpander = new Expander()
                 {
-                    Header = t.Name,
+                    Header = $"{t.Name} ({t.UnmatchedRequests.Count})",
+                    Foreground = (t.UnmatchedRequests.Count > 0)? Brushes.Red: Brushes.Black,
                     Content = t.Requests,
-                    IsExpanded = true,
+                    IsExpanded = false,
                     Background = Brushes.LightGray,
-                    FontSize = 12,
+                    FontSize = 12                    
                 };
 
                 var reqTree = new TreeView();
@@ -77,7 +78,7 @@ namespace WMSA_Project.Utilities.Factories
                         {
                             IsExpanded = false,
                             Header = r.GetInfoString(),
-                            FontSize = 11,
+                            FontSize = 11
                         };
 
                         if (r.Correlations != null)
