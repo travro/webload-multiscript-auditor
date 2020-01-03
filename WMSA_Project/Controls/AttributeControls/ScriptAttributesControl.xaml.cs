@@ -30,9 +30,9 @@ namespace WMSA_Project.Controls.AttributeControls
         public ScriptAttributesControl()
         {
             InitializeComponent();
-            this.DataContext = this;
-            _selectedValue = DefaultValue = "No Selection Made";
-        }
+            DataContext = this;
+            _selectedValue = DefaultValue = "";
+        }        
 
         public event PropertyChangedEventHandler PropertyChanged;
         public ScriptAttribute Attribute
@@ -64,11 +64,8 @@ namespace WMSA_Project.Controls.AttributeControls
         {
             SelectedValue = DefaultValue;
         }
-        
-        public bool IsValid()
-        {
-            return (SelectedValue != null && SelectedValue != "" && SelectedValue != DefaultValue);
-        }
+
+        public bool IsValid() => (SelectedValue != null && SelectedValue != "" && SelectedValue != DefaultValue);
 
         #region handlers
         private void Select_Button_Click(object sender, RoutedEventArgs e)

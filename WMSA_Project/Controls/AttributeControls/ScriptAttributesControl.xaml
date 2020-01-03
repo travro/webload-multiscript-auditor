@@ -10,8 +10,8 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
     <DockPanel LastChildFill="True">
-        <Button DockPanel.Dock="Right"  x:Name="Btn_Add" Content="Add" Click="Add_Button_Click"/>
-        <Button DockPanel.Dock="Right" x:Name="Btn_Select" Content="Select" Click="Select_Button_Click"/>
+        <Button DockPanel.Dock="Right"  x:Name="Btn_Add" Content="Add" Click="Add_Button_Click" Visibility="Collapsed"/>
+        <Button DockPanel.Dock="Right" x:Name="Btn_Select" Content="Select" Click="Select_Button_Click" IsEnabled="False"/>
         <TextBlock DockPanel.Dock="Right"  x:Name="Text_Block" HorizontalAlignment="Left" Margin="15,0,0,0.4" Text="{Binding SelectedValue}"/>
     </DockPanel>
 </UserControl>
