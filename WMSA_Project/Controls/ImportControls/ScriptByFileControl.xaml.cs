@@ -37,6 +37,7 @@ namespace WMSA_Project.Controls.ImportControls
         {
             InitializeComponent();
             DBQ_Ctrl.AttributesReady += OnAttributesReady;
+            DBQ_Ctrl.ShowAddButtons();
         }
 
         public event EventHandler<ScriptReadyEventArgs> ScriptReady;

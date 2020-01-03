@@ -5,15 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WMSA_Project.Controls.ImportControls"
              xmlns:uc="clr-namespace:WMSA_Project.Controls.AttributeControls"
-             mc:Ignorable="d" d:DesignWidth="800" Height="300">
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="300">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
-    <GroupBox Grid.Row="1" Header="Select The Attributes for This Script">
+    <GroupBox Grid.Row="1" Header="Select The Attributes for This Script" Margin="10">
         <StackPanel Orientation="Vertical">
+            <TextBlock x:Name="Txt_Block_DBStatus" Text="Checking for DB connection......." Margin="0,10,0,20" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>            
+            <TextBlock Text="Select test group:"/>
             <uc:ScriptAttributesControl x:Name="SAC_Test" Attribute="TestName" />
+            <TextBlock Text="Select the build: "/>
             <uc:ScriptAttributesControl x:Name="SAC_Build" Attribute="BuildName"/>
+            <TextBlock Text="Select the Script's name:"/>
             <uc:ScriptAttributesControl x:Name="SAC_Script" Attribute="ScriptName" IsEnabled="False"/>
+            <TextBlock Text="Select the date the script was recorded:"/>
             <DatePicker x:Name="Dt_Pckr"/>
         </StackPanel>
     </GroupBox>

@@ -5,27 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WMSA_Project.Controls.ImportControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ComboBox Grid.Row="0" x:Name="CmbBx_TestName">
-            <ComboBoxItem IsSelected="True">LM</ComboBoxItem>
-        </ComboBox>
-        <ComboBox Grid.Row="1" x:Name="CmbBx_ScriptName">
-            <ComboBoxItem IsSelected="True">AdminGenTasks</ComboBoxItem>
-        </ComboBox>
+        <local:DBQueryControl Grid.Row="0" Grid.Column="0" x:Name="DBQ_Ctrl"/>
         <ScrollViewer Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" x:Name="ScrlVwr_Output">
             <ListView  x:Name="Lst_Results" >
-
             </ListView>
         </ScrollViewer>
     </Grid>

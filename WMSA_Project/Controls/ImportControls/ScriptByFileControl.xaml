@@ -15,7 +15,7 @@
         <GroupBox Grid.Row="0" HorizontalContentAlignment="Center"  Header="Select The Webload Project File (.wlp) from Storage">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock x:Name="TxtBlk_FilePath" HorizontalAlignment="Stretch"/>
-                <Button x:Name="Btn_OFD"  Content="..." Width="80" Click="Btn_OFD_Click"/>
+                <Button x:Name="Btn_OFD"  Content="..." Width="80" VerticalAlignment="Stretch" Click="Btn_OFD_Click"/>
             </StackPanel>
         </GroupBox>
         <uc:DBQueryControl Grid.Row="1" x:Name="DBQ_Ctrl"/>
