@@ -11,16 +11,18 @@ namespace WMSA_Project.Models
     {
         public Script UnmatchedSource { get; }
         public SolidColorBrush SourceColor { get; }
+        public bool SourceIsPrev { get; }
 
-        public UnmatchedRequest(Script s, SolidColorBrush color):base()
+        public UnmatchedRequest(Script s, SolidColorBrush color) : base()
         {
             UnmatchedSource = s;
             SourceColor = color;
         }
-        public UnmatchedRequest(Script s, SolidColorBrush color, RequestVerb verb, string parameters, bool visible): base(verb, parameters, visible)
+        public UnmatchedRequest(Script s, SolidColorBrush color, bool sourcePrevious, RequestVerb verb, string parameters, bool visible) : base(verb, parameters, visible)
         {
             UnmatchedSource = s;
             SourceColor = color;
+            SourceIsPrev = sourcePrevious;
         }
     }
 }

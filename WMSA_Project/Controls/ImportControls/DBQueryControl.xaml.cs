@@ -56,7 +56,7 @@ namespace WMSA_Project.Controls.ImportControls
 
             if (!_dbAvailable)
             {
-                Txt_Block_DBStatus.Text = $"Database: {_dbName} not found. Check configuration file for correct connection string";
+                Txt_Block_DBStatus.Text = $"Database: {_dbName} not found. Check configuration file for correct connection string and restart app";
             }
             else
             {

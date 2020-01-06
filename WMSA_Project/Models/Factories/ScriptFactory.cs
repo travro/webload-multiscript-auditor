@@ -39,21 +39,21 @@ namespace WMSA_Project.Models.Factories
             return script;
         }
 
-        public static Script GetComparativeScriptFromControls(ScriptControl baseControl, ScriptControl leftControl = null, ScriptControl rightControl = null)
+        public static Script GetComparativeScriptFromControls(ScriptControl baseControl)
         {
             baseControl.Script.ClearUnmatchedRequests();
             baseControl.Script.Transactions.ForEach((t) =>
             {
-                if (leftControl != null)
+                if (baseControl.PrevComparison != null)
                 {
-                    var leftControlTransaction = leftControl.Script.Transactions.First((leftT) => leftT.Name == t.Name);
-                    ScriptTransactionsComparer.MatchRequests(t, leftControlTransaction, leftControl.LabelColor);
+                    var prevTransaction = baseControl.PrevComparison.Script.Transactions.First((prevT) => prevT.Name == t.Name);
+                    ScriptTransactionsComparer.MatchRequests(t, prevTransaction, baseControl.PrevComparison.LabelColor, true);
                 }
 
-                if (rightControl != null)
+                if (baseControl.NextComparison != null)
                 {
-                    var rightControlTransaction = rightControl.Script.Transactions.First((rightT) => rightT.Name == t.Name);
-                    ScriptTransactionsComparer.MatchRequests(t, rightControlTransaction, rightControl.LabelColor);
+                    var nextTransaction = baseControl.NextComparison.Script.Transactions.First((nextT) => nextT.Name == t.Name);
+                    ScriptTransactionsComparer.MatchRequests(t, nextTransaction, baseControl.NextComparison.LabelColor);
                 }
             });
             return baseControl.Script;

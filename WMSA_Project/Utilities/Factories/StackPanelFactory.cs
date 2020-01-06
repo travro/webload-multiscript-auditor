@@ -47,7 +47,7 @@ namespace WMSA_Project.Utilities.Factories
             {
                 thisContainer.PrevComparison = previousContainer;
                 thisContainer.NextComparison = nextContainer;
-                thisContainer.Script =  ScriptFactory.GetComparativeScriptFromControls(thisContainer, previousContainer, nextContainer);
+                thisContainer.Script =  ScriptFactory.GetComparativeScriptFromControls(thisContainer);
                 BuildPanels(thisContainer);
             }
             BuildComparativePanels(node.Next);
@@ -65,7 +65,7 @@ namespace WMSA_Project.Utilities.Factories
                     Content = t.Requests,
                     IsExpanded = false,
                     Background = Brushes.LightGray,
-                    FontSize = 12                    
+                    FontSize = 13                    
                 };
 
                 var reqTree = new TreeView();
@@ -78,7 +78,7 @@ namespace WMSA_Project.Utilities.Factories
                         {
                             IsExpanded = false,
                             Header = r.GetInfoString(),
-                            FontSize = 11
+                            FontSize = 12
                         };
 
                         if (r.Correlations != null)
@@ -104,10 +104,20 @@ namespace WMSA_Project.Utilities.Factories
                         var unReqTreeViewItem = new TreeViewItem()
                         {
                             IsExpanded = false,
-                            Header = unReq.GetInfoString(),
-                            FontSize = 11,
+                            //Header = unReq.GetInfoString(),
+                            FontSize = 12,
                             Foreground = unReq.SourceColor
                         };
+
+                        //addition of arrow to unmatched request
+                        if (unReq.SourceIsPrev)
+                        {
+                            unReqTreeViewItem.Header = char.ConvertFromUtf32(0x25c4) + unReq.GetInfoString();
+                        }
+                        else
+                        {
+                            unReqTreeViewItem.Header = unReq.GetInfoString() + char.ConvertFromUtf32(0x25ba);
+                        }
                         reqTree.Items.Add(unReqTreeViewItem);
                     }
                 }

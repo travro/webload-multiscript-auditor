@@ -34,17 +34,11 @@ namespace WMSA_Project.Utilities
             return (CompareCount(scriptLeft, scriptRight) && CompareEach(scriptLeft, scriptRight)) ? true : false;
         }
 
-        public static void MatchRequests(Transaction baseTrans, Transaction compTrans, SolidColorBrush compColor)
+        public static void MatchRequests(Transaction baseTrans, Transaction compTrans, SolidColorBrush compColor, bool isPrevious = false)
         {
             compTrans.Requests.ForEach((compReq) =>
             {
-                /*
-                 
-                 FIX First() method throws an exception and does not simply return null if no match is found.
-                 */
-
-                var validRequest = baseTrans.Requests.FirstOrDefault((baseReq) => baseReq.Equals(compReq) && baseReq.Matched == false);               
-
+                var validRequest = baseTrans.Requests.FirstOrDefault((baseReq) => baseReq.Equals(compReq) && baseReq.Matched == false);   
 
                 if (validRequest != null)
                 {
@@ -52,7 +46,7 @@ namespace WMSA_Project.Utilities
                 }
                 else
                 {
-                    baseTrans.UnmatchedRequests.Add(new UnmatchedRequest(compTrans.Script, compColor, compReq.Verb, compReq.Parameters, compReq.Visible));
+                    baseTrans.UnmatchedRequests.Add(new UnmatchedRequest(compTrans.Script, compColor, isPrevious, compReq.Verb, compReq.Parameters, compReq.Visible));
                 }
             });
             baseTrans.Requests.ForEach((baseReq) => baseReq.Matched = false);
