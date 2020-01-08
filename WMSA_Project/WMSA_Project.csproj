@@ -92,7 +92,7 @@
     <Compile Include="Models\UnmatchedRequest.cs" />
     <Compile Include="Utilities\ColorDispenser.cs" />
     <Compile Include="Utilities\Factories\StackPanelFactory.cs" />
-    <Compile Include="Utilities\ScriptTransactionComparer.cs" />
+    <Compile Include="Utilities\ScriptTransactionsComparer.cs" />
     <Compile Include="Windows\AttributeWindows\AttributeAddWindow.xaml.cs">
       <DependentUpon>AttributeAddWindow.xaml</DependentUpon>
     </Compile>
