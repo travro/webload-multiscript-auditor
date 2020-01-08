@@ -47,13 +47,7 @@ namespace WMSA_Project.Models.Factories
                 if (baseControl.PrevComparison != null)
                 {
                     var prevTransaction = baseControl.PrevComparison.Script.Transactions.First((prevT) => prevT.Name == t.Name);
-                    ScriptTransactionsComparer.MatchRequests(t, prevTransaction, baseControl.PrevComparison.LabelColor, true);
-                }
-
-                if (baseControl.NextComparison != null)
-                {
-                    var nextTransaction = baseControl.NextComparison.Script.Transactions.First((nextT) => nextT.Name == t.Name);
-                    ScriptTransactionsComparer.MatchRequests(t, nextTransaction, baseControl.NextComparison.LabelColor);
+                    ScriptTransactionsComparer.MatchRequests(t, prevTransaction);
                 }
             });
             return baseControl.Script;

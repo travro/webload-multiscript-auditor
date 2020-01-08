@@ -27,32 +27,32 @@ namespace WMSA_Project.Utilities.Factories
 
         private static void BuildComparisons(LinkedList<ScriptContainerControl> sccLinkList)
         {
-            if (sccLinkList.Count == 1)
+            sccLinkList.First.Value.Container.Script.ClearUnmatchedRequests();
+            BuildPanels(sccLinkList.First.Value.Container, true);
+
+            if(sccLinkList.Count > 1)
             {
-                sccLinkList.First.Value.Container.Script.ClearUnmatchedRequests();
-                BuildPanels(sccLinkList.First.Value.Container);
-                return;
+                BuildComparativePanels(sccLinkList.First.Next);
             }
-            BuildComparativePanels(sccLinkList.First);
+
         }
+
         private static void BuildComparativePanels(LinkedListNode<ScriptContainerControl> node)
         {
             if (node == null) return;
 
             var thisContainer = node.Value.Container;
-            var previousContainer = (node.Previous != null)? node.Previous.Value.Container: null;
-            var nextContainer = (node.Next != null) ? node.Next.Value.Container : null;
+            var previousContainer = (node.Previous != null) ? node.Previous.Value.Container : null;
 
-            if (previousContainer != thisContainer.PrevComparison || nextContainer != thisContainer.NextComparison)
+            if (previousContainer != thisContainer.PrevComparison)
             {
                 thisContainer.PrevComparison = previousContainer;
-                thisContainer.NextComparison = nextContainer;
-                thisContainer.Script =  ScriptFactory.GetComparativeScriptFromControls(thisContainer);
+                thisContainer.Script = ScriptFactory.GetComparativeScriptFromControls(thisContainer);
                 BuildPanels(thisContainer);
             }
             BuildComparativePanels(node.Next);
         }
-        private static void BuildPanels(ScriptControl scriptControl)
+        private static void BuildPanels(ScriptControl scriptControl, bool isFirst = false)
         {
             scriptControl.Stack_Transactions.Children.Clear();
 
@@ -60,12 +60,11 @@ namespace WMSA_Project.Utilities.Factories
             {
                 var transExpander = new Expander()
                 {
-                    Header = $"{t.Name} ({t.UnmatchedRequests.Count})",
-                    Foreground = (t.UnmatchedRequests.Count > 0)? Brushes.Red: Brushes.Black,
+                    Header = t.Name,
                     Content = t.Requests,
-                    IsExpanded = false,
+                    IsExpanded = true,
                     Background = Brushes.LightGray,
-                    FontSize = 13                    
+                    FontSize = 13
                 };
 
                 var reqTree = new TreeView();
@@ -80,6 +79,13 @@ namespace WMSA_Project.Utilities.Factories
                             Header = r.GetInfoString(),
                             FontSize = 12
                         };
+
+                        if (!isFirst && !r.Matched)
+                        {
+                            reqTreeViewItem.Foreground = Brushes.Green;
+                            reqTreeViewItem.Header = "+" + reqTreeViewItem.Header;
+                        }
+
 
                         if (r.Correlations != null)
                         {
@@ -97,27 +103,17 @@ namespace WMSA_Project.Utilities.Factories
                     }
                 }
 
-                if(t.UnmatchedRequests != null && t.UnmatchedRequests.Count > 0)
+                if (t.UnmatchedRequests != null && t.UnmatchedRequests.Count > 0)
                 {
-                    foreach(var unReq in t.UnmatchedRequests)
+                    foreach (var unReq in t.UnmatchedRequests)
                     {
                         var unReqTreeViewItem = new TreeViewItem()
                         {
                             IsExpanded = false,
-                            //Header = unReq.GetInfoString(),
+                            Header = "-" + unReq.GetInfoString(),
                             FontSize = 12,
-                            Foreground = unReq.SourceColor
+                            Foreground = Brushes.Red
                         };
-
-                        //addition of arrow to unmatched request
-                        if (unReq.SourceIsPrev)
-                        {
-                            unReqTreeViewItem.Header = char.ConvertFromUtf32(0x25c4) + unReq.GetInfoString();
-                        }
-                        else
-                        {
-                            unReqTreeViewItem.Header = unReq.GetInfoString() + char.ConvertFromUtf32(0x25ba);
-                        }
                         reqTree.Items.Add(unReqTreeViewItem);
                     }
                 }
