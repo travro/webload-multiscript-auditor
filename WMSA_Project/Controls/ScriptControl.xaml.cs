@@ -31,9 +31,6 @@ namespace WMSA_Project.Controls
         }
         public Script Script { get; set; }
         public ScriptControl PrevComparison { get; set; }
-
-        //can probably scrap NextComparison here
-        public ScriptControl NextComparison { get; set; }
         public SolidColorBrush LabelColor { get; set; }     
         
     }
