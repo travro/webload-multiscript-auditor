@@ -30,7 +30,7 @@ namespace WMSA_Project.Utilities.Factories
             sccLinkList.First.Value.Container.Script.ClearUnmatchedRequests();
             BuildPanels(sccLinkList.First.Value.Container, true);
 
-            if(sccLinkList.Count > 1)
+            if (sccLinkList.Count > 1)
             {
                 BuildComparativePanels(sccLinkList.First.Next);
             }
@@ -60,9 +60,9 @@ namespace WMSA_Project.Utilities.Factories
             {
                 var transExpander = new Expander()
                 {
-                    Header = t.Name,
+                    Header = new StackPanel() { Orientation = Orientation.Horizontal },
                     Content = t.Requests,
-                    IsExpanded = true,
+                    IsExpanded = false,
                     Background = Brushes.LightGray,
                     FontSize = 13
                 };
@@ -119,6 +119,36 @@ namespace WMSA_Project.Utilities.Factories
                 }
 
                 transExpander.Content = reqTree;
+
+                //transExpander header
+                (transExpander.Header as StackPanel).Children.Add(new TextBlock() { Text = t.Name });
+
+                if (!isFirst)
+                {
+                    int uniqReqNum = t.Requests.Where(r => !r.Matched).Count();
+
+                    if (uniqReqNum > 0)
+                    {
+
+
+                        (transExpander.Header as StackPanel).Children.Add(new TextBlock()
+                        {
+                            Text = $" (+{uniqReqNum})",
+                            Foreground = Brushes.Green
+                        });
+                    } 
+                }
+
+                if(t.UnmatchedRequests.Count > 0)
+                {
+                    (transExpander.Header as StackPanel).Children.Add(new TextBlock()
+                    {
+                        Text = $" (-{t.UnmatchedRequests.Count()})",
+                        Foreground = Brushes.Red
+                    });
+                }
+
+
                 scriptControl.Stack_Transactions.Children.Add(transExpander);
             }
         }
