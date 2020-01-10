@@ -55,7 +55,9 @@ namespace WMSA_Project.Models.Repositories
             {
                 if (args.ScriptOnClose != null && CanAdd(args.ScriptOnClose, node))
                 {
-                    node.Container = new ScriptControl(args.ScriptOnClose);
+                    var scrptCtrl = new ScriptControl(args.ScriptOnClose);
+                    scrptCtrl.StackTransExpanderStateChange += OnScriptControlExpanderStateChange;
+                    node.Container = scrptCtrl;
                     OnNodeContainerChanged();
                 }
                 else
@@ -70,18 +72,15 @@ namespace WMSA_Project.Models.Repositories
             _linkedList.AddBefore(_linkedList.Find(node), new ScriptContainerControl(this));
             OnCollectionChanged();
         }
-
         public void AddContainerAfter(ScriptContainerControl node)
         {
             _linkedList.AddAfter(_linkedList.Find(node), new ScriptContainerControl(this));
             OnCollectionChanged();
         }
-
         public int GetCount()
         {
             return _linkedList.Count;
         }
-
         public void Remove(ScriptContainerControl node)
         {
             if (GetCount() > 1)
@@ -103,7 +102,6 @@ namespace WMSA_Project.Models.Repositories
                 node.Reset();
             }
         }
-
         private bool CanAdd(Script newScript, ScriptContainerControl sccCaller)
         {
             if (sccCaller == _sccStarter) return true;
@@ -117,6 +115,18 @@ namespace WMSA_Project.Models.Repositories
                     return ScriptTransactionsComparer.CompareEach(newScript, sccFirst.Container.Script);
                 }
                 return false;
+            }
+        }
+        private void OnScriptControlExpanderStateChange(object sender, RoutedEventArgs args)
+        {
+            var expander = (args.Source as System.Windows.Controls.Expander);
+            int expanderIndex = (sender as ScriptControl).Stack_Transactions.Children.IndexOf(expander);
+
+            var validLinkList = _linkedList.Where(scc => scc.Container != null);
+
+            foreach(var scc in validLinkList)
+            {
+                (scc.Container.Stack_Transactions.Children[expanderIndex] as System.Windows.Controls.Expander).IsExpanded = expander.IsExpanded;
             }
         }
         private void OnNodeContainerChanged()

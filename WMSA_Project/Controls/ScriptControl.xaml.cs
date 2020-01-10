@@ -29,9 +29,18 @@ namespace WMSA_Project.Controls
             TxtBlck_TestGroup.Background = LabelColor = ColorDispenser.Dispenser.GetNextColor();
             Script = script;
         }
+
+        public EventHandler<RoutedEventArgs> StackTransExpanderStateChange;
+
         public Script Script { get; set; }
         public ScriptControl PrevComparison { get; set; }
-        public SolidColorBrush LabelColor { get; set; }     
-        
+        public SolidColorBrush LabelColor { get; set; }            
+        public void OnStackTransExpanderStateChange(object sender, RoutedEventArgs args)
+        {
+            if(StackTransExpanderStateChange != null)
+            {
+                StackTransExpanderStateChange(this, args);
+            }
+        }        
     }
 }

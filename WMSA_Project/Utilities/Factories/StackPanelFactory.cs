@@ -24,7 +24,6 @@ namespace WMSA_Project.Utilities.Factories
         }
 
         #region helpermethods
-
         private static void BuildComparisons(LinkedList<ScriptContainerControl> sccLinkList)
         {
             sccLinkList.First.Value.Container.Script.ClearUnmatchedRequests();
@@ -34,9 +33,7 @@ namespace WMSA_Project.Utilities.Factories
             {
                 BuildComparativePanels(sccLinkList.First.Next);
             }
-
         }
-
         private static void BuildComparativePanels(LinkedListNode<ScriptContainerControl> node)
         {
             if (node == null) return;
@@ -64,8 +61,11 @@ namespace WMSA_Project.Utilities.Factories
                     Content = t.Requests,
                     IsExpanded = false,
                     Background = Brushes.LightGray,
-                    FontSize = 13
+                    FontSize = 13,
                 };
+
+                transExpander.Expanded += scriptControl.OnStackTransExpanderStateChange;
+                transExpander.Collapsed += scriptControl.OnStackTransExpanderStateChange;
 
                 var reqTree = new TreeView();
 
@@ -121,7 +121,8 @@ namespace WMSA_Project.Utilities.Factories
                 transExpander.Content = reqTree;
 
                 //transExpander header
-                (transExpander.Header as StackPanel).Children.Add(new TextBlock() { Text = t.Name });
+                var transExpanderHeader = (transExpander.Header as StackPanel);
+                transExpanderHeader.Children.Add(new TextBlock() { Text = t.Name });
 
                 if (!isFirst)
                 {
@@ -129,29 +130,27 @@ namespace WMSA_Project.Utilities.Factories
 
                     if (uniqReqNum > 0)
                     {
-
-
-                        (transExpander.Header as StackPanel).Children.Add(new TextBlock()
+                        transExpanderHeader.Children.Add(new TextBlock()
                         {
                             Text = $" (+{uniqReqNum})",
                             Foreground = Brushes.Green
                         });
-                    } 
+                    }
                 }
 
-                if(t.UnmatchedRequests.Count > 0)
+                if (t.UnmatchedRequests.Count > 0)
                 {
-                    (transExpander.Header as StackPanel).Children.Add(new TextBlock()
+                    transExpanderHeader.Children.Add(new TextBlock()
                     {
                         Text = $" (-{t.UnmatchedRequests.Count()})",
                         Foreground = Brushes.Red
                     });
                 }
-
-
                 scriptControl.Stack_Transactions.Children.Add(transExpander);
             }
         }
+        #endregion
+        #region handlers
         #endregion
     }
 }
