@@ -16,11 +16,14 @@ namespace WMSA_Project.Utilities.Factories
             LinkedList<ScriptContainerControl> sccLinkList = new LinkedList<ScriptContainerControl>();
 
             IEnumerable<ScriptContainerControl> validContainers = repo.ScriptContainerList.Where((sCL) => sCL.Container != null && sCL.Container.Script != null);
-            foreach (ScriptContainerControl scc in validContainers)
+            if (validContainers != null && validContainers.Count() > 0)
             {
-                sccLinkList.AddLast(scc);
+                foreach (ScriptContainerControl scc in validContainers)
+                {
+                    sccLinkList.AddLast(scc);
+                }
+                BuildComparisons(sccLinkList); 
             }
-            BuildComparisons(sccLinkList);
         }
 
         #region helpermethods
