@@ -30,7 +30,7 @@ namespace WMSA_Project.Controls.ImportControls
     /// </summary>
     public partial class DBQueryControl : UserControl
     {
-        string _dbName = "WlScriptsDB";
+        string _dbName = "WLScriptsDB";
         bool _dbAvailable;
         public DBQueryControl()
         {
