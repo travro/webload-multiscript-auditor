@@ -1,17 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using WMSA.Entities.Interfaces;
 
 
 namespace WMSA_Project.Models
 {
-    public class Transaction
+    public class Transaction : ITransaction
     {
-        public int Id { get; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public List<Request> Requests { get; set; }
         public List<Request> UnmatchedRequests { get; set; }
         public Script Script { get; }
+        ICollection<IRequest> ITransaction.Requests
+        {
+            get => Requests as ICollection<IRequest>;
+            set => Requests = value as List<Request>;
+        }
 
         public Transaction(string name)
         {

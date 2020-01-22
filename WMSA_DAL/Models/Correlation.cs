@@ -1,21 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Spatial;
+using WMSA.Entities.Interfaces;
+
 namespace WMSA_DAL.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
-    public partial class Correlation
+    public partial class Correlation : ICorrelation
     {
-        public int id { get; set; }
+        [Key, Column("id")]
+        public int Id { get; set; }
 
-        [StringLength(128)]
-        public string corr_rule { get; set; }
+        [StringLength(128), Column("corr_rule")]
+        public string Rule { get; set; }
 
-        [StringLength(256)]
-        public string original_val { get; set; }
+        [StringLength(256), Column("original_val")]
+        public string OriginalValue { get; set; }
 
+        [Column("req_id")]
         public int? req_id { get; set; }
 
         public virtual Request Request { get; set; }

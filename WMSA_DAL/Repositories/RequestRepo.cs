@@ -16,13 +16,13 @@ namespace WMSA_DAL.Repositories
         }
         public int Delete(int entityId)
         {
-            Context.Entry(new Request() { id = entityId }).State = System.Data.Entity.EntityState.Deleted;
+            Context.Entry(new Request() { Id = entityId }).State = System.Data.Entity.EntityState.Deleted;
             return SaveChanges();
         }
 
         public Task<int> DeleteAsync(int entityId)
         {
-            Context.Entry(new Request() { id = entityId }).State = System.Data.Entity.EntityState.Deleted;
+            Context.Entry(new Request() { Id = entityId }).State = System.Data.Entity.EntityState.Deleted;
             return SaveChangesAsync();
         }
     }

@@ -16,14 +16,25 @@ namespace WMSA_DAL.Repositories
         }
         public int Delete(int entityId)
         {
-            Context.Entry(new Script() { id = entityId }).State = System.Data.Entity.EntityState.Deleted;
+            Context.Entry(new Script() { Id = entityId }).State = System.Data.Entity.EntityState.Deleted;
             return SaveChanges();
         }
 
         public Task<int> DeleteAsync(int entityId)
         {
-            Context.Entry(new Script() { id = entityId }).State = System.Data.Entity.EntityState.Deleted;
+            Context.Entry(new Script() { Id = entityId }).State = System.Data.Entity.EntityState.Deleted;
             return SaveChangesAsync();
+        }
+
+        public List<Script> GetScriptsByTestName(string testName)
+        {
+            using (var repo = new TestRepo())
+            {
+                //testId must be acquired separately as _table: DBSet<> cannot run C# code because the paramters of DBSet<> functions
+                //are apart of the DB query
+                var testId = repo.GetTestId(testName);
+                return _table.Where(s => s.test_id == testId).ToList();
+            }
         }
     }
 }

@@ -26,5 +26,10 @@ namespace WMSA_DAL.Repositories
             Context.Entry(new Test() { id = entityId }).State = System.Data.Entity.EntityState.Deleted;
             return SaveChangesAsync();
         }
+
+        public int GetTestId(string name)
+        {
+            return _table.FirstOrDefault(t => t.test_name == name).id;
+        }
     }
 }

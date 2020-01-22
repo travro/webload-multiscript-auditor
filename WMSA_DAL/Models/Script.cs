@@ -1,12 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Spatial;
+using WMSA.Entities.Interfaces;
+
 namespace WMSA_DAL.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
-    public partial class Script
+    public partial class Script: IScript
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Script()
@@ -14,13 +15,14 @@ namespace WMSA_DAL.Models
             Transactions = new HashSet<Transaction>();
         }
 
-        public int id { get; set; }
+        [Key, Column("id")]
+        public int Id { get; set; }
 
-        [StringLength(50)]
-        public string script_name { get; set; }
+        [StringLength(50), Column("script_name")]
+        public string Name { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? recording_date { get; set; }
+        [Column("recording_date")]
+        public DateTime RecordedDate { get; set; }
 
         public int? test_id { get; set; }
 
@@ -28,5 +30,15 @@ namespace WMSA_DAL.Models
         public virtual ICollection<Transaction> Transactions { get; set; }
 
         public virtual Test Test { get; set; }
+
+        [NotMapped]
+        public string TestName { get => Test.test_name; set => Test.test_name = value; }
+        [NotMapped]
+        public string BuildVersion { get => Test.build_version; set => Test.build_version = value; }
+        ICollection<ITransaction> IScript.Transactions
+        {
+            get => Transactions as ICollection<ITransaction>;
+            set => Transactions = value as ICollection<Transaction>;
+        }
     }
 }

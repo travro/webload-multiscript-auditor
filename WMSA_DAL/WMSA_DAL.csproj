@@ -70,7 +70,9 @@
     <Compile Include="Repositories\ScriptRepo.cs" />
     <Compile Include="Repositories\TestRepo.cs" />
     <Compile Include="Repositories\TransactionNameRepo.cs" />
+    <Compile Include="Repositories\TransactionRepo.cs" />
     <Compile Include="Repositories\WLObjectRepo.cs" />
+    <Compile Include="Service\ScriptFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -79,6 +81,13 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WMSA.Entities\WMSA.Entities.csproj">
+      <Project>{eb3febe5-82bd-46e5-b4ae-9d239ab858ac}</Project>
+      <Name>WMSA.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
