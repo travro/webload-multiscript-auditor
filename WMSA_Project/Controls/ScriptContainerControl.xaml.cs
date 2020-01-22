@@ -38,14 +38,14 @@ namespace WMSA_Project.Controls
             set
             {
                 CntCtrl_Main.Content = _container = value; ;
-                Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Visible;
+               Btn_Export.Visibility = Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Visible;
             }
         }
 
         #region handlers
-        private void Btn_Add_Click(object sender, RoutedEventArgs e)
+        private void Btn_Import_Click(object sender, RoutedEventArgs e)
         {
-            _repo.AddScriptTo(this);
+            _repo.ImportScript(this);
         }
 
         private void Btn_Left_Click(object sender, RoutedEventArgs e)
@@ -62,6 +62,11 @@ namespace WMSA_Project.Controls
         {
             _repo.Remove(this);
         }
+
+        private void Btn_Export_Click(object sender, RoutedEventArgs e)
+        {
+            _repo.ExportScript(this);
+        }
         #endregion
 
         #region helpermethods
@@ -69,7 +74,7 @@ namespace WMSA_Project.Controls
         {
             Container = null;
             CntCtrl_Main.ClearValue(ContentProperty);
-            Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Collapsed;
+            Btn_Export.Visibility = Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Collapsed;
         }
         public bool ContainsScript()
         {
@@ -83,5 +88,7 @@ namespace WMSA_Project.Controls
             }
         }
         #endregion
+
+
     }
 }

@@ -12,6 +12,7 @@ using WMSA_Project.Controls;
 using WMSA_Project.Utilities;
 using WMSA_Project.Utilities.Factories;
 using WMSA_Project.Windows;
+using ScriptFactoryDAL = WMSA_DAL.Service.ScriptFactory;
 
 namespace WMSA_Project.Repositories
 {
@@ -48,7 +49,7 @@ namespace WMSA_Project.Repositories
 
         #endregion
         #region helpermethods
-        public void AddScriptTo(ScriptContainerControl node)
+        public void ImportScript(ScriptContainerControl node)
         {
             var importScrptWin = new ImportScriptWindow();
             importScrptWin.ClosedWithScript += (object sender, ClosedWithScriptEventArgs args) =>
@@ -101,6 +102,11 @@ namespace WMSA_Project.Repositories
             {
                 node.Reset();
             }
+        }
+        public void ExportScript(ScriptContainerControl node)
+        {
+            //logic for calling DAL service
+            ScriptFactoryDAL.SayHi();
         }
         private bool CanAdd(Script newScript, ScriptContainerControl sccCaller)
         {
