@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WMSA_Project.Models;
 using WMSA_Project.Windows.Interfaces;
-using WMSA_Project.DAL.Repositories;
+using WMSA_Project.Repositories;
 
 namespace WMSA_Project.Windows.AttributeWindows
 {

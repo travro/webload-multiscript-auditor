@@ -18,7 +18,7 @@ using WMSA_Project.Models.Factories;
 using WMSA_Project.Controls.AttributeControls;
 using WMSA_Project.Controls.Interfaces;
 using WMSA_Project.DAL;
-using WMSA_Project.DAL.Repositories;
+using WMSA_Project.Repositories;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;

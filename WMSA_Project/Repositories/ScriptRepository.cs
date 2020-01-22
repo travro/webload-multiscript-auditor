@@ -13,7 +13,7 @@ using WMSA_Project.Utilities;
 using WMSA_Project.Utilities.Factories;
 using WMSA_Project.Windows;
 
-namespace WMSA_Project.Models.Repositories
+namespace WMSA_Project.Repositories
 {
     public sealed class ScriptRepository : INotifyCollectionChanged
     {

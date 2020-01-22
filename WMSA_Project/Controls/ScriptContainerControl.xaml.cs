@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WMSA_Project.Models.Repositories;
+using WMSA_Project.Repositories;
 
 namespace WMSA_Project.Controls
 {

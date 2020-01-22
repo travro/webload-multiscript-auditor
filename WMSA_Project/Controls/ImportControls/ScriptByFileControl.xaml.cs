@@ -18,7 +18,7 @@ using WMSA_Project.Models;
 using WMSA_Project.Models.Factories;
 using WMSA_Project.Controls.AttributeControls;
 using WMSA_Project.Controls.Interfaces;
-using WMSA_Project.DAL.Repositories;
+using WMSA_Project.Repositories;
 
 namespace WMSA_Project.Controls.ImportControls
 {
