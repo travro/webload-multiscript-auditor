@@ -12,7 +12,7 @@ using WMSA_Project.Controls;
 using WMSA_Project.Utilities;
 using WMSA_Project.Utilities.Factories;
 using WMSA_Project.Windows;
-using ScriptFactoryDAL = WMSA_DAL.Service.ScriptFactory;
+using WMSA_DAL.Service;
 
 namespace WMSA_Project.Repositories
 {
@@ -105,8 +105,19 @@ namespace WMSA_Project.Repositories
         }
         public void ExportScript(ScriptContainerControl node)
         {
-            //logic for calling DAL service
-            ScriptFactoryDAL.SayHi();
+            if (node.Container != null && node.Container.Script != null)
+            {
+                try
+                {
+                    var scriptService = new ScriptService(node.Container.Script);
+                    scriptService.SaveScript();
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.ToString());
+                }
+            }
         }
         private bool CanAdd(Script newScript, ScriptContainerControl sccCaller)
         {

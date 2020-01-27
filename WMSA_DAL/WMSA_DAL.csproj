@@ -72,7 +72,7 @@
     <Compile Include="Repositories\TransactionNameRepo.cs" />
     <Compile Include="Repositories\TransactionRepo.cs" />
     <Compile Include="Repositories\WLObjectRepo.cs" />
-    <Compile Include="Service\ScriptFactory.cs" />
+    <Compile Include="Service\ScriptService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
