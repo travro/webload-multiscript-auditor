@@ -10,6 +10,6 @@ namespace WMSA.Entities.Interfaces
     {
         string Verb { get; set; }
         string Parameters { get; set; }
-        ICollection<ICorrelation> Correlations { get; set; }
+        IEnumerable<ICorrelation> Correlations { get; set; }
     }
 }

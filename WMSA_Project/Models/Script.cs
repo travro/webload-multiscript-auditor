@@ -15,9 +15,9 @@ namespace WMSA_Project.Models
         public string Name { get; set; }
         public DateTime RecordedDate { get; set; }
         public List<Transaction> Transactions { get; set; }
-        ICollection<ITransaction> IScript.Transactions
+        IEnumerable<ITransaction> IScript.Transactions
         {
-            get => Transactions as ICollection<ITransaction>; 
+            get => Transactions; 
             set => Transactions = value as List<Transaction>;  
         }
 

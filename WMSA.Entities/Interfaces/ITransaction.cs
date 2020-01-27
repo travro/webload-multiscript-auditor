@@ -9,6 +9,6 @@ namespace WMSA.Entities.Interfaces
     public interface ITransaction : IEntity
     {
         string Name { get; set; }
-        ICollection<IRequest> Requests { get; set; }
+        IEnumerable<IRequest> Requests { get; set; }
     }
 }

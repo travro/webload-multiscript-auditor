@@ -15,9 +15,9 @@ namespace WMSA_Project.Models
         public bool Visible { get; set; }
         public bool Matched { get; set; }
         public List<Correlation> Correlations { get; set; }
-        ICollection<ICorrelation> IRequest.Correlations
+        IEnumerable<ICorrelation> IRequest.Correlations
         {
-            get => Correlations as ICollection<ICorrelation>;
+            get => Correlations;
             set => Correlations = value as List<Correlation>;
         }
         string IRequest.Verb

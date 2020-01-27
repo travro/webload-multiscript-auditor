@@ -12,6 +12,6 @@ namespace WMSA.Entities.Interfaces
         string BuildVersion { get; set; }
         string Name { get; set; }
         DateTime RecordedDate { get; set; }        
-        ICollection<ITransaction> Transactions { get; set; }
+        IEnumerable<ITransaction> Transactions { get; set; }
     }
 }

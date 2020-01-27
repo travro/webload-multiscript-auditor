@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Spatial;
 using WMSA.Entities.Interfaces;
-
 namespace WMSA_DAL.Models
 {
     public partial class Script: IScript
@@ -35,9 +34,9 @@ namespace WMSA_DAL.Models
         public string TestName { get => Test.test_name; set => Test.test_name = value; }
         [NotMapped]
         public string BuildVersion { get => Test.build_version; set => Test.build_version = value; }
-        ICollection<ITransaction> IScript.Transactions
+        IEnumerable<ITransaction> IScript.Transactions
         {
-            get => Transactions as ICollection<ITransaction>;
+            get => Transactions as ICollection<WMSA.Entities.Interfaces.ITransaction>;
             set => Transactions = value as ICollection<Transaction>;
         }
     }

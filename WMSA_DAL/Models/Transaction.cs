@@ -37,9 +37,9 @@ namespace WMSA_DAL.Models
             get => TransactionName.trans_name;
             set => TransactionName.trans_name = value;
         }
-        ICollection<IRequest> ITransaction.Requests
+        IEnumerable<IRequest> ITransaction.Requests
         {
-            get => Requests as ICollection<IRequest>;
+            get => Requests;
             set => Requests = value as ICollection<Request>;
         }
     }

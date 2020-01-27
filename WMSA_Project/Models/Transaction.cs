@@ -13,9 +13,9 @@ namespace WMSA_Project.Models
         public List<Request> Requests { get; set; }
         public List<Request> UnmatchedRequests { get; set; }
         public Script Script { get; }
-        ICollection<IRequest> ITransaction.Requests
+        IEnumerable<IRequest> ITransaction.Requests
         {
-            get => Requests as ICollection<IRequest>;
+            get => Requests;
             set => Requests = value as List<Request>;
         }
 
