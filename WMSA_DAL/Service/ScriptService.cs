@@ -18,7 +18,7 @@ namespace WMSA_DAL.Service
             _script = script;
         }
 
-        //public IScript ImportScript(string testName, string buildVersion, string scriptName, DateTime recordedDate)
+        //public IScript GetScript(int scriptID)
         //{
 
         //}
@@ -26,42 +26,58 @@ namespace WMSA_DAL.Service
         {
             using (var context = new WLContext())
             {
-                var newTest = context.Tests.Add(new Test() { test_name = _script.TestName, build_version = _script.BuildVersion });
-                var newScript = context.Scripts.Add(new Script() { Name = _script.Name, RecordedDate = _script.RecordedDate, test_id = newTest.id });
-
-                foreach (var trans in _script.Transactions)
+                using (var contextTransaction = context.Database.BeginTransaction())
                 {
-                    Transaction newTrans;
-
-                    var queriedTransName = context.TransactionNames.FirstOrDefault(t => t.trans_name == trans.Name);
-
-                    if (queriedTransName != null)
+                    try
                     {
-                        newTrans = context.Transactions.Add(new Transaction() { trans_nm_id = queriedTransName.id, script_id = newScript.Id });
-                    }
-                    else
-                    {
-                        var newTransName = context.TransactionNames.Add(new TransactionName() { trans_name = trans.Name });
-                        newTrans = context.Transactions.Add(new Transaction() { trans_nm_id = newTransName.id, script_id = newScript.Id });
-                    }
+                        var newTest = context.Tests.Add(new Test() { test_name = _script.TestName, build_version = _script.BuildVersion });
+                        context.SaveChanges();
 
-                    foreach(var req in trans.Requests)
-                    {
-                        var queriedReqVerb = context.RequestVerbs.FirstOrDefault(rV => rV.verb == req.Verb);
+                        var newScript = context.Scripts.Add(new Script() { Name = _script.Name, RecordedDate = _script.RecordedDate, test_id = newTest.id });
+                        context.SaveChanges();
 
-                        if(queriedReqVerb != null)
+                        foreach (var trans in _script.Transactions)
                         {
-                            var newRequest = context.Requests.Add(new Request() { verb_id = queriedReqVerb.id, Parameters = req.Parameters, trans_id = newTrans.Id });
+                            Transaction newTrans;
+
+                            var queriedTransName = context.TransactionNames.FirstOrDefault(t => t.trans_name == trans.Name);
+
+                            if (queriedTransName != null)
+                            {
+                                newTrans = context.Transactions.Add(new Transaction() { trans_nm_id = queriedTransName.id, script_id = newScript.Id });
+                                context.SaveChanges();
+                            }
+                            else
+                            {
+                                var newTransName = context.TransactionNames.Add(new TransactionName() { trans_name = trans.Name });
+                                context.SaveChanges();
+
+                                newTrans = context.Transactions.Add(new Transaction() { trans_nm_id = newTransName.id, script_id = newScript.Id });
+                                context.SaveChanges();
+                            }
+
+                            foreach (var req in trans.Requests)
+                            {
+                                var queriedReqVerb = context.RequestVerbs.FirstOrDefault(rV => rV.verb == req.Verb);
+
+                                if (queriedReqVerb != null)
+                                {
+                                    var newRequest = context.Requests.Add(new Request() { verb_id = queriedReqVerb.id, Parameters = req.Parameters, trans_id = newTrans.Id });
+                                    context.SaveChanges();
+                                }
+                            }
                         }
+                        contextTransaction.Commit();
                     }
-                }
-                try
-                {
-                    context.SaveChanges();
-                }
-                catch(Exception ex)
-                {
-                    throw ex;
+                    catch (Exception ex)
+                    {
+                        contextTransaction.Rollback();
+                        throw ex;
+                    }
+                    finally
+                    {
+                        contextTransaction.Dispose();
+                    }
                 }
             }
         }
