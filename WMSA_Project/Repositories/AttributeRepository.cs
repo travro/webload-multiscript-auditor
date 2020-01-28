@@ -48,7 +48,7 @@ namespace WMSA_Project.Repositories
             }
         }
 
-        public void Update()
+        private void Update()
         {
             using (var repo = new TestRepo())
             {

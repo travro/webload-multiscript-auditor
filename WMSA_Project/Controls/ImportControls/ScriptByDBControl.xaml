@@ -15,8 +15,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <local:DBQueryControl Grid.Row="0" Grid.Column="0" x:Name="DBQ_Ctrl"/>
-        <ScrollViewer Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" x:Name="ScrlVwr_Output">
-            <ListView  x:Name="Lst_Results" >
+        <ScrollViewer Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" x:Name="ScrlVwr_Output" VerticalScrollBarVisibility="Auto">
+            <ListView  x:Name="Lst_Results" ItemsSource="{Binding ScriptList}">
             </ListView>
         </ScrollViewer>
     </Grid>

@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using WMSA_Project.Models;
 using WMSA_Project.Controls;
 using WMSA_Project.Utilities;
+using WMSA.Entities.Interfaces;
 
 namespace WMSA_Project.Models.Factories
 {
@@ -52,5 +53,20 @@ namespace WMSA_Project.Models.Factories
             });
             return baseControl.Script;
         }
+
+        public static Script GetScriptFromDB(IScript script)
+        {
+            var newScript = new Script()
+            {
+                Id = script.Id,
+                Name = script.Name,
+                BuildVersion = script.BuildVersion,
+                TestName = script.TestName,
+                RecordedDate = script.RecordedDate,
+                Transactions = script.Transactions as List<Transaction>,                
+            };
+            return newScript;
+        }
+
     }
 }
