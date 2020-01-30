@@ -18,10 +18,40 @@ namespace WMSA_DAL.Service
             _script = script;
         }
 
-        //public IScript GetScript(int scriptID)
-        //{
+        public static IScript GetScript(int scriptid)
+        {
+            IScript scriptToExport;
 
-        //}
+            using (var context = new WLContext())
+            {
+                using (var cntxtTransaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        scriptToExport = context.Scripts
+                            .Include("Test")
+                            .Include("Transactions")
+                            .Include("Transactions.TransactionName")
+                            .Include("Transactions.Requests")
+                            .Include("Transactions.Requests.RequestVerb")
+                            .Include("Transactions.Requests.Correlations")
+                            .FirstOrDefault(s => s.Id == scriptid);
+
+                        cntxtTransaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        cntxtTransaction.Rollback();
+                        throw ex;
+                    }
+                    finally
+                    {
+                        cntxtTransaction.Dispose();
+                    }
+                }
+            }
+            return scriptToExport;
+        }
         public void SaveScript()
         {
             using (var context = new WLContext())
@@ -60,10 +90,25 @@ namespace WMSA_DAL.Service
                             {
                                 var queriedReqVerb = context.RequestVerbs.FirstOrDefault(rV => rV.verb == req.Verb);
 
+                                Request newRequest;
+
                                 if (queriedReqVerb != null)
                                 {
-                                    var newRequest = context.Requests.Add(new Request() { verb_id = queriedReqVerb.id, Parameters = req.Parameters, trans_id = newTrans.Id });
+                                    newRequest = context.Requests.Add(new Request() { verb_id = queriedReqVerb.id, Parameters = req.Parameters, trans_id = newTrans.Id });
                                     context.SaveChanges();
+                                }
+                                else
+                                {
+                                    newRequest = context.Requests.Add(new Request() { verb_id = 5, Parameters = req.Parameters, trans_id = newTrans.Id });
+                                }
+                                //add correlations                           
+
+                                if(req.Correlations != null && req.Correlations.Count() > 0)
+                                {
+                                    foreach(var corr in req.Correlations)
+                                    {
+                                        context.Correlations.Add(new Correlation() { OriginalValue = corr.OriginalValue, Rule = corr.Rule, req_id = newRequest.Id });
+                                    }
                                 }
                             }
                         }
