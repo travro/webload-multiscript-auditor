@@ -11,23 +11,7 @@ namespace WMSA_Project.Utilities.Factories
 {
     public static class StackPanelFactory
     {
-        public static void BuildStackPanels(ScriptRepository repo)
-        {
-            LinkedList<ScriptContainerControl> sccLinkList = new LinkedList<ScriptContainerControl>();
-
-            IEnumerable<ScriptContainerControl> validContainers = repo.ScriptContainerList.Where((sCL) => sCL.Container != null && sCL.Container.Script != null);
-            if (validContainers != null && validContainers.Count() > 0)
-            {
-                foreach (ScriptContainerControl scc in validContainers)
-                {
-                    sccLinkList.AddLast(scc);
-                }
-                BuildComparisons(sccLinkList); 
-            }
-        }
-
-        #region helpermethods
-        private static void BuildComparisons(LinkedList<ScriptContainerControl> sccLinkList)
+        public static void BuildStackPanels(LinkedList<ScriptContainerControl> sccLinkList)
         {
             sccLinkList.First.Value.Container.Script.ClearUnmatchedRequests();
             BuildPanels(sccLinkList.First.Value.Container, true);
@@ -37,6 +21,8 @@ namespace WMSA_Project.Utilities.Factories
                 BuildComparativePanels(sccLinkList.First.Next);
             }
         }
+
+        #region helpermethods
         private static void BuildComparativePanels(LinkedListNode<ScriptContainerControl> node)
         {
             if (node == null) return;

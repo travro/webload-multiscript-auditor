@@ -19,10 +19,11 @@ namespace WMSA_Project.Repositories
     public sealed class ScriptRepository : INotifyCollectionChanged
     {
         private static ScriptRepository _repository;
+        private LinkedList<ScriptContainerControl> _linkedList;
 
         private ScriptRepository()
         {
-            ScriptContainterLinkedList = new LinkedList<ScriptContainerControl>();
+            _linkedList = new LinkedList<ScriptContainerControl>();
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
@@ -38,8 +39,7 @@ namespace WMSA_Project.Repositories
                 return _repository;
             }
         }
-        public List<ScriptContainerControl> ScriptContainerList => ScriptContainterLinkedList.ToList();
-        public LinkedList<ScriptContainerControl> ScriptContainterLinkedList { get; }
+        public List<ScriptContainerControl> ScriptContainerList => _linkedList.ToList();
 
         #region handlers
 
@@ -81,7 +81,7 @@ namespace WMSA_Project.Repositories
 
             if (newSCControl.Container != null)
             {
-                ScriptContainterLinkedList.AddBefore(ScriptContainterLinkedList.Find(callingNode), newSCControl);
+                _linkedList.AddBefore(_linkedList.Find(callingNode), newSCControl);
                 OnCollectionChanged();
             }
 
@@ -93,7 +93,7 @@ namespace WMSA_Project.Repositories
 
             if (newSCControl.Container != null)
             {
-                ScriptContainterLinkedList.AddAfter(ScriptContainterLinkedList.Find(callingNode), newSCControl);
+                _linkedList.AddAfter(_linkedList.Find(callingNode), newSCControl);
                 OnCollectionChanged();
             }
         }
@@ -104,13 +104,13 @@ namespace WMSA_Project.Repositories
 
             if (newSCControl.Container != null)
             {
-                ScriptContainterLinkedList.AddLast(newSCControl);
+                _linkedList.AddLast(newSCControl);
                 OnCollectionChanged();
             }
         }
         public void Remove(ScriptContainerControl node)
         {
-            ScriptContainterLinkedList.Remove(ScriptContainterLinkedList.Find(node));
+            _linkedList.Remove(_linkedList.Find(node));
             OnCollectionChanged();
         }
         public void ExportScript(ScriptContainerControl node)
@@ -134,11 +134,11 @@ namespace WMSA_Project.Repositories
         }
         private bool CanAdd(Script newScript, ScriptContainerControl sccCaller)
         {
-            if (ScriptContainterLinkedList.Count == 0) { return true; }
-            else if (ScriptContainterLinkedList.First.Value == sccCaller) { return true; }
+            if (_linkedList.Count == 0) { return true; }
+            else if (_linkedList.First.Value == sccCaller) { return true; }
             else
             {
-                var sccFirst = ScriptContainterLinkedList.First(scc => scc.Container != null);
+                var sccFirst = _linkedList.First(scc => scc.Container != null);
 
                 if (sccFirst != null && sccFirst.Container.Script != null)
                 {
@@ -152,7 +152,7 @@ namespace WMSA_Project.Repositories
             var expander = (args.Source as System.Windows.Controls.Expander);
             int expanderIndex = (sender as ScriptControl).Stack_Transactions.Children.IndexOf(expander);
 
-            var validLinkList = ScriptContainterLinkedList.Where(scc => scc.Container != null);
+            var validLinkList = _linkedList.Where(scc => scc.Container != null);
 
             foreach (var scc in validLinkList)
             {
@@ -161,13 +161,13 @@ namespace WMSA_Project.Repositories
         }
         private void OnNodeContainerChanged()
         {
-            StackPanelFactory.BuildStackPanels(this);
+            StackPanelFactory.BuildStackPanels(_linkedList);
         }
         private void OnCollectionChanged()
         {
-            if (ScriptContainterLinkedList.Count > 0)
+            if (_linkedList.Count >0)
             {
-                StackPanelFactory.BuildStackPanels(this); 
+                StackPanelFactory.BuildStackPanels(_linkedList); 
             }
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
