@@ -25,7 +25,7 @@ namespace WMSA_Project.Repositories
                 {
                     //lazy loading here
                     repo = new AttributesRepository();
-                    repo.Update();
+                    repo.Refresh();
                 }
                 return repo;
             }
@@ -48,7 +48,7 @@ namespace WMSA_Project.Repositories
             }
         }
 
-        private void Update()
+        public void Refresh()
         {
             using (var repo = new TestRepo())
             {

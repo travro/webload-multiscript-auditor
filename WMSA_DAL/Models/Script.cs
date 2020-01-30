@@ -36,7 +36,7 @@ namespace WMSA_DAL.Models
         public string BuildVersion { get => Test.build_version; set => Test.build_version = value; }
         IEnumerable<ITransaction> IScript.Transactions
         {
-            get => Transactions as ICollection<WMSA.Entities.Interfaces.ITransaction>;
+            get => Transactions;
             set => Transactions = value as ICollection<Transaction>;
         }
     }

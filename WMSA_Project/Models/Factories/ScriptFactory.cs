@@ -9,7 +9,8 @@ using System.Xml.Linq;
 using WMSA_Project.Models;
 using WMSA_Project.Controls;
 using WMSA_Project.Utilities;
-using WMSA.Entities.Interfaces;
+using IScript = WMSA.Entities.Interfaces.IScript;
+using ScriptService = WMSA_DAL.Service.ScriptService;
 
 namespace WMSA_Project.Models.Factories
 {
@@ -54,19 +55,50 @@ namespace WMSA_Project.Models.Factories
             return baseControl.Script;
         }
 
-        public static Script GetScriptFromDB(IScript script)
+        public static Script GetScriptFromDB(int scriptId)
         {
+            IScript importedScript = ScriptService.GetScript(scriptId);
+
             var newScript = new Script()
             {
-                Id = script.Id,
-                Name = script.Name,
-                BuildVersion = script.BuildVersion,
-                TestName = script.TestName,
-                RecordedDate = script.RecordedDate,
-                Transactions = script.Transactions as List<Transaction>,                
+                Id = importedScript.Id,
+                Name = importedScript.Name,
+                BuildVersion = importedScript.BuildVersion,
+                RecordedDate = importedScript.RecordedDate
             };
+
+            foreach (var importedTrans in importedScript.Transactions)
+            {
+                var newTrans = new Transaction(importedTrans.Name, newScript);
+
+                foreach (var importedRequest in importedTrans.Requests)
+                {
+                    var newReq = new Request()
+                    {
+                        Parameters = importedRequest.Parameters,
+                        Visible = true,
+                        Correlations = new List<Correlation>()
+                    };
+
+                    RequestVerb v = RequestVerb.MISSING;
+                    Enum.TryParse(importedRequest.Verb, out v);
+                    newReq.Verb = v;
+
+                    if (importedRequest.Correlations != null)
+                    {
+                        foreach (var importedCorrelation in importedRequest.Correlations)
+                        {
+                            var newCorr = new Correlation(importedCorrelation.Rule, importedCorrelation.OriginalValue);
+                            newReq.Correlations.Add(newCorr);
+                        } 
+                    }
+
+                    newTrans.Requests.Add(newReq);
+                }
+                newScript.Transactions.Add(newTrans);
+            }
+
             return newScript;
         }
-
     }
 }

@@ -26,7 +26,7 @@ namespace WMSA_Project.Controls.ImportControls
     /// </summary>
     public partial class ScriptByDBControl : UserControl, IScriptImportControl
     {
-        private IEnumerable<IScript> _scriptList;
+
 
         public event EventHandler<ScriptReadyEventArgs> ScriptReady;
 
@@ -38,9 +38,12 @@ namespace WMSA_Project.Controls.ImportControls
             DBQ_Ctrl.SAC_Script.PropertyChanged += UpdateSelectionList;
             Lst_Results.SelectionChanged += Lst_Results_SelectionChanged;
         }
+
+        public IEnumerable<IScript> ScriptList { get; private set; }
+
         public Script GetScript()
         {
-            throw new NotImplementedException();
+            return ScriptFactory.GetScriptFromDB((Lst_Results.SelectedItem as IScript).Id);
         }
         #region handlers
         private void UpdateSelectionList(object sender, PropertyChangedEventArgs args)
@@ -49,13 +52,15 @@ namespace WMSA_Project.Controls.ImportControls
             {
                 using (var scriptRepo = new ScriptRepo())
                 {
-                    Lst_Results.ItemsSource = scriptRepo.GetAll()
-                        .Where(s =>
-                        s.Name == DBQ_Ctrl.SAC_Script.SelectedValue &&
-                        s.BuildVersion == DBQ_Ctrl.SAC_Build.SelectedValue
-                        ).Select(s => $"{s.Id}, {s.Name}, {s.BuildVersion}, {s.RecordedDate.ToShortDateString()}");
-                    //Lst_Results.ItemsSource = _scriptList.Select(s => $"{s.Name}, {s.BuildVersion}, {s.RecordedDate.ToShortDateString()}");
+                    ScriptList = scriptRepo.GetAll()
+                        .Where(s => s.Name == DBQ_Ctrl.SAC_Script.SelectedValue && s.BuildVersion == DBQ_Ctrl.SAC_Build.SelectedValue);
+
+                    Lst_Results.ItemsSource = ScriptList;
                 }
+            }
+            else
+            {
+                Lst_Results.ItemsSource = null;
             }
         }
 

@@ -114,8 +114,11 @@ namespace WMSA_Project.Repositories
                 }
                 catch (Exception ex)
                 {
-
                     MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    AttributesRepository.Repository.Refresh();
                 }
             }
         }
