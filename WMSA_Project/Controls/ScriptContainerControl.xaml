@@ -5,28 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WMSA_Project.Controls"
              mc:Ignorable="d" 
-             Height="auto" Width="auto" MinWidth="240" BorderThickness="1" BorderBrush="Gray">
+             Height="auto" Width="auto" MinWidth="0" BorderThickness="1" BorderBrush="Gray" Margin="1,10,1,10">
     <Grid>
         <Grid.Resources>
             <Style TargetType="Button">
                 <Setter Property="Height" Value="auto"/>
                 <Setter Property="Width" Value="40"/>
                 <Setter Property="Background" Value="LightGray"/>
-                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontSize" Value="20"/>
                 <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="FontWeight" Value="ExtraBold"/>
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="22"/>
+            <RowDefinition Height="36"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" LastChildFill="True">
-            <Button DockPanel.Dock="Left" x:Name="Btn_Left"  Visibility="Collapsed" Click="Btn_Left_Click" Content="+"/>
-            <Button DockPanel.Dock="Right" IsEnabled="True"  x:Name="Btn_Exit" Click="Btn_Exit_Click" Background="LightPink" Foreground="White" 
-                    Visibility="Collapsed" Content="x" Margin="20,0,0,0"/>
-            <Button DockPanel.Dock="Right" x:Name="Btn_Right" Visibility="Collapsed" Click="Btn_Right_Click" Content="+"/>
-            <Button DockPanel.Dock="Left" x:Name="Btn_Add" Click="Btn_Add_Click" Content="-----" Background="LightSlateGray" Foreground="White" Width="60"/>
+        <DockPanel Grid.Row="0" LastChildFill="False">
+            <Button DockPanel.Dock="Left" x:Name="Btn_Left"  Visibility="Collapsed" Click="Btn_Left_Click" Content="&#x21E4;"/>
+            <Button DockPanel.Dock="Left" x:Name="Btn_Import" Click="Btn_Import_Click" Content="&#x21A7;" />
+            <Button DockPanel.Dock="Left" x:Name="Btn_Export" Click="Btn_Export_Click" Visibility="Collapsed" Content="&#x2B71;" />
+            <Button DockPanel.Dock="Left" x:Name="Btn_Right" Visibility="Collapsed" Click="Btn_Right_Click" Content="&#x21E5;"/>
+            <Button DockPanel.Dock="Right" IsEnabled="True"  x:Name="Btn_Exit" Click="Btn_Exit_Click" Background="OrangeRed" Foreground="White" Visibility="Collapsed" Content="&#x2B59;" Margin="0,0,0,0"/>
         </DockPanel>
         <ContentControl Grid.Row="1"  x:Name="CntCtrl_Main" VerticalAlignment="Top"/>
     </Grid>

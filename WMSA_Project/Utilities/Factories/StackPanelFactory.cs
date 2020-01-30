@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using WMSA_Project.Controls;
 using WMSA_Project.Models;
-using WMSA_Project.Models.Repositories;
+using WMSA_Project.Repositories;
 using WMSA_Project.Models.Factories;
 
 namespace WMSA_Project.Utilities.Factories

@@ -89,10 +89,10 @@
       <DependentUpon>SelectScriptPathControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Interfaces\IScriptImportControl.cs" />
-    <Compile Include="DAL\Repositories\AttributeRepository.cs" />
+    <Compile Include="Repositories\AttributeRepository.cs" />
     <Compile Include="DAL\SqlCommands.cs" />
     <Compile Include="DAL\SqlConnectionManager.cs" />
-    <Compile Include="Models\Repositories\ScriptRepository.cs" />
+    <Compile Include="Repositories\ScriptRepository.cs" />
     <Compile Include="Models\Script.cs" />
     <Compile Include="Models\Factories\CorrelationListFactory.cs" />
     <Compile Include="Models\Factories\RequestListFactory.cs" />
@@ -197,6 +197,16 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WMSA.Entities\WMSA.Entities.csproj">
+      <Project>{eb3febe5-82bd-46e5-b4ae-9d239ab858ac}</Project>
+      <Name>WMSA.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WMSA_DAL\WMSA_DAL.csproj">
+      <Project>{892991b7-3f57-439d-b3a8-f6720196b177}</Project>
+      <Name>WMSA_DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

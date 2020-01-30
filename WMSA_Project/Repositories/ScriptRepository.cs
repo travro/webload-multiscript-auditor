@@ -12,8 +12,9 @@ using WMSA_Project.Controls;
 using WMSA_Project.Utilities;
 using WMSA_Project.Utilities.Factories;
 using WMSA_Project.Windows;
+using WMSA_DAL.Service;
 
-namespace WMSA_Project.Models.Repositories
+namespace WMSA_Project.Repositories
 {
     public sealed class ScriptRepository : INotifyCollectionChanged
     {
@@ -48,7 +49,7 @@ namespace WMSA_Project.Models.Repositories
 
         #endregion
         #region helpermethods
-        public void AddScriptTo(ScriptContainerControl node)
+        public void ImportScript(ScriptContainerControl node)
         {
             var importScrptWin = new ImportScriptWindow();
             importScrptWin.ClosedWithScript += (object sender, ClosedWithScriptEventArgs args) =>
@@ -100,6 +101,25 @@ namespace WMSA_Project.Models.Repositories
             else
             {
                 node.Reset();
+            }
+        }
+        public void ExportScript(ScriptContainerControl node)
+        {
+            if (node.Container != null && node.Container.Script != null)
+            {
+                try
+                {
+                    var scriptService = new ScriptService(node.Container.Script);
+                    scriptService.SaveScript();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    AttributesRepository.Repository.Refresh();
+                }
             }
         }
         private bool CanAdd(Script newScript, ScriptContainerControl sccCaller)

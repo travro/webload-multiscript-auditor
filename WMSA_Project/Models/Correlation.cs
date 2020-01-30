@@ -1,8 +1,10 @@
-﻿namespace WMSA_Project.Models
+﻿using WMSA.Entities.Interfaces;
+
+namespace WMSA_Project.Models
 {
-    public class Correlation
+    public class Correlation : ICorrelation
     {
-        public int Id { get; }
+        public int Id { get; set; }
         public string Rule { get; set; }
         public string OriginalValue { get; set; }
         public Correlation() { }
