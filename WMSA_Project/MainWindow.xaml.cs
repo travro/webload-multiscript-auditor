@@ -49,5 +49,15 @@ namespace WMSA_Project
             }
         }
         #endregion
+
+        private void MenuItem_Import_Click(object sender, RoutedEventArgs e)
+        {
+            ScriptRepository.Repository.ImportScriptToEndOfList();
+        }
+
+        private void MenuItem_Exit_CLick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

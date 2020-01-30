@@ -29,7 +29,6 @@ namespace WMSA_Project.Controls
         {
             InitializeComponent();
             _repo = repo;
-            if (_repo.GetCount() >= 1) { Btn_Exit.Visibility = Visibility.Visible; }
         }
 
         public ScriptControl Container
@@ -37,8 +36,7 @@ namespace WMSA_Project.Controls
             get { return _container; }
             set
             {
-                CntCtrl_Main.Content = _container = value; ;
-               Btn_Export.Visibility = Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Visible;
+                CntCtrl_Main.Content = _container = value;
             }
         }
 
@@ -50,12 +48,12 @@ namespace WMSA_Project.Controls
 
         private void Btn_Left_Click(object sender, RoutedEventArgs e)
         {
-            _repo.AddContainerBefore(this);
+            _repo.ImportScriptBefore(this);
         }
 
         private void Btn_Right_Click(object sender, RoutedEventArgs e)
         {
-            _repo.AddContainerAfter(this);
+            _repo.ImportScriptAfter(this);
         }
 
         private void Btn_Exit_Click(object sender, RoutedEventArgs e)
@@ -74,7 +72,6 @@ namespace WMSA_Project.Controls
         {
             Container = null;
             CntCtrl_Main.ClearValue(ContentProperty);
-            Btn_Export.Visibility = Btn_Left.Visibility = Btn_Right.Visibility = Btn_Exit.Visibility = Visibility.Collapsed;
         }
         public bool ContainsScript()
         {

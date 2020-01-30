@@ -22,11 +22,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" LastChildFill="False">
-            <Button DockPanel.Dock="Left" x:Name="Btn_Left"  Visibility="Collapsed" Click="Btn_Left_Click" Content="&#x21E4;"/>
+            <Button DockPanel.Dock="Left" x:Name="Btn_Left"   Click="Btn_Left_Click" Content="&#x21E4;"/>
             <Button DockPanel.Dock="Left" x:Name="Btn_Import" Click="Btn_Import_Click" Content="&#x21A7;" />
-            <Button DockPanel.Dock="Left" x:Name="Btn_Export" Click="Btn_Export_Click" Visibility="Collapsed" Content="&#x2B71;" />
-            <Button DockPanel.Dock="Left" x:Name="Btn_Right" Visibility="Collapsed" Click="Btn_Right_Click" Content="&#x21E5;"/>
-            <Button DockPanel.Dock="Right" IsEnabled="True"  x:Name="Btn_Exit" Click="Btn_Exit_Click" Background="OrangeRed" Foreground="White" Visibility="Collapsed" Content="&#x2B59;" Margin="0,0,0,0"/>
+            <Button DockPanel.Dock="Left" x:Name="Btn_Export" Click="Btn_Export_Click" Content="&#x2B71;" />
+            <Button DockPanel.Dock="Left" x:Name="Btn_Right"  Click="Btn_Right_Click" Content="&#x21E5;"/>
+            <Button DockPanel.Dock="Right" IsEnabled="True"  x:Name="Btn_Exit" Click="Btn_Exit_Click" Background="OrangeRed" Foreground="White" Content="&#x2B59;" Margin="0,0,0,0"/>
         </DockPanel>
         <ContentControl Grid.Row="1"  x:Name="CntCtrl_Main" VerticalAlignment="Top"/>
     </Grid>
