@@ -14,7 +14,7 @@ namespace WMSA_Project.Repositories
         IEnumerable<string> _scriptNames;
         public string[] TestNames => _testNames.ToArray();
         public string[] TestBuilds => _testBuilds.ToArray();
-        public string[] ScriptNames => _scriptNames.ToArray();
+        public string[] ScriptNames => _scriptNames?.ToArray() ?? new string[0];
         //private  List<object> _scenarioNames;
         //private  List<object> _scenarioDates;
         public static AttributesRepository Repository
@@ -23,7 +23,6 @@ namespace WMSA_Project.Repositories
             {
                 if (repo == null)
                 {
-                    //lazy loading here
                     repo = new AttributesRepository();
                     repo.Refresh();
                 }
@@ -43,8 +42,7 @@ namespace WMSA_Project.Repositories
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
 

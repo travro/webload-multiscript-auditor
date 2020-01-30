@@ -28,12 +28,17 @@ namespace WMSA_DAL.Repositories
 
         public List<Script> GetScriptsByTestName(string testName)
         {
-            using (var repo = new TestRepo())
+            try
             {
-                //testId must be acquired separately as _table: DBSet<> cannot run C# code because the paramters of DBSet<> functions
-                //are apart of the DB query
-                var testId = repo.GetTestId(testName);
-                return _table.Where(s => s.test_id == testId).ToList();
+                using (var repo = new TestRepo())
+                {
+                    var testId = repo.GetTestId(testName);
+                    return _table.Where(s => s.test_id == testId).ToList();
+                }
+            }
+            catch 
+            {
+                throw new NullReferenceException("No scripts found under the currently listed Test group name");
             }
         }
     }
