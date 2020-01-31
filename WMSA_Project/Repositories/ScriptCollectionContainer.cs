@@ -16,27 +16,27 @@ using WMSA_DAL.Service;
 
 namespace WMSA_Project.Repositories
 {
-    public sealed class ScriptRepository : INotifyCollectionChanged
+    public sealed class ScriptCollectionContainer : INotifyCollectionChanged
     {
-        private static ScriptRepository _repository;
+        private static ScriptCollectionContainer _collection;
         private LinkedList<ScriptContainerControl> _linkedList;
 
-        private ScriptRepository()
+        private ScriptCollectionContainer()
         {
             _linkedList = new LinkedList<ScriptContainerControl>();
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-        public static ScriptRepository Repository
+        public static ScriptCollectionContainer ThisContainer
         {
             get
             {
-                if (_repository == null)
+                if (_collection == null)
                 {
-                    _repository = new ScriptRepository();
+                    _collection = new ScriptCollectionContainer();
                 }
-                return _repository;
+                return _collection;
             }
         }
         public List<ScriptContainerControl> ScriptContainerList => _linkedList.ToList();
@@ -46,24 +46,24 @@ namespace WMSA_Project.Repositories
 
         #endregion
         #region helpermethods
-        public void ImportScript(ScriptContainerControl callingNode)
+        public void ImportScript(ScriptContainerControl caller)
         {
             var importScrptWin = new ImportScriptWindow();
             importScrptWin.ClosedWithScript += (object sender, ClosedWithScriptEventArgs args) =>
             {
-                if (args.ScriptOnClose != null && CanAdd(args.ScriptOnClose, callingNode))
+                if (args.ScriptOnClose != null && CanAdd(args.ScriptOnClose, caller))
                 {
                     var scrptCtrl = new ScriptControl(args.ScriptOnClose);
                     scrptCtrl.StackTransExpanderStateChange += OnScriptControlExpanderStateChange;
 
-                    if (callingNode.Container != null)
+                    if (caller.Container != null)
                     {
-                        callingNode.Container = scrptCtrl;
+                        caller.Container = scrptCtrl;
                         OnNodeContainerChanged();
                     }
                     else
                     {
-                        callingNode.Container = scrptCtrl;
+                        caller.Container = scrptCtrl;
                     }
                 }
                 else
@@ -73,7 +73,7 @@ namespace WMSA_Project.Repositories
             };
             importScrptWin.ShowDialog();
         }
-        public void ImportScriptBefore(ScriptContainerControl callingNode)
+        public void ImportScriptBefore(ScriptContainerControl caller)
         {
 
             var newSCControl = new ScriptContainerControl(this);
@@ -81,19 +81,19 @@ namespace WMSA_Project.Repositories
 
             if (newSCControl.Container != null)
             {
-                _linkedList.AddBefore(_linkedList.Find(callingNode), newSCControl);
+                _linkedList.AddBefore(_linkedList.Find(caller), newSCControl);
                 OnCollectionChanged();
             }
 
         }
-        public void ImportScriptAfter(ScriptContainerControl callingNode)
+        public void ImportScriptAfter(ScriptContainerControl caller)
         {
             var newSCControl = new ScriptContainerControl(this);
             ImportScript(newSCControl);
 
             if (newSCControl.Container != null)
             {
-                _linkedList.AddAfter(_linkedList.Find(callingNode), newSCControl);
+                _linkedList.AddAfter(_linkedList.Find(caller), newSCControl);
                 OnCollectionChanged();
             }
         }
@@ -108,18 +108,18 @@ namespace WMSA_Project.Repositories
                 OnCollectionChanged();
             }
         }
-        public void Remove(ScriptContainerControl node)
+        public void Remove(ScriptContainerControl caller)
         {
-            _linkedList.Remove(_linkedList.Find(node));
+            _linkedList.Remove(_linkedList.Find(caller));
             OnCollectionChanged();
         }
-        public void ExportScript(ScriptContainerControl node)
+        public void ExportScript(ScriptContainerControl caller)
         {
-            if (node.Container != null && node.Container.Script != null)
+            if (caller.Container != null && caller.Container.Script != null)
             {
                 try
                 {
-                    var scriptService = new ScriptService(node.Container.Script);
+                    var scriptService = new ScriptService(caller.Container.Script);
                     scriptService.SaveScript();
                 }
                 catch (Exception ex)
@@ -128,14 +128,14 @@ namespace WMSA_Project.Repositories
                 }
                 finally
                 {
-                    AttributesRepository.Repository.Refresh();
+                    ScriptMetadataRepo.ThisRepo.Refresh();
                 }
             }
         }
-        private bool CanAdd(Script newScript, ScriptContainerControl sccCaller)
+        private bool CanAdd(Script newScript, ScriptContainerControl caller)
         {
             if (_linkedList.Count == 0) { return true; }
-            else if (_linkedList.First.Value == sccCaller) { return true; }
+            else if (_linkedList.First.Value == caller) { return true; }
             else
             {
                 var sccFirst = _linkedList.First(scc => scc.Container != null);

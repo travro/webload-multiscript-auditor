@@ -27,14 +27,14 @@ namespace WMSA_Project
         {
             InitializeComponent();
 
-            foreach (var scc in ScriptRepository.Repository.ScriptContainerList)
+            foreach (var scc in ScriptCollectionContainer.ThisContainer.ScriptContainerList)
             {
                 StkPnl_Main.Children.Add(scc);
             }
 
-            if (ScriptRepository.Repository != null)
+            if (ScriptCollectionContainer.ThisContainer != null)
             {
-                ScriptRepository.Repository.CollectionChanged += UpdateList;
+                ScriptCollectionContainer.ThisContainer.CollectionChanged += UpdateList;
             }
         }
 
@@ -43,7 +43,7 @@ namespace WMSA_Project
         {
             StkPnl_Main.Children.Clear();
 
-            foreach (var scc in ScriptRepository.Repository.ScriptContainerList)
+            foreach (var scc in ScriptCollectionContainer.ThisContainer.ScriptContainerList)
             {
                 StkPnl_Main.Children.Add(scc);                
             }
@@ -52,7 +52,7 @@ namespace WMSA_Project
 
         private void MenuItem_Import_Click(object sender, RoutedEventArgs e)
         {
-            ScriptRepository.Repository.ImportScriptToEndOfList();
+            ScriptCollectionContainer.ThisContainer.ImportScriptToEndOfList();
         }
 
         private void MenuItem_Exit_CLick(object sender, RoutedEventArgs e)

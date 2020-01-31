@@ -89,7 +89,7 @@ namespace WMSA_Project.Controls.ImportControls
 
                 if (_dbAvailable)
                 {
-                    AttributesRepository.Repository.BuildScriptCollection(SAC_Test.SelectedValue);
+                    ScriptMetadataRepo.ThisRepo.BuildScriptCollection(SAC_Test.SelectedValue);
                 }
                 SAC_Script.IsEnabled = true;
             }

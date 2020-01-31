@@ -29,9 +29,9 @@ namespace WMSA_Project.Windows.AttributeWindows
 
             switch (attribute)
             {
-                case ScriptAttribute.TestName: SelectableList = AttributesRepository.Repository.TestNames; break;
-                case ScriptAttribute.BuildName: SelectableList = AttributesRepository.Repository.TestBuilds; break;
-                case ScriptAttribute.ScriptName: SelectableList = AttributesRepository.Repository.ScriptNames; break;
+                case ScriptAttribute.TestName: SelectableList = ScriptMetadataRepo.ThisRepo.TestNames; break;
+                case ScriptAttribute.BuildName: SelectableList = ScriptMetadataRepo.ThisRepo.TestBuilds; break;
+                case ScriptAttribute.ScriptName: SelectableList = ScriptMetadataRepo.ThisRepo.ScriptNames; break;
             }
         }
         public event EventHandler<ClosedWithAttributeEventArgs> ClosedWithAttribute;

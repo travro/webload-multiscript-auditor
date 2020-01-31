@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace WMSA_Project.Repositories
 {
-    public sealed class AttributesRepository
+    public sealed class ScriptMetadataRepo
     {
-        private static AttributesRepository repo = null;
+        private static ScriptMetadataRepo repo = null;
         IEnumerable<string> _testNames;
         IEnumerable<string> _testBuilds;
         IEnumerable<string> _scriptNames;
@@ -17,19 +17,19 @@ namespace WMSA_Project.Repositories
         public string[] ScriptNames => _scriptNames?.ToArray() ?? new string[0];
         //private  List<object> _scenarioNames;
         //private  List<object> _scenarioDates;
-        public static AttributesRepository Repository
+        public static ScriptMetadataRepo ThisRepo
         {
             get
             {
                 if (repo == null)
                 {
-                    repo = new AttributesRepository();
+                    repo = new ScriptMetadataRepo();
                     repo.Refresh();
                 }
                 return repo;
             }
         }
-        private AttributesRepository() { }
+        private ScriptMetadataRepo() { }
 
         public void BuildScriptCollection(string testName)
         {

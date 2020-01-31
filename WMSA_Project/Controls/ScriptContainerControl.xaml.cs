@@ -23,9 +23,9 @@ namespace WMSA_Project.Controls
     public partial class ScriptContainerControl : UserControl
     {
         private ScriptControl _container;
-        private ScriptRepository _repo;
+        private ScriptCollectionContainer _repo;
 
-        public ScriptContainerControl(ScriptRepository repo)
+        public ScriptContainerControl(ScriptCollectionContainer repo)
         {
             InitializeComponent();
             _repo = repo;
