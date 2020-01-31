@@ -26,20 +26,17 @@ namespace WMSA_Project.Controls.ImportControls
     /// </summary>
     public partial class ScriptByDBControl : UserControl, IScriptImportControl
     {
-
-
         public event EventHandler<ScriptReadyEventArgs> ScriptReady;
-
+        public IEnumerable<IScript> ScriptList { get; private set; }
 
         public ScriptByDBControl()
         {
             InitializeComponent();
             DataContext = this;
+            DBQ_Ctrl.AddButtonsVisible = true;
             DBQ_Ctrl.SAC_Script.PropertyChanged += UpdateSelectionList;
             Lst_Results.SelectionChanged += Lst_Results_SelectionChanged;
         }
-
-        public IEnumerable<IScript> ScriptList { get; private set; }
 
         public Script GetScript()
         {
@@ -65,6 +62,11 @@ namespace WMSA_Project.Controls.ImportControls
         }
 
         private void Lst_Results_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            OnScriptReady();
+        }
+
+        private void OnScriptReady()
         {
             ScriptReady?.Invoke(this, new ScriptReadyEventArgs() { Message = "Script is Ready" });
         }

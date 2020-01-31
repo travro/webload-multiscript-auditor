@@ -54,12 +54,10 @@ namespace WMSA_Project.Windows
             Btn_Imprt.Visibility = Btn_Back.Visibility = Visibility.Visible;
             Btn_Next.Visibility = Visibility.Collapsed;
         }
-
         private void Btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-
         private void Btn_Back_Click(object sender, RoutedEventArgs e)
         {
             Content_Control.Content = _selectPathCtrl;

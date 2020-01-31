@@ -36,8 +36,8 @@ namespace WMSA_Project.Controls.ImportControls
         public ScriptByFileControl()
         {
             InitializeComponent();
+            DBQ_Ctrl.AddButtonsVisible = false;
             DBQ_Ctrl.AttributesReady += OnAttributesReady;
-            DBQ_Ctrl.ShowAddButtons();
         }
 
         public event EventHandler<ScriptReadyEventArgs> ScriptReady;
@@ -102,7 +102,6 @@ namespace WMSA_Project.Controls.ImportControls
 
             AttributesReady = true;
         }
-
         private void OnScriptReady()
         {
             if (FilePath != null && FilePath != "" && AttributesReady)

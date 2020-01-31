@@ -45,6 +45,14 @@ namespace WMSA_Project.Controls.ImportControls
 
         public event EventHandler<AttributesReadyEventArgs> AttributesReady;
 
+        public bool AddButtonsVisible
+        {
+            set
+            {
+                SAC_Test.Btn_Add.Visibility = SAC_Build.Btn_Add.Visibility = SAC_Script.Btn_Add.Visibility = (value) ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
         #region helpermethods
         private async void CheckDBStatus()
         {
@@ -111,7 +119,6 @@ namespace WMSA_Project.Controls.ImportControls
                 });
             }
         }
-        public void ShowAddButtons() => SAC_Test.Btn_Add.Visibility = SAC_Build.Btn_Add.Visibility = SAC_Script.Btn_Add.Visibility = Visibility.Visible;
         #endregion
     }
 

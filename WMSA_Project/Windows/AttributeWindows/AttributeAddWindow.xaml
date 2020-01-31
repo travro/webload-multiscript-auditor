@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMSA_Project.Windows.AttributeWindows"
         mc:Ignorable="d"
-        Title="AttributeAddWindow" Height="80" Width="574.064" WindowStartupLocation="CenterScreen">
+        Title="AttributeAddWindow" Height="80" Width="574.064" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
