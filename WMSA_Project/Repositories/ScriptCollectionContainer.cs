@@ -1,18 +1,13 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using WMSA_Project.Models.Factories;
 using WMSA_Project.Models;
 using WMSA_Project.Controls;
 using WMSA_Project.Utilities;
 using WMSA_Project.Utilities.Factories;
 using WMSA_Project.Windows;
-using WMSA_DAL.Service;
 
 namespace WMSA_Project.Repositories
 {
@@ -115,36 +110,29 @@ namespace WMSA_Project.Repositories
         }
         public void ExportScript(ScriptContainerControl caller)
         {
-            if (caller.Container != null && caller.Container.Script != null)
+            try
             {
-                try
-                {
-                    var scriptService = new ScriptService(caller.Container.Script);
-                    scriptService.SaveScript();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-                finally
-                {
-                    ScriptMetadataRepo.ThisRepo.Refresh();
-                }
+                SciptMetaRepo.ThisRepo.ExportScript(caller.Container.Script);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
         private bool CanAdd(Script newScript, ScriptContainerControl caller)
         {
             if (_linkedList.Count == 0) { return true; }
-            else if (_linkedList.First.Value == caller) { return true; }
+            else if (_linkedList.First.Value == caller && _linkedList.First.Next == null)
+            {
+                return true;
+            }
+            else if (_linkedList.First.Value == caller && _linkedList.First.Next != null)
+            {
+                return ScriptTransactionsComparer.CompareEach(newScript, _linkedList.First.Next.Value.Container.Script);
+            }
             else
             {
-                var sccFirst = _linkedList.First(scc => scc.Container != null);
-
-                if (sccFirst != null && sccFirst.Container.Script != null)
-                {
-                    return ScriptTransactionsComparer.CompareEach(newScript, sccFirst.Container.Script);
-                }
-                return false;
+                return ScriptTransactionsComparer.CompareEach(newScript, _linkedList.First.Value.Container.Script);
             }
         }
         private void OnScriptControlExpanderStateChange(object sender, RoutedEventArgs args)
@@ -165,9 +153,9 @@ namespace WMSA_Project.Repositories
         }
         private void OnCollectionChanged()
         {
-            if (_linkedList.Count >0)
+            if (_linkedList.Count > 0)
             {
-                StackPanelFactory.BuildStackPanels(_linkedList); 
+                StackPanelFactory.BuildStackPanels(_linkedList);
             }
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }

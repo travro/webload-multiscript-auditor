@@ -29,14 +29,14 @@ namespace WMSA_Project.Windows.AttributeWindows
 
             switch (attribute)
             {
-                case ScriptAttribute.TestName: SelectableList = ScriptMetadataRepo.ThisRepo.TestNames; break;
-                case ScriptAttribute.BuildName: SelectableList = ScriptMetadataRepo.ThisRepo.TestBuilds; break;
-                case ScriptAttribute.ScriptName: SelectableList = ScriptMetadataRepo.ThisRepo.ScriptNames; break;
+                case ScriptAttribute.TestName: SelectableList = SciptMetaRepo.ThisRepo.ScriptTestGroups; break;
+                case ScriptAttribute.BuildName: SelectableList = SciptMetaRepo.ThisRepo.ScriptTestBuilds; break;
+                case ScriptAttribute.ScriptName: SelectableList = SciptMetaRepo.ThisRepo.ScriptNames; break;
             }
         }
         public event EventHandler<ClosedWithAttributeEventArgs> ClosedWithAttribute;
 
-        public string[] SelectableList { get; }
+        public IEnumerable<string> SelectableList { get; }
 
         private void List_View_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

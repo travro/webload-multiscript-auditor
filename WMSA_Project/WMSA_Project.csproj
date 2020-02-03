@@ -89,7 +89,7 @@
       <DependentUpon>SelectScriptPathControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Interfaces\IScriptImportControl.cs" />
-    <Compile Include="Repositories\ScriptMetadataRepo.cs" />
+    <Compile Include="Repositories\ScriptMetaRepo.cs" />
     <Compile Include="DAL\SqlCommands.cs" />
     <Compile Include="DAL\SqlConnectionManager.cs" />
     <Compile Include="Repositories\ScriptCollectionContainer.cs" />

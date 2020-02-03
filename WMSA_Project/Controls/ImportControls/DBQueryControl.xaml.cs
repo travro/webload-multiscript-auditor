@@ -36,11 +36,12 @@ namespace WMSA_Project.Controls.ImportControls
         {
             InitializeComponent();
             DataContext = this;
-            SAC_Test.PropertyChanged += CheckScriptSacEnable;
-            SAC_Build.PropertyChanged += CheckScriptSacEnable;
+            SAC_Test.PropertyChanged += SciptMetaRepo.ThisRepo.FilterScriptsByTestName;
+            SAC_Test.PropertyChanged += ClearScriptSAC;
+            SAC_Build.PropertyChanged += ClearScriptSAC;
             SAC_Script.PropertyChanged += CheckAttributesReady;
             Dt_Pckr.SelectedDateChanged += CheckAttributesReady;
-            CheckDBStatus();
+            CheckDBStatus();            
         }
 
         public event EventHandler<AttributesReadyEventArgs> AttributesReady;
@@ -72,32 +73,35 @@ namespace WMSA_Project.Controls.ImportControls
             }
 
         }
-        private void CheckScriptSacEnable(object sender, PropertyChangedEventArgs args)
+        private void ClearScriptSAC(object sender, PropertyChangedEventArgs args)
         {
-            if (sender == SAC_Test)
-            {
-                SAC_Build.Clear();
-            }
-            if (sender == SAC_Build)
-            {
-                SAC_Script.Clear();
-            }
+            SAC_Script.Clear();
+            Dt_Pckr.SelectedDate = null;
 
-            if (SAC_Test.IsValid() && SAC_Build.IsValid())
-            {
-                SAC_Script.Clear();
+            //if (sender == SAC_Test)
+            //{
+            //    SAC_Build.Clear();
+            //}
+            //if (sender == SAC_Build)
+            //{
+            //    SAC_Script.Clear();
+            //}
 
-                if (_dbAvailable)
-                {
-                    ScriptMetadataRepo.ThisRepo.BuildScriptCollection(SAC_Test.SelectedValue);
-                }
-                SAC_Script.IsEnabled = true;
-            }
-            else
-            {
-                SAC_Script.IsEnabled = false;
-                Dt_Pckr.SelectedDate = null;
-            }
+            //if (SAC_Test.IsValid() && SAC_Build.IsValid())
+            //{
+            //    SAC_Script.Clear();
+
+            //    if (_dbAvailable)
+            //    {
+            //        SciptMetaRepo.ThisRepo.BuildScriptCollection(SAC_Test.SelectedValue);
+            //    }
+            //    SAC_Script.IsEnabled = true;
+            //}
+            //else
+            //{
+            //    SAC_Script.IsEnabled = false;
+            //    Dt_Pckr.SelectedDate = null;
+            //}
         }
         private void CheckAttributesReady(object sender, EventArgs args)
         {

@@ -17,7 +17,7 @@
             <TextBlock Text="Select the build: "/>
             <uc:ScriptAttributesControl x:Name="SAC_Build" Attribute="BuildName"/>
             <TextBlock Text="Select the Script's name:"/>
-            <uc:ScriptAttributesControl x:Name="SAC_Script" Attribute="ScriptName" IsEnabled="False"/>
+            <uc:ScriptAttributesControl x:Name="SAC_Script" Attribute="ScriptName"/>
             <TextBlock Text="Select the date the script was recorded:"/>
             <DatePicker x:Name="Dt_Pckr"/>
         </StackPanel>

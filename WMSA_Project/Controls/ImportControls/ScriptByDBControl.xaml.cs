@@ -15,8 +15,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WMSA_Project.Models;
 using WMSA_Project.Models.Factories;
+using WMSA_Project.Repositories;
 using WMSA_Project.Controls.Interfaces;
-using WMSA_DAL.Repositories;
+using WMSA_Project.Controls.AttributeControls;
 using IScript = WMSA.Entities.Interfaces.IScript;
 
 namespace WMSA_Project.Controls.ImportControls
@@ -33,7 +34,9 @@ namespace WMSA_Project.Controls.ImportControls
         {
             InitializeComponent();
             DataContext = this;
-            DBQ_Ctrl.AddButtonsVisible = true;
+            DBQ_Ctrl.AddButtonsVisible = false;
+            DBQ_Ctrl.SAC_Test.PropertyChanged += UpdateSelectionList;
+            DBQ_Ctrl.SAC_Build.PropertyChanged += UpdateSelectionList;
             DBQ_Ctrl.SAC_Script.PropertyChanged += UpdateSelectionList;
             Lst_Results.SelectionChanged += Lst_Results_SelectionChanged;
         }
@@ -43,22 +46,22 @@ namespace WMSA_Project.Controls.ImportControls
             return ScriptFactory.GetScriptFromDB((Lst_Results.SelectedItem as IScript).Id);
         }
         #region handlers
+
+        //need to refactor to use scriptmed
         private void UpdateSelectionList(object sender, PropertyChangedEventArgs args)
         {
-            if (DBQ_Ctrl.SAC_Script.SelectedValue != null && DBQ_Ctrl.SAC_Script.SelectedValue != DBQ_Ctrl.SAC_Script.DefaultValue)
-            {
-                using (var scriptRepo = new ScriptRepo())
-                {
-                    ScriptList = scriptRepo.GetAll()
-                        .Where(s => s.Name == DBQ_Ctrl.SAC_Script.SelectedValue && s.BuildVersion == DBQ_Ctrl.SAC_Build.SelectedValue);
+            ScriptList = SciptMetaRepo.ThisRepo.Scripts;
 
-                    Lst_Results.ItemsSource = ScriptList;
-                }
-            }
-            else
-            {
-                Lst_Results.ItemsSource = null;
-            }
+            if (DBQ_Ctrl.SAC_Test.SelectedValue != null && DBQ_Ctrl.SAC_Test.SelectedValue != DBQ_Ctrl.SAC_Test.DefaultValue)
+                ScriptList = ScriptList.Where(s => s.TestName == DBQ_Ctrl.SAC_Test.SelectedValue);
+
+            if (DBQ_Ctrl.SAC_Build.SelectedValue != null && DBQ_Ctrl.SAC_Build.SelectedValue != DBQ_Ctrl.SAC_Build.DefaultValue)
+                ScriptList = ScriptList.Where(s => s.BuildVersion == DBQ_Ctrl.SAC_Build.SelectedValue);
+
+            if (DBQ_Ctrl.SAC_Script.SelectedValue != null && DBQ_Ctrl.SAC_Script.SelectedValue != DBQ_Ctrl.SAC_Script.DefaultValue)
+                ScriptList = ScriptList.Where(s => s.Name == DBQ_Ctrl.SAC_Script.SelectedValue);
+
+            Lst_Results.ItemsSource = ScriptList;
         }
 
         private void Lst_Results_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -24,6 +24,7 @@ namespace WMSA_DAL.Service
 
             using (var context = new WLContext())
             {
+                //delete transaction becuase it is simply a select statement?
                 using (var cntxtTransaction = context.Database.BeginTransaction())
                 {
                     try
@@ -52,7 +53,23 @@ namespace WMSA_DAL.Service
             }
             return scriptToExport;
         }
-        public void SaveScript()
+        public static IEnumerable<IScript> GetTestAndScripts()
+        {
+            using (var context = new WLContext())
+            {
+                IEnumerable<IScript> scripts;
+                try
+                {
+                    scripts = context.Scripts.Include("Test").ToList();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                return scripts;
+            }
+        }
+        public IScript SaveScript()
         {
             using (var context = new WLContext())
             {
@@ -60,7 +77,11 @@ namespace WMSA_DAL.Service
                 {
                     try
                     {
-                        var newTest = context.Tests.Add(new Test() { test_name = _script.TestName, build_version = _script.BuildVersion });
+                        Test newTest;
+
+                        var queriedTestRecord = context.Tests.FirstOrDefault(t => t.test_name == _script.TestName && t.build_version == _script.BuildVersion);
+
+                        newTest = (queriedTestRecord != null) ? queriedTestRecord : context.Tests.Add(new Test() { test_name = _script.TestName, build_version = _script.BuildVersion });
                         context.SaveChanges();
 
                         var newScript = context.Scripts.Add(new Script() { Name = _script.Name, RecordedDate = _script.RecordedDate, test_id = newTest.id });
@@ -103,9 +124,9 @@ namespace WMSA_DAL.Service
                                 }
                                 //add correlations                           
 
-                                if(req.Correlations != null && req.Correlations.Count() > 0)
+                                if (req.Correlations != null && req.Correlations.Count() > 0)
                                 {
-                                    foreach(var corr in req.Correlations)
+                                    foreach (var corr in req.Correlations)
                                     {
                                         context.Correlations.Add(new Correlation() { OriginalValue = corr.OriginalValue, Rule = corr.Rule, req_id = newRequest.Id });
                                     }
@@ -113,6 +134,8 @@ namespace WMSA_DAL.Service
                             }
                         }
                         contextTransaction.Commit();
+
+                        return context.Scripts.Include("Test").FirstOrDefault(s => s.Id == newScript.Id);
                     }
                     catch (Exception ex)
                     {

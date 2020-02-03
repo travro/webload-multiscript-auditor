@@ -36,7 +36,7 @@ namespace WMSA_Project.Controls.ImportControls
         public ScriptByFileControl()
         {
             InitializeComponent();
-            DBQ_Ctrl.AddButtonsVisible = false;
+            DBQ_Ctrl.AddButtonsVisible = true;
             DBQ_Ctrl.AttributesReady += OnAttributesReady;
         }
 
