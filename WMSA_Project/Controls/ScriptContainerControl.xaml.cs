@@ -37,6 +37,7 @@ namespace WMSA_Project.Controls
             set
             {
                 CntCtrl_Main.Content = _container = value;
+                Btn_Export.IsEnabled = (_container.Script.ImportStrategy == Models.ScriptImportStrategy.FromDB) ? false : true;
             }
         }
 
@@ -64,6 +65,7 @@ namespace WMSA_Project.Controls
         private void Btn_Export_Click(object sender, RoutedEventArgs e)
         {
             _repo.ExportScript(this);
+            Btn_Export.IsEnabled = false;
         }
         #endregion
 

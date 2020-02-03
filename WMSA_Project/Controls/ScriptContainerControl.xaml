@@ -10,9 +10,9 @@
         <Grid.Resources>
             <Style TargetType="Button">
                 <Setter Property="Height" Value="auto"/>
-                <Setter Property="Width" Value="40"/>
+                <Setter Property="Width" Value="30"/>
                 <Setter Property="Background" Value="LightGray"/>
-                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontSize" Value="14"/>
                 <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="FontWeight" Value="ExtraBold"/>
             </Style>
@@ -26,7 +26,7 @@
             <Button DockPanel.Dock="Left" x:Name="Btn_Import" Click="Btn_Import_Click" Content="&#x21A7;" />
             <Button DockPanel.Dock="Left" x:Name="Btn_Export" Click="Btn_Export_Click" Content="&#x2B71;" />
             <Button DockPanel.Dock="Left" x:Name="Btn_Right"  Click="Btn_Right_Click" Content="&#x21E5;"/>
-            <Button DockPanel.Dock="Right" IsEnabled="True"  x:Name="Btn_Exit" Click="Btn_Exit_Click" Background="OrangeRed" Foreground="White" Content="&#x2B59;" Margin="0,0,0,0"/>
+            <Button DockPanel.Dock="Right" x:Name="Btn_Exit" Click="Btn_Exit_Click" Background="Red" Foreground="White" Content="&#x274c;" Margin="0,0,0,0"/>
         </DockPanel>
         <ContentControl Grid.Row="1"  x:Name="CntCtrl_Main" VerticalAlignment="Top"/>
     </Grid>

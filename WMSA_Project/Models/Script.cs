@@ -9,17 +9,19 @@ namespace WMSA_Project.Models
 {
     public class Script : IScript
     {
+        IEnumerable<ITransaction> IScript.Transactions
+        {
+            get => Transactions;
+            set => Transactions = value as List<Transaction>;
+        }
         public int Id { get; set; }
         public string TestName { get; set; }
         public string BuildVersion { get; set; }
         public string Name { get; set; }
         public DateTime RecordedDate { get; set; }
         public List<Transaction> Transactions { get; set; }
-        IEnumerable<ITransaction> IScript.Transactions
-        {
-            get => Transactions; 
-            set => Transactions = value as List<Transaction>;  
-        }
+        public ScriptImportStrategy ImportStrategy { get; set; }
+
 
         public Script()
         {

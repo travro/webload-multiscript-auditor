@@ -25,7 +25,8 @@ namespace WMSA_Project.Windows
     public partial class ImportScriptWindow : Window
     {
         SelectScriptPathControl _selectPathCtrl;
-        IScriptImportControl _scriptImportCtrl;
+        IScriptImportControl _scrptImprtCtrl;
+        Script _scrptFromImprt;
 
         public ImportScriptWindow()
         {
@@ -35,22 +36,31 @@ namespace WMSA_Project.Windows
 
         public event EventHandler<ClosedWithScriptEventArgs> ClosedWithScript;
 
-        public Script Script { get; private set; }
+        public Script Script
+        {
+            get
+            { return _scrptFromImprt; }
+            private set
+            {
+                _scrptFromImprt = value;
+                _scrptFromImprt.ImportStrategy = _selectPathCtrl.Strategy;
+            }
+        }
 
         #region handlers
         private void Btn_Next_Click(object sender, RoutedEventArgs e)
         {
             if (_selectPathCtrl.Strategy == ScriptImportStrategy.FromProjFile)
             {
-                _scriptImportCtrl = new ScriptByFileControl();
-                _scriptImportCtrl.ScriptReady += ((object ctrlSender, ScriptReadyEventArgs args) => { Btn_Imprt.IsEnabled = true; });
+                _scrptImprtCtrl = new ScriptByFileControl();
+                _scrptImprtCtrl.ScriptReady += ((object ctrlSender, ScriptReadyEventArgs args) => { Btn_Imprt.IsEnabled = true; });
             }
             else
             {
-                _scriptImportCtrl = new ScriptByDBControl();
-                _scriptImportCtrl.ScriptReady += ((object ctrlSender, ScriptReadyEventArgs args) => { Btn_Imprt.IsEnabled = true; });
+                _scrptImprtCtrl = new ScriptByDBControl();
+                _scrptImprtCtrl.ScriptReady += ((object ctrlSender, ScriptReadyEventArgs args) => { Btn_Imprt.IsEnabled = true; });
             }
-            Content_Control.Content = _scriptImportCtrl;
+            Content_Control.Content = _scrptImprtCtrl;
             Btn_Imprt.Visibility = Btn_Back.Visibility = Visibility.Visible;
             Btn_Next.Visibility = Visibility.Collapsed;
         }
@@ -69,7 +79,7 @@ namespace WMSA_Project.Windows
         {
             try
             {
-                Script = _scriptImportCtrl.GetScript();
+                Script = _scrptImprtCtrl.GetScript();
             }
             catch (Exception)
             {

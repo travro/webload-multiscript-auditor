@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WMSA_Project.Models;
 
 namespace WMSA_Project.Controls.ImportControls
 {
@@ -36,11 +37,5 @@ namespace WMSA_Project.Controls.ImportControls
         {
             Strategy = ScriptImportStrategy.FromDB;
         }
-    }
-
-    public enum ScriptImportStrategy
-    {
-        FromProjFile = 1,
-        FromDB = 2
     }
 }
