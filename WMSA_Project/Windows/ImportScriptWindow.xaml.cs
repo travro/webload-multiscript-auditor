@@ -53,13 +53,12 @@ namespace WMSA_Project.Windows
             if (_selectPathCtrl.Strategy == ScriptImportStrategy.FromProjFile)
             {
                 _scrptImprtCtrl = new ScriptByFileControl();
-                _scrptImprtCtrl.ScriptReady += ((object ctrlSender, ScriptReadyEventArgs args) => { Btn_Imprt.IsEnabled = true; });
             }
             else
             {
                 _scrptImprtCtrl = new ScriptByDBControl();
-                _scrptImprtCtrl.ScriptReady += ((object ctrlSender, ScriptReadyEventArgs args) => { Btn_Imprt.IsEnabled = true; });
             }
+            _scrptImprtCtrl.ScriptReady += ((object ctrlSender, ScriptReadyEventArgs args) => { Btn_Imprt.IsEnabled = true; });
             Content_Control.Content = _scrptImprtCtrl;
             Btn_Imprt.Visibility = Btn_Back.Visibility = Visibility.Visible;
             Btn_Next.Visibility = Visibility.Collapsed;

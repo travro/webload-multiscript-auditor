@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Windows;
 using System.Linq;
 using System.Collections.Generic;
-using Script = WMSA_Project.Models.Script;
 using WMSA_DAL.Service;
 using IScript = WMSA.Entities.Interfaces.IScript;
 
@@ -40,7 +39,6 @@ namespace WMSA_Project.Repositories
             }
         }
 
-
         private SciptMetaRepo()
         {
             try
@@ -52,23 +50,17 @@ namespace WMSA_Project.Repositories
                 MessageBox.Show(ex.Message);
             }
         }
-
-        //
         public void FilterScriptsByTestName(object sender, PropertyChangedEventArgs args)
         {
             _testNameFilter = args.PropertyName;
         }
-        //SAVE SCRIPT SHOULD PROBABLY RETURN THE ENTITY META DATA FOR THE LIST SO THE SCRIPTS PROPERTY HAS THE CORRECT ID IN THE DB
         public void ExportScript(IScript script)
-        {
-            var scriptService = new ScriptService(script);
-
+        {          
             try
             {
+                var scriptService = new ScriptService(script);
                 var exportedScript = scriptService.SaveScript();
                 _sessionUploads.Add(exportedScript);
-                //Scripts.Concat(singletonList);
-
             }
             catch (Exception ex)
             {

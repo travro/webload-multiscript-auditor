@@ -28,42 +28,44 @@ namespace WMSA_Project.Controls.ImportControls
     public partial class ScriptByDBControl : UserControl, IScriptImportControl
     {
         public event EventHandler<ScriptReadyEventArgs> ScriptReady;
-        public IEnumerable<IScript> ScriptList { get; private set; }
+
 
         public ScriptByDBControl()
         {
             InitializeComponent();
             DataContext = this;
             DBQ_Ctrl.AddButtonsVisible = false;
-            DBQ_Ctrl.SAC_Test.PropertyChanged += UpdateSelectionList;
-            DBQ_Ctrl.SAC_Build.PropertyChanged += UpdateSelectionList;
-            DBQ_Ctrl.SAC_Script.PropertyChanged += UpdateSelectionList;
+            DBQ_Ctrl.CollectionChanged += DBQ_Ctrl_CollectionChanged;
             Lst_Results.SelectionChanged += Lst_Results_SelectionChanged;
         }
+
+
 
         public Script GetScript()
         {
             return ScriptFactory.GetScriptFromDB((Lst_Results.SelectedItem as IScript).Id);
         }
         #region handlers
+        //private void UpdateSelectionList(object sender, PropertyChangedEventArgs args)
+        //{
+        //    ScriptList = SciptMetaRepo.ThisRepo.Scripts;
 
-        //need to refactor to use scriptmed
-        private void UpdateSelectionList(object sender, PropertyChangedEventArgs args)
+        //    if (DBQ_Ctrl.SAC_Test.SelectedValue != null && DBQ_Ctrl.SAC_Test.SelectedValue != DBQ_Ctrl.SAC_Test.DefaultValue)
+        //        ScriptList = ScriptList.Where(s => s.TestName == DBQ_Ctrl.SAC_Test.SelectedValue);
+
+        //    if (DBQ_Ctrl.SAC_Build.SelectedValue != null && DBQ_Ctrl.SAC_Build.SelectedValue != DBQ_Ctrl.SAC_Build.DefaultValue)
+        //        ScriptList = ScriptList.Where(s => s.BuildVersion == DBQ_Ctrl.SAC_Build.SelectedValue);
+
+        //    if (DBQ_Ctrl.SAC_Script.SelectedValue != null && DBQ_Ctrl.SAC_Script.SelectedValue != DBQ_Ctrl.SAC_Script.DefaultValue)
+        //        ScriptList = ScriptList.Where(s => s.Name == DBQ_Ctrl.SAC_Script.SelectedValue);
+
+        //    //Lst_Results.ItemsSource = ScriptList;
+        //}
+
+        private void DBQ_Ctrl_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            ScriptList = SciptMetaRepo.ThisRepo.Scripts;
-
-            if (DBQ_Ctrl.SAC_Test.SelectedValue != null && DBQ_Ctrl.SAC_Test.SelectedValue != DBQ_Ctrl.SAC_Test.DefaultValue)
-                ScriptList = ScriptList.Where(s => s.TestName == DBQ_Ctrl.SAC_Test.SelectedValue);
-
-            if (DBQ_Ctrl.SAC_Build.SelectedValue != null && DBQ_Ctrl.SAC_Build.SelectedValue != DBQ_Ctrl.SAC_Build.DefaultValue)
-                ScriptList = ScriptList.Where(s => s.BuildVersion == DBQ_Ctrl.SAC_Build.SelectedValue);
-
-            if (DBQ_Ctrl.SAC_Script.SelectedValue != null && DBQ_Ctrl.SAC_Script.SelectedValue != DBQ_Ctrl.SAC_Script.DefaultValue)
-                ScriptList = ScriptList.Where(s => s.Name == DBQ_Ctrl.SAC_Script.SelectedValue);
-
-            Lst_Results.ItemsSource = ScriptList;
+            Lst_Results.ItemsSource = DBQ_Ctrl.ScriptList;
         }
-
         private void Lst_Results_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             OnScriptReady();

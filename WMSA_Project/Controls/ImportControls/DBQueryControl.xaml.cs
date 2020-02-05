@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ using WMSA_Project.Controls.AttributeControls;
 using WMSA_Project.Controls.Interfaces;
 using WMSA_Project.DAL;
 using WMSA_Project.Repositories;
+using IScript = WMSA.Entities.Interfaces.IScript;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
@@ -28,7 +30,7 @@ namespace WMSA_Project.Controls.ImportControls
     /// <summary>
     /// Interaction logic for DBQueryControl.xaml
     /// </summary>
-    public partial class DBQueryControl : UserControl
+    public partial class DBQueryControl : UserControl, INotifyCollectionChanged
     {
         string _dbName = "WLScriptsDB";
         bool _dbAvailable;
@@ -36,16 +38,17 @@ namespace WMSA_Project.Controls.ImportControls
         {
             InitializeComponent();
             DataContext = this;
-            SAC_Test.PropertyChanged += SciptMetaRepo.ThisRepo.FilterScriptsByTestName;
-            SAC_Test.PropertyChanged += ClearScriptSAC;
-            SAC_Build.PropertyChanged += ClearScriptSAC;
+            SAC_Test.PropertyChanged += ClearScriptandDate;
+            SAC_Build.PropertyChanged += ClearScriptandDate;
             SAC_Script.PropertyChanged += CheckAttributesReady;
             Dt_Pckr.SelectedDateChanged += CheckAttributesReady;
-            CheckDBStatus();            
+            CheckDBStatus();
         }
 
         public event EventHandler<AttributesReadyEventArgs> AttributesReady;
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
 
+        public IEnumerable<IScript> ScriptList { get; private set; }
         public bool AddButtonsVisible
         {
             set
@@ -59,9 +62,7 @@ namespace WMSA_Project.Controls.ImportControls
         {
             _dbAvailable = await Task.Run(() => SqlConnectionManager.CheckDatabaseAvailability());
 
-            SAC_Test.Btn_Select.IsEnabled = (_dbAvailable) ? true : false;
-            SAC_Build.Btn_Select.IsEnabled = (_dbAvailable) ? true : false;
-            SAC_Script.Btn_Select.IsEnabled = (_dbAvailable) ? true : false;
+            SAC_Test.Btn_Select.IsEnabled = SAC_Build.Btn_Select.IsEnabled = SAC_Script.Btn_Select.IsEnabled = (_dbAvailable) ? true : false;
 
             if (!_dbAvailable)
             {
@@ -70,10 +71,13 @@ namespace WMSA_Project.Controls.ImportControls
             else
             {
                 Txt_Block_DBStatus.Text = $"Database {_dbName} found";
+                SAC_Test.PropertyChanged += SciptMetaRepo.ThisRepo.FilterScriptsByTestName;
+                SAC_Test.PropertyChanged += UpdateScriptList;
+                SAC_Build.PropertyChanged += UpdateScriptList;
+                SAC_Script.PropertyChanged += UpdateScriptList;
             }
-
         }
-        private void ClearScriptSAC(object sender, PropertyChangedEventArgs args)
+        private void ClearScriptandDate(object sender, PropertyChangedEventArgs args)
         {
             SAC_Script.Clear();
             Dt_Pckr.SelectedDate = null;
@@ -103,6 +107,15 @@ namespace WMSA_Project.Controls.ImportControls
             //    Dt_Pckr.SelectedDate = null;
             //}
         }
+        private void UpdateScriptList(object sender, PropertyChangedEventArgs args)
+        {
+            ScriptList = SciptMetaRepo.ThisRepo.Scripts;
+
+            if (SAC_Test.IsValid()) ScriptList = ScriptList.Where(s => s.TestName == SAC_Test.SelectedValue);
+            if (SAC_Build.IsValid()) ScriptList = ScriptList.Where(s => s.BuildVersion == SAC_Build.SelectedValue);
+            if (SAC_Script.IsValid()) ScriptList = ScriptList.Where(s => s.Name == SAC_Script.SelectedValue);
+            OnCollectionChanged();
+        }
         private void CheckAttributesReady(object sender, EventArgs args)
         {
             if (SAC_Test.IsValid() && SAC_Build.IsValid() && SAC_Script.IsValid() && Dt_Pckr.SelectedDate != null)
@@ -110,18 +123,20 @@ namespace WMSA_Project.Controls.ImportControls
                 OnAttributesReady();
             }
         }
+        private void OnCollectionChanged()
+        {
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        }
+        
         private void OnAttributesReady()
         {
-            if (AttributesReady != null)
+            AttributesReady?.Invoke(this, new AttributesReadyEventArgs()
             {
-                AttributesReady(this, new AttributesReadyEventArgs()
-                {
-                    SelectedTestName = SAC_Test.SelectedValue,
-                    SelectedBuildVersion = SAC_Build.SelectedValue,
-                    SelectedScriptName = SAC_Script.SelectedValue,
-                    SelectedDate = Dt_Pckr.SelectedDate.Value
-                });
-            }
+                SelectedTestName = SAC_Test.SelectedValue,
+                SelectedBuildVersion = SAC_Build.SelectedValue,
+                SelectedScriptName = SAC_Script.SelectedValue,
+                SelectedDate = Dt_Pckr.SelectedDate.Value
+            });
         }
         #endregion
     }

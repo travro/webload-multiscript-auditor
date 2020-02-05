@@ -51,7 +51,6 @@ namespace WMSA_Project.Controls.ImportControls
                 _attributesReady = value;
                 OnScriptReady();
             }
-
         }
 
         public Script GetScript()
@@ -110,6 +109,5 @@ namespace WMSA_Project.Controls.ImportControls
             }
         }
         #endregion
-
     }
 }
