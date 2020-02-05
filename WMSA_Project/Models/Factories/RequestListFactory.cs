@@ -38,7 +38,7 @@ namespace WMSA_Project.Models.Factories
                         requests.Add(new Request()
                         {
                             Verb = ParseRequestVerb(httpEl),
-                            Parameters = ParseRequestParamters(httpEl),
+                            URL = ParseRequestParamters(httpEl),
                             Visible = true,
                             Correlations = CorrelationListFactory.GetCorrelationsFromXElement(nodeScriptEl)
                         });
@@ -48,7 +48,7 @@ namespace WMSA_Project.Models.Factories
                         requests.Add(new Request()
                         {
                             Verb = ParseRequestVerb(httpEl),
-                            Parameters = ParseRequestParamters(httpEl),
+                            URL = ParseRequestParamters(httpEl),
                             Visible = true,
                         });
                     }
@@ -59,7 +59,7 @@ namespace WMSA_Project.Models.Factories
                             requests.Add(new Request()
                             {
                                 Verb = ParseRequestVerb(httpEl),
-                                Parameters = ParseRequestParamters(httpEl),
+                                URL = ParseRequestParamters(httpEl),
                                 Visible = false
                             }); 
                         }

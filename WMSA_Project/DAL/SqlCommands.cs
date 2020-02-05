@@ -202,7 +202,7 @@ namespace WMSA_Project.DAL
                     foreach (var request in requests)
                     {
                         cmd.Parameters["@requestVerbId"].Value = (Int32)request.Verb;
-                        cmd.Parameters["@requestParams"].Value = request.Parameters;
+                        cmd.Parameters["@requestParams"].Value = request.URL;
 
                         object requestScopeId = cmd.ExecuteScalar();
 

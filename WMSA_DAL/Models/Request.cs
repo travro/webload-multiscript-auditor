@@ -21,8 +21,8 @@ namespace WMSA_DAL.Models
         [Column("verb_id")]
         public int? verb_id { get; set; }
 
-        [StringLength(256), Column("req_parameters")]
-        public string Parameters { get; set; }
+        [StringLength(256), Column("uRL")]
+        public string URL { get; set; }
 
         [Column("trans_id")]
         public int? trans_id { get; set; }

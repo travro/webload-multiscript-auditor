@@ -9,7 +9,7 @@ namespace WMSA.Entities.Interfaces
     public interface IRequest : IEntity
     {
         string Verb { get; set; }
-        string Parameters { get; set; }
+        string URL { get; set; }
         IEnumerable<ICorrelation> Correlations { get; set; }
     }
 }

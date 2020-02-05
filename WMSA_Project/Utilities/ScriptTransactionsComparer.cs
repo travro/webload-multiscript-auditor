@@ -48,7 +48,7 @@ namespace WMSA_Project.Utilities
                 }
                 else
                 {
-                    baseTrans.UnmatchedRequests.Add(new Request(compReq.Verb, compReq.Parameters, compReq.Visible));
+                    baseTrans.UnmatchedRequests.Add(new Request(compReq.Verb, compReq.URL, compReq.Visible));
                 }
             });
         }

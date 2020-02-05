@@ -1,9 +1,5 @@
-﻿using System.IO;
-using System.Xml;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using System.Linq;
-using WMSA_Project.Models;
-using System;
 using System.Collections.Generic;
 
 namespace WMSA_Project.Models.Factories
@@ -26,6 +22,7 @@ namespace WMSA_Project.Models.Factories
             foreach (var jsPBE in jsParentBlockElements)
             {
                 var transaction = new Transaction(ParseTransactionName(jsPBE), script);
+                transaction.Sleep = ParseSleepTimeAfter(jsPBE.NextNode?.NextNode);
                 transaction.Requests = RequestListFactory.GetRequestsFromXElement(jsPBE, false);
                 transactions.Add(transaction);
             }
@@ -34,17 +31,42 @@ namespace WMSA_Project.Models.Factories
         #region helpermethods
         private static string ParseTransactionName(XElement element)
         {
+            var beginTrans = "BeginTransaction::";
+
             string itemName = element
                 .Element("Properties")
                 .Element("PropertyPage")
                 .Element("ItemName").Value;
-            string beginTrans = "BeginTransaction::";
 
             if (itemName.Contains(beginTrans))
             {
                 return itemName.Substring(itemName.IndexOf(beginTrans) + beginTrans.Length);
             }
             else return "Transaction";
+        }
+
+        private static string ParseSleepTimeAfter(XNode node = null)
+        {
+            if (node != null)
+            {
+                var element = node as XElement;
+                var sleepIndex = "Sleep(";
+
+                string nodeScript = element
+                    .Element("Properties")?
+                    .Elements("PropertyPage").Where(e => e.Attribute("Name").Value == "JavaScript")
+                    .FirstOrDefault()  //<---------does this need a parameter
+                    .Element("NodeScript").Value;
+
+                if (nodeScript != null && nodeScript.Contains(sleepIndex))
+                {
+                    int leftbound = nodeScript.IndexOf(sleepIndex) + sleepIndex.Length;
+                    int rightbound = nodeScript.LastIndexOf(')');
+
+                    return nodeScript.Substring(leftbound, rightbound - leftbound);
+                }
+            }
+            return null;
         }
         #endregion
     }

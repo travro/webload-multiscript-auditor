@@ -113,6 +113,8 @@ namespace WMSA_Project.Utilities.Factories
                 var transExpanderHeader = (transExpander.Header as StackPanel);
                 transExpanderHeader.Children.Add(new TextBlock() { Text = t.Name });
 
+                if (t.Sleep != null) transExpanderHeader.Children.Add(new TextBlock() { Text = $", Sleep({t.Sleep})," });
+
                 if (!isFirst)
                 {
                     int uniqReqNum = t.Requests.Where(r => !r.Matched).Count();

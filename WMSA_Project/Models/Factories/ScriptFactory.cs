@@ -69,13 +69,16 @@ namespace WMSA_Project.Models.Factories
 
             foreach (var importedTrans in importedScript.Transactions)
             {
-                var newTrans = new Transaction(importedTrans.Name, newScript);
+                var newTrans = new Transaction(importedTrans.Name, newScript)
+                {
+                    Sleep = importedTrans.Sleep
+                };
 
                 foreach (var importedRequest in importedTrans.Requests)
                 {
                     var newReq = new Request()
                     {
-                        Parameters = importedRequest.Parameters,
+                        URL = importedRequest.URL,
                         Visible = true,
                         Correlations = new List<Correlation>()
                     };

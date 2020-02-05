@@ -24,6 +24,9 @@ namespace WMSA_DAL.Models
         [Column("script_id")]
         public int? script_id { get; set; }
 
+        [Column("sleep_after_end")]
+        public string Sleep { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Request> Requests { get; set; }
 

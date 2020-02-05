@@ -95,7 +95,7 @@ namespace WMSA_DAL.Service
 
                             if (queriedTransName != null)
                             {
-                                newTrans = context.Transactions.Add(new Transaction() { trans_nm_id = queriedTransName.id, script_id = newScript.Id });
+                                newTrans = context.Transactions.Add(new Transaction() { trans_nm_id = queriedTransName.id, script_id = newScript.Id, Sleep = trans.Sleep });
                                 context.SaveChanges();
                             }
                             else
@@ -103,7 +103,7 @@ namespace WMSA_DAL.Service
                                 var newTransName = context.TransactionNames.Add(new TransactionName() { trans_name = trans.Name });
                                 context.SaveChanges();
 
-                                newTrans = context.Transactions.Add(new Transaction() { trans_nm_id = newTransName.id, script_id = newScript.Id });
+                                newTrans = context.Transactions.Add(new Transaction() { trans_nm_id = newTransName.id, script_id = newScript.Id, Sleep = trans.Sleep });
                                 context.SaveChanges();
                             }
 
@@ -115,12 +115,12 @@ namespace WMSA_DAL.Service
 
                                 if (queriedReqVerb != null)
                                 {
-                                    newRequest = context.Requests.Add(new Request() { verb_id = queriedReqVerb.id, Parameters = req.Parameters, trans_id = newTrans.Id });
+                                    newRequest = context.Requests.Add(new Request() { verb_id = queriedReqVerb.id, URL = req.URL, trans_id = newTrans.Id });
                                     context.SaveChanges();
                                 }
                                 else
                                 {
-                                    newRequest = context.Requests.Add(new Request() { verb_id = 5, Parameters = req.Parameters, trans_id = newTrans.Id });
+                                    newRequest = context.Requests.Add(new Request() { verb_id = 5, URL = req.URL, trans_id = newTrans.Id });
                                 }
                                 //add correlations                           
 
