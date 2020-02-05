@@ -6,7 +6,7 @@ using WMSA_DAL.Models;
 
 namespace WMSA_DAL.Context
 {
-    public class WLContext : DbContext
+    internal class WLContext : DbContext
     {
         public virtual DbSet<Correlation> Correlations { get; set; }
         public virtual DbSet<Request> Requests { get; set; }

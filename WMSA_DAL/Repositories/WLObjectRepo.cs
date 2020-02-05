@@ -13,7 +13,7 @@ namespace WMSA_DAL.Repositories
         protected DbSet<TEntity> _table;
         private bool _disposed = false;
 
-        public WLContext Context { get; }
+        internal WLContext Context { get; }
 
         public WLObjectRepo()
         {
