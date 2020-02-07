@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMSA_Project"
         mc:Ignorable="d"
-        Title="Webload Script Tool" Height="900" Width="auto" Background="WhiteSmoke">
+        Title="Webload Script Tool" Height="900" Width="1080" Background="WhiteSmoke">
     <Grid Width="auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
+            <RowDefinition Height="4*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="268*"/>
-            <ColumnDefinition Width="129*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>-->
         <Menu Grid.Row="0" Grid.ColumnSpan="2" Background="LightGray">
             <MenuItem Header="_File" Background="LightGray">
@@ -21,7 +22,7 @@
                 <MenuItem Header="E_xit" Click="MenuItem_Exit_CLick"/>
             </MenuItem>
         </Menu>
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Column="0" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <StackPanel x:Name="StkPnl_Main" Orientation="Horizontal" HorizontalAlignment="Left" Width="auto"/>
         </ScrollViewer>
     </Grid>

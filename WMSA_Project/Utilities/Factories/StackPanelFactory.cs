@@ -44,17 +44,8 @@ namespace WMSA_Project.Utilities.Factories
 
             foreach (var t in scriptControl.Script.Transactions)
             {
-                var transExpander = new Expander()
-                {
-                    Header = new StackPanel() { Orientation = Orientation.Horizontal },
-                    Content = t.Requests,
-                    IsExpanded = false,
-                    Background = Brushes.LightGray,
-                    FontSize = 13,
-                };
-
-                transExpander.Expanded += scriptControl.OnStackTransExpanderStateChange;
-                transExpander.Collapsed += scriptControl.OnStackTransExpanderStateChange;
+                var transExpander = new Expander() { Header = new StackPanel() { Orientation = Orientation.Horizontal }};
+                transExpander.DataContext = transExpander;
 
                 var reqTree = new TreeView();
 
@@ -64,17 +55,16 @@ namespace WMSA_Project.Utilities.Factories
                     {
                         var reqTreeViewItem = new TreeViewItem()
                         {
-                            IsExpanded = false,
                             Header = r.GetInfoString(),
-                            FontSize = 12
                         };
+
+                        reqTreeViewItem.DataContext = reqTreeViewItem;
 
                         if (!isFirst && !r.Matched)
                         {
                             reqTreeViewItem.Foreground = Brushes.Green;
                             reqTreeViewItem.Header = "+" + reqTreeViewItem.Header;
                         }
-
 
                         if (r.Correlations != null)
                         {
@@ -83,8 +73,8 @@ namespace WMSA_Project.Utilities.Factories
                                 var corrTreeViewItem = new TreeViewItem()
                                 {
                                     Header = c.GetInfoString(),
-                                    FontSize = 11
                                 };
+                                corrTreeViewItem.DataContext = corrTreeViewItem;
                                 reqTreeViewItem.Items.Add(corrTreeViewItem);
                             }
                         }
@@ -98,9 +88,7 @@ namespace WMSA_Project.Utilities.Factories
                     {
                         var unReqTreeViewItem = new TreeViewItem()
                         {
-                            IsExpanded = false,
                             Header = "-" + unReq.GetInfoString(),
-                            FontSize = 12,
                             Foreground = Brushes.Red
                         };
                         reqTree.Items.Add(unReqTreeViewItem);
@@ -109,11 +97,10 @@ namespace WMSA_Project.Utilities.Factories
 
                 transExpander.Content = reqTree;
 
-                //transExpander header
                 var transExpanderHeader = (transExpander.Header as StackPanel);
                 transExpanderHeader.Children.Add(new TextBlock() { Text = t.Name });
 
-                if (t.Sleep != null) transExpanderHeader.Children.Add(new TextBlock() { Text = $", Sleep({t.Sleep})," });
+                if (t.Sleep != null) transExpanderHeader.Children.Add(new TextBlock() { Text = $" slp:{t.Sleep}" });
 
                 if (!isFirst)
                 {

@@ -64,7 +64,9 @@ namespace WMSA_Project.Models.Factories
                 Id = importedScript.Id,
                 Name = importedScript.Name,
                 BuildVersion = importedScript.BuildVersion,
-                RecordedDate = importedScript.RecordedDate
+                RecordedDate = importedScript.RecordedDate,
+                TestName = importedScript.TestName
+                
             };
 
             foreach (var importedTrans in importedScript.Transactions)

@@ -4,16 +4,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WMSA_Project.Controls"
-             mc:Ignorable="d" 
-             Background="LightGray">
+             mc:Ignorable="d"  Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Vertical" x:Name="Stack_Attributes">
-            <TextBlock Background="SteelBlue" x:Name="TxtBlck_TestGroup" HorizontalAlignment="Stretch" Foreground="White" FontSize="14" >AdminGenTask | 19.3.0.0-211 | 10\30\2019</TextBlock>
+            <TextBlock Background="SteelBlue" x:Name="TxtBlck_TestGroup" HorizontalAlignment="Stretch" Foreground="White" FontSize="13" >
+                LM  19.3.0.0-211 AdminGenTask  10\30\2019
+            </TextBlock>
         </StackPanel>
-        <StackPanel Grid.Row="1" x:Name="Stack_Transactions"/>
+        <StackPanel Grid.Row="1" x:Name="Stack_Transactions" Margin="2,2,2,2">
+            <StackPanel.Resources>
+                <Style TargetType="Expander">
+                    <Setter Property="IsExpanded" Value="False"/>
+                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <EventSetter Event="Collapsed" Handler="OnStackTransExpanderStateChange"/>
+                    <EventSetter Event="Expanded" Handler="OnStackTransExpanderStateChange"/>
+                    <!--<Setter Property="ToolTip" Value="{Binding Header}"/>-->
+                </Style>
+                <Style TargetType="TreeView">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                </Style>
+                <Style TargetType="TreeViewItem">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="ToolTip" Value="{Binding Header}"/>                    
+                </Style>
+            </StackPanel.Resources>
+        </StackPanel>
     </Grid>
 </UserControl>

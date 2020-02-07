@@ -140,9 +140,9 @@ namespace WMSA_Project.Repositories
             var expander = (args.Source as System.Windows.Controls.Expander);
             int expanderIndex = (sender as ScriptControl).Stack_Transactions.Children.IndexOf(expander);
 
-            var validLinkList = _linkedList.Where(scc => scc.Container != null);
+            //var validLinkList = _linkedList.Where(scc => scc.Container != null);
 
-            foreach (var scc in validLinkList)
+            foreach (var scc in _linkedList)
             {
                 (scc.Container.Stack_Transactions.Children[expanderIndex] as System.Windows.Controls.Expander).IsExpanded = expander.IsExpanded;
             }

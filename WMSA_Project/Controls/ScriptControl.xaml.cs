@@ -25,7 +25,7 @@ namespace WMSA_Project.Controls
         public ScriptControl(Script script)
         {
             InitializeComponent();
-            TxtBlck_TestGroup.Text = $"{script.Name} | {script.BuildVersion} | {script.RecordedDate.ToShortDateString()}";
+            TxtBlck_TestGroup.Text = $"{script.TestName}  {script.BuildVersion}  {script.Name}  {script.RecordedDate.ToShortDateString()}";
             TxtBlck_TestGroup.Background = LabelColor = ColorDispenser.Dispenser.GetNextColor();
             Script = script;
         }
