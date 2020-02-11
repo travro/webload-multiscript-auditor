@@ -16,8 +16,8 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>-->
-        <Menu Grid.Row="0" Grid.ColumnSpan="2" Background="LightGray">
-            <MenuItem Header="_File" Background="LightGray">
+        <Menu Grid.Row="0" Grid.ColumnSpan="2" Background="WhiteSmoke">
+            <MenuItem Header="_File" Background="WhiteSmoke">
                 <MenuItem Header="_Import" Click="MenuItem_Import_Click"/>
                 <MenuItem Header="E_xit" Click="MenuItem_Exit_CLick"/>
             </MenuItem>

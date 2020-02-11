@@ -4,15 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WMSA_Project.Controls.AttributeControls"
-             mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="500" Margin="0">
+             mc:Ignorable="d" HorizontalAlignment="Stretch" >
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+
     </UserControl.Resources>
-    <DockPanel LastChildFill="True">
-        <Button DockPanel.Dock="Right"  x:Name="Btn_Add" Content="Add" Click="Add_Button_Click" Visibility="Collapsed"/>
-        <Button DockPanel.Dock="Right" x:Name="Btn_Select" Content="Select" Click="Select_Button_Click" IsEnabled="False"/>
-        <TextBlock DockPanel.Dock="Right"  x:Name="Text_Block" HorizontalAlignment="Left" Margin="15,0,0,0.4" Text="{Binding SelectedValue}"/>
-    </DockPanel>
+    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+        <TextBlock Grid.Column="0" x:Name="Txt_Blk" MinWidth="230"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                   
+                 Text="{Binding Path=SelectedValue}"
+                   Style="{StaticResource textBlock}">
+        </TextBlock>
+        <Button   x:Name="Btn_Add" Content="Add" Click="Add_Button_Click" Visibility="Collapsed"/>
+        <Button   x:Name="Btn_Select" Content="Select" Click="Select_Button_Click" IsEnabled="False"/>
+    </StackPanel>
 </UserControl>
-<!--Visibility="{Binding Path=ShowAddButton, Converter={StaticResource BoolToVis} }"-->

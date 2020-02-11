@@ -52,7 +52,7 @@ namespace WMSA_Project.Controls.AttributeControls
             }
             private set
             {
-                _selectedValue = Text_Block.Text = value;
+                _selectedValue = Txt_Blk.Text = value;
                 if (PropertyChanged != null)
                 {
                     PropertyChanged(this, new PropertyChangedEventArgs(_selectedValue));

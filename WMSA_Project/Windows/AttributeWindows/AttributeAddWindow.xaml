@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMSA_Project.Windows.AttributeWindows"
         mc:Ignorable="d"
-        Title="AttributeAddWindow" Height="80" Width="574.064" WindowStartupLocation="CenterScreen" WindowStyle="None">
-    <Grid>
+        Title="Add the Attribute" Height="120" Width="470.064" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="NoResize">
+    <Grid Margin="10,0,10,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1.75*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBox Grid.Column="0" x:Name="Txt_Box" MaxLength="25" />
-        <Button Grid.Column="1" x:Name="Btn_Close" Content="Close" Click="Btn_Close_Click" Margin="10,0,0,0"/>
+        <TextBox  Grid.Column="0" x:Name="Txt_Box" MaxLength="25" Background="AliceBlue"/>
+        <Button  Grid.Column="1" x:Name="Btn_Close" Content="Close" Click="Btn_Close_Click" Margin="10,0,0,0"/>
     </Grid>
 </Window>

@@ -5,30 +5,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WMSA_Project.Controls.ImportControls"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
+             HorizontalAlignment="Stretch" d:DesignWidth="739.2"
+             VerticalAlignment="Stretch" Height="484">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.75*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <local:DBQueryControl Grid.Row="0" Grid.Column="0" x:Name="DBQ_Ctrl"/>
-        <ScrollViewer Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" x:Name="ScrlVwr_Output" VerticalScrollBarVisibility="Auto">
-            <ListView  x:Name="Lst_Results">
+        <ScrollViewer Grid.Row="0" Grid.Column="1" x:Name="ScrlVwr_Output" VerticalScrollBarVisibility="Auto">
+            <ListView  x:Name="Lst_Results" Background="LightSalmon" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
-                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding Name}" />
                             <TextBlock Text=", "/>
-                            <TextBlock Text="{Binding BuildVersion}"/>
+                            <TextBlock Text="{Binding BuildVersion}" />
                             <TextBlock Text=", "/>
-                            <TextBlock Text="{Binding RecordedDate, StringFormat= 'MMM dd, yyyy'}"/>
+                            <TextBlock Text="{Binding RecordedDate, StringFormat= 'yyMMMdd'}"/>
                         </WrapPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </ScrollViewer>        
+        </ScrollViewer>
     </Grid>
 </UserControl>
