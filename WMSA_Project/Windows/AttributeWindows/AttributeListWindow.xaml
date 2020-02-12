@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:WMSA_Project.Windows.AttributeWindows"
         mc:Ignorable="d"
         Title="List of Script Attributes" Height="450" Width="300" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <ListView x:Name="List_View" ItemsSource="{Binding SelectableList}" SelectionChanged="List_View_SelectionChanged"/>
-    </Grid>
+    <Border BorderBrush="AliceBlue" BorderThickness="2">
+        <Grid>
+            <ListView x:Name="List_View" ItemsSource="{Binding SelectableList}" SelectionChanged="List_View_SelectionChanged"/>
+        </Grid>
+    </Border>
 </Window>

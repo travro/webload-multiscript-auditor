@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:WMSA_Project"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <Style TargetType="Window">
+            <Setter Property="BorderBrush" Value="Pink"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
         <Style TargetType="TextBox">
             <Setter Property="MaxHeight" Value="24"/>
         </Style>

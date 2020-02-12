@@ -8,25 +8,27 @@
         WindowStyle="ToolWindow" 
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Height="auto" Width="800">    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="7*"/>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <!--<Grid.Resources>
+        Height="auto" Width="800">
+    <Border BorderThickness="2" BorderBrush="AliceBlue">
+        <Grid Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!--<Grid.Resources>
             <Style TargetType="Button">
                 <Setter Property="Margin" Value="10"/>
             </Style>
         </Grid.Resources>-->
-        <StackPanel Grid.Row="0" >
-            <ContentControl x:Name="Content_Control" Margin="0" BorderBrush="LightGray" BorderThickness="1"/>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,30,0">
-            <Button x:Name="Btn_Back" Click="Btn_Back_Click"  Visibility="Collapsed" >Back</Button>
-            <Button x:Name="Btn_Next" Click="Btn_Next_Click">Next</Button>
-            <Button x:Name="Btn_Imprt" Click="Btn_Imprt_Click" Visibility="Collapsed" IsEnabled="False">Import</Button>
-            <Button x:Name="Btn_Cancel" Click="Btn_Cancel_Click" IsCancel="True">Cancel</Button>
-        </StackPanel>
-    </Grid>
+            <StackPanel Grid.Row="0" >
+                <ContentControl x:Name="Content_Control" Margin="0" BorderBrush="LightGray" BorderThickness="1"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,30,0">
+                <Button x:Name="Btn_Back" Click="Btn_Back_Click"  Visibility="Collapsed" >Back</Button>
+                <Button x:Name="Btn_Next" Click="Btn_Next_Click">Next</Button>
+                <Button x:Name="Btn_Imprt" Click="Btn_Imprt_Click" Visibility="Collapsed" IsEnabled="False">Import</Button>
+                <Button x:Name="Btn_Cancel" Click="Btn_Cancel_Click" IsCancel="True">Cancel</Button>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>
