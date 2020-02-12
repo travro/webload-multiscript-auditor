@@ -13,10 +13,10 @@
         <GroupBox Grid.Row="0" HorizontalContentAlignment="Center"  Header="Select The Webload Project File (.wlp) from Storage">
             <Grid >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" x:Name="TxtBlk_FilePath" HorizontalAlignment="Stretch" Style="{StaticResource textBlock}"/>
+                <TextBlock Grid.Column="0" x:Name="TxtBlk_FilePath" HorizontalAlignment="Stretch" Style="{StaticResource textBlock}" FontStyle="Normal" FontWeight="Light"/>
                 <Button Grid.Column="1" x:Name="Btn_OFD"  Content="Select" 
                         VerticalAlignment="Stretch" 
                         HorizontalAlignment="Right"

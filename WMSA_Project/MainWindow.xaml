@@ -9,8 +9,8 @@
     <Grid Width="auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="4*"/>
             <RowDefinition Height="*"/>
+            <!--<RowDefinition Height="*"/>-->
         </Grid.RowDefinitions>
         <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
