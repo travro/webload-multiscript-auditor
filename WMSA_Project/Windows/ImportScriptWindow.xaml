@@ -8,9 +8,9 @@
         WindowStyle="ToolWindow" 
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Height="auto" Width="800">
-    <Border BorderThickness="2" BorderBrush="AliceBlue">
-        <Grid Margin="0">
+        Height="auto" Width="800" Effect="{StaticResource dropShadow}">
+    <Border BorderThickness="2" BorderBrush="AliceBlue" >
+        <Grid Margin="0"  >
             <Grid.RowDefinitions>
                 <RowDefinition Height="7*"/>
                 <RowDefinition Height="*" />

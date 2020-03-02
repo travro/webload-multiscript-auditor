@@ -27,5 +27,6 @@
             <Setter Property="TextBlock.Height" Value="22"/>
             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
         </Style>
+        <DropShadowEffect x:Key="dropShadow" BlurRadius="25" Direction="200"/>
     </Application.Resources>
 </Application>

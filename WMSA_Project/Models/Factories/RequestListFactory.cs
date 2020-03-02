@@ -95,9 +95,10 @@ namespace WMSA_Project.Models.Factories
             filteredUrl = filteredUrl.ReplaceInBounds("[TenantKey]", "/learning/DataStore/", "/Common/");
             filteredUrl = filteredUrl.ReplaceInBounds("[TimeStamp]", "blank___", ".");
             filteredUrl = filteredUrl.ReplaceInBounds("[UserId]", "gamification/summaries/");
-            filteredUrl = filteredUrl.ReplaceInBounds("[BrokerSessionId]", "api/sumtSocial/communities/");
-            filteredUrl = filteredUrl.ReplaceInBounds("[BrokerSessionId]", "api/sumtSocial/communities/", "/");
-            filteredUrl = filteredUrl.ReplaceInBounds("[BrokerSessionId]", "api/social/discuss");
+            filteredUrl = filteredUrl.ReplaceInBounds("[CommunityId]", "api/sumtSocial/communities/");
+            filteredUrl = filteredUrl.ReplaceInBounds("[CommunityId]", "api/sumtSocial/communities/", "/");
+            filteredUrl = filteredUrl.ReplaceInBounds("[CommunityId]", "/communities/", "/blogs");
+            filteredUrl = filteredUrl.ReplaceInBounds("[DiscussionId]", "api/social/discuss");
             filteredUrl = filteredUrl.ReplaceInBounds("[TenantKey]", "contentengine/TCAPI/", "/");
 
             return filteredUrl;

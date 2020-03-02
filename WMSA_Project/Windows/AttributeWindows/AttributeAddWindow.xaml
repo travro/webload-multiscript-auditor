@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMSA_Project.Windows.AttributeWindows"
         mc:Ignorable="d"
-        Title="Add the Attribute" Height="120" Width="470.064" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="NoResize">
-    <Border BorderBrush="AliceBlue" BorderThickness="2">
-        <Grid Margin="10,0,10,0">
+        Title="Add the Attribute" Height="120" Width="470.064" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="NoResize" Effect="{StaticResource dropShadow}">
+    <Border BorderBrush="AliceBlue" BorderThickness="2" >
+        <Grid Margin="10,0,10,0"  >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
