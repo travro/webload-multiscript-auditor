@@ -4,17 +4,51 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WMSA_Project.Controls"
-             mc:Ignorable="d"  Width="400">
+             mc:Ignorable="d"  MaxWidth="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Vertical" x:Name="Stack_Attributes">
-            <TextBlock Background="SteelBlue" x:Name="TxtBlck_TestGroup" HorizontalAlignment="Stretch" Foreground="White" FontSize="13" >
-                LM  19.3.0.0-211 AdminGenTask  10\30\2019
-            </TextBlock>
-        </StackPanel>
+        <Border Margin="2,4,4,2" BorderBrush="DarkGray" BorderThickness="1.5">
+            <Grid Grid.Row="0" x:Name="Grd_Attributes">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width=".9*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontSize" Value="13"/>
+                        <Setter Property="Margin" Value="5,0,0,0"/>
+                    </Style>
+                </Grid.Resources>
+                <TextBlock x:Name="TxtBlck_Name" Grid.Row="0" Grid.Column="0">ContinuousIntegration</TextBlock>
+                <TextBlock x:Name="TxtBlck_Script" Grid.Row="0" Grid.Column="1" Margin="5,0,4.53,0">03_Organization_Method</TextBlock>
+                <TextBlock x:Name="TxtBlck_Build" Grid.Row="0" Grid.Column="2" Margin="5.47,0,4.53,0">19.2.0.0-288</TextBlock>
+                <TextBlock x:Name="TxtBlck_Date" Grid.Row="0" Grid.Column="3" Margin="5.47,0,4.53,0">8/18/2019</TextBlock>
+                <Button x:Name="Btn_AllExpndrs" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" 
+                        Height="20" Width="20" Background="WhiteSmoke" Margin="2,0,0,2" ToolTip="Expand/Collapse All"
+                        Click="Btn_AllExpndrs_Click" Content="&#709;">
+                    <!--&#708;-->
+                </Button>
+                <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Background="LightGray">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock HorizontalAlignment="Stretch" 
+                           VerticalAlignment="Center" Foreground="Black" Margin="0">Total Changes: </TextBlock>
+                        <TextBlock x:Name="TxtBlck_TotalAdds" Foreground="Green" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="TxtBlck_TotalDrops" Foreground="Red" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+        </Border>
         <StackPanel Grid.Row="1" x:Name="Stack_Transactions" Margin="2,2,2,2">
             <StackPanel.Resources>
                 <Style TargetType="Expander">
@@ -23,14 +57,13 @@
                     <Setter Property="FontSize" Value="12"/>
                     <EventSetter Event="Collapsed" Handler="OnStackTransExpanderStateChange"/>
                     <EventSetter Event="Expanded" Handler="OnStackTransExpanderStateChange"/>
-                    <!--<Setter Property="ToolTip" Value="{Binding Header}"/>-->
                 </Style>
                 <Style TargetType="TreeView">
                     <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 </Style>
                 <Style TargetType="TreeViewItem">
                     <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                    <Setter Property="ToolTip" Value="{Binding Header}"/>                    
+                    <Setter Property="ToolTip" Value="{Binding Header}"/>
                 </Style>
             </StackPanel.Resources>
         </StackPanel>

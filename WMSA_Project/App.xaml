@@ -28,5 +28,17 @@
             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
         </Style>
         <DropShadowEffect x:Key="dropShadow" BlurRadius="25" Direction="200"/>
+        <Style x:Key="RoundButtonTemplate" TargetType="Button">
+            <Setter Property="Background" Value="WhiteSmoke"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="20" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>               
     </Application.Resources>
 </Application>

@@ -44,14 +44,24 @@ namespace WMSA_Project.Models.Factories
         public static Script GetComparativeScriptFromControls(ScriptControl baseControl)
         {
             baseControl.Script.ClearUnmatchedRequests();
+            int adds = 0;
+            int drops = 0;
             baseControl.Script.Transactions.ForEach((t) =>
             {
                 if (baseControl.PrevComparison != null)
                 {
-                    var prevTransaction = baseControl.PrevComparison.Script.Transactions.First((prevT) => prevT.Name == t.Name);
+                    var thisTransIndex = baseControl.Script.Transactions.IndexOf(t);
+
+                    Transaction prevTransaction = baseControl.PrevComparison.Script.Transactions[thisTransIndex];
                     ScriptTransactionsComparer.MatchRequests(t, prevTransaction);
+                    adds += t.Requests.Where(r => r.Matched == false).Count();
+                    drops += t.UnmatchedRequests.Count();
+
                 }
             });
+            baseControl.TotalAdds = adds;
+            baseControl.TotalDrops = drops;
+
             return baseControl.Script;
         }
 

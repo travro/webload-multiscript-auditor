@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using WMSA_Project.Models;
 using WMSA_Project.Controls;
 using WMSA_Project.Utilities;
@@ -128,23 +129,18 @@ namespace WMSA_Project.Repositories
             }
             else if (_linkedList.First.Value == caller && _linkedList.First.Next != null)
             {
-                return ScriptTransactionsComparer.CompareEach(newScript, _linkedList.First.Next.Value.Container.Script);
+                return ScriptTransactionsComparer.CompareCount(newScript, _linkedList.First.Next.Value.Container.Script);
             }
             else
             {
-                return ScriptTransactionsComparer.CompareEach(newScript, _linkedList.First.Value.Container.Script);
+                return ScriptTransactionsComparer.CompareCount(newScript, _linkedList.First.Value.Container.Script);
             }
         }
         private void OnScriptControlExpanderStateChange(object sender, RoutedEventArgs args)
         {
-            var expander = (args.Source as System.Windows.Controls.Expander);
-            int expanderIndex = (sender as ScriptControl).Stack_Transactions.Children.IndexOf(expander);
-
-            //var validLinkList = _linkedList.Where(scc => scc.Container != null);
-
             foreach (var scc in _linkedList)
             {
-                (scc.Container.Stack_Transactions.Children[expanderIndex] as System.Windows.Controls.Expander).IsExpanded = expander.IsExpanded;
+                scc.Container.ToggleExpander(sender, args);
             }
         }
         private void OnNodeContainerChanged()

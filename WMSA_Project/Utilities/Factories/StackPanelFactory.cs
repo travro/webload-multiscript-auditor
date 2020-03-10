@@ -44,7 +44,7 @@ namespace WMSA_Project.Utilities.Factories
 
             foreach (var t in scriptControl.Script.Transactions)
             {
-                var transExpander = new Expander() { Header = new StackPanel() { Orientation = Orientation.Horizontal }};
+                var transExpander = new Expander() { Header = new StackPanel() { Orientation = Orientation.Horizontal } };
                 transExpander.DataContext = transExpander;
 
                 var reqTree = new TreeView();
@@ -63,6 +63,7 @@ namespace WMSA_Project.Utilities.Factories
                         if (!isFirst && !r.Matched)
                         {
                             reqTreeViewItem.Foreground = Brushes.Green;
+                            reqTreeViewItem.Background = Brushes.WhiteSmoke;
                             reqTreeViewItem.Header = "+" + reqTreeViewItem.Header;
                         }
 
@@ -89,8 +90,10 @@ namespace WMSA_Project.Utilities.Factories
                         var unReqTreeViewItem = new TreeViewItem()
                         {
                             Header = "-" + unReq.GetInfoString(),
-                            Foreground = Brushes.Red
+                            Foreground = Brushes.Red,
+                            Background = Brushes.WhiteSmoke
                         };
+                        unReqTreeViewItem.DataContext = unReqTreeViewItem;
                         reqTree.Items.Add(unReqTreeViewItem);
                     }
                 }

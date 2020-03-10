@@ -9,6 +9,8 @@ namespace WMSA_Project.Models
 {
     public class Script : IScript
     {
+        public event EventHandler<ScriptResetEventArgs> ScriptReset;
+
         IEnumerable<ITransaction> IScript.Transactions
         {
             get => Transactions;
@@ -36,6 +38,15 @@ namespace WMSA_Project.Models
         }
         public bool Contains(Transaction t) => Transactions.Exists(element => element.Name == t.Name);
         public bool Contains(string s) => Transactions.Exists(element => element.Name == s);
-        public void ClearUnmatchedRequests() => Transactions.ForEach((t) => t.UnmatchedRequests.Clear());
+        public void ClearUnmatchedRequests()
+        {
+            Transactions.ForEach((t) => t.UnmatchedRequests.Clear());
+            ScriptReset?.Invoke(this, new ScriptResetEventArgs() { Message = "This Script Reset" });
+        } 
+    }
+
+    public class ScriptResetEventArgs : EventArgs
+    {
+        public string Message { get; set; }                
     }
 }
