@@ -44,6 +44,7 @@
                            VerticalAlignment="Center" Foreground="Black" Margin="0">Total Changes: </TextBlock>
                         <TextBlock x:Name="TxtBlck_TotalAdds" Foreground="Green" VerticalAlignment="Center"/>
                         <TextBlock x:Name="TxtBlck_TotalDrops" Foreground="Red" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="TxtBlck_PrevComp" Foreground="Black" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Border>
 

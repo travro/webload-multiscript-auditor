@@ -27,7 +27,7 @@ namespace WMSA_Project
         {
             InitializeComponent();
 
-            foreach (var scc in ScriptCollectionContainer.ThisContainer.ScriptContainerList)
+            foreach (var scc in ScriptCollectionContainer.ThisContainer.List)
             {
                 StkPnl_Main.Children.Add(scc);
             }
@@ -35,6 +35,7 @@ namespace WMSA_Project
             if (ScriptCollectionContainer.ThisContainer != null)
             {
                 ScriptCollectionContainer.ThisContainer.CollectionChanged += UpdateList;
+                ScriptCollectionContainer.ThisContainer.CollectionChanged += UpdateDeltaGrid;
             }
         }
 
@@ -43,7 +44,7 @@ namespace WMSA_Project
         {
             StkPnl_Main.Children.Clear();
 
-            foreach (var scc in ScriptCollectionContainer.ThisContainer.ScriptContainerList)
+            foreach (var scc in ScriptCollectionContainer.ThisContainer.List)
             {
                 StkPnl_Main.Children.Add(scc);                
             }

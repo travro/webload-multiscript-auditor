@@ -38,7 +38,7 @@ namespace WMSA_Project.Models.Factories
                         requests.Add(new Request()
                         {
                             Verb = ParseRequestVerb(httpEl),
-                            URL = ParseRequestParamters(httpEl),
+                            URL = ParseRequestUrl(httpEl),
                             Visible = true,
                             Correlations = CorrelationListFactory.GetCorrelationsFromXElement(nodeScriptEl)
                         });
@@ -48,7 +48,7 @@ namespace WMSA_Project.Models.Factories
                         requests.Add(new Request()
                         {
                             Verb = ParseRequestVerb(httpEl),
-                            URL = ParseRequestParamters(httpEl),
+                            URL = ParseRequestUrl(httpEl),
                             Visible = true,
                         });
                     }
@@ -59,7 +59,7 @@ namespace WMSA_Project.Models.Factories
                             requests.Add(new Request()
                             {
                                 Verb = ParseRequestVerb(httpEl),
-                                URL = ParseRequestParamters(httpEl),
+                                URL = ParseRequestUrl(httpEl),
                                 Visible = false
                             }); 
                         }
@@ -79,7 +79,7 @@ namespace WMSA_Project.Models.Factories
             return RequestVerb.GET;
         }
 
-        private static string ParseRequestParamters(XElement xElement)
+        private static string ParseRequestUrl(XElement xElement)
         {
             string line = xElement.Attribute("Text").Value;
 
@@ -100,6 +100,12 @@ namespace WMSA_Project.Models.Factories
             filteredUrl = filteredUrl.ReplaceInBounds("[CommunityId]", "/communities/", "/blogs");
             filteredUrl = filteredUrl.ReplaceInBounds("[DiscussionId]", "api/social/discuss");
             filteredUrl = filteredUrl.ReplaceInBounds("[TenantKey]", "contentengine/TCAPI/", "/");
+
+            //truncate ending front slash
+            if (filteredUrl.LastIndexOf('/') == filteredUrl.Length - 1)
+            {
+                filteredUrl = filteredUrl.Remove(filteredUrl.Length - 1);
+            }
 
             return filteredUrl;
         }
@@ -132,6 +138,9 @@ namespace WMSA_Project.Models.Factories
 
             var strBuilder = new StringBuilder(url);
             strBuilder.Replace(originalValue, replacementVal);
+
+            
+
             url = strBuilder.ToString();
             return url;
         }

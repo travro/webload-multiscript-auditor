@@ -5,7 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WMSA_Project.Controls"
              mc:Ignorable="d" 
-             Height="auto" Width="auto" MinWidth="0" BorderThickness="1" BorderBrush="Gray" Margin="1,10,1,10">
+             Height="auto" Width="auto" 
+             MinWidth="0" 
+             BorderThickness="1" 
+             BorderBrush="Gray" 
+             Margin="4">
     <Grid>
         <Grid.Resources>
             <Style TargetType="Button">

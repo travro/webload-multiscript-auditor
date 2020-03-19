@@ -73,6 +73,9 @@
     <Compile Include="Controls\AttributeControls\ScriptAttributesControl.xaml.cs">
       <DependentUpon>ScriptAttributesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DeltaDatagridControl.xaml.cs">
+      <DependentUpon>DeltaDatagridControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ImportControls\DBQueryControl.xaml.cs">
       <DependentUpon>DBQueryControl.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,8 @@
       <DependentUpon>SelectScriptPathControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Interfaces\IScriptImportControl.cs" />
+    <Compile Include="MainWindow2.xaml.cs" />
+    <Compile Include="Models\DeltaMode.cs" />
     <Compile Include="Models\ScriptImportStrategy.cs" />
     <Compile Include="Repositories\ScriptMetaRepo.cs" />
     <Compile Include="DAL\SqlCommands.cs" />
@@ -117,6 +122,10 @@
     </Compile>
     <Compile Include="Windows\Interfaces\IScriptAttributeWindow.cs" />
     <Page Include="Controls\AttributeControls\ScriptAttributesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DeltaDatagridControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

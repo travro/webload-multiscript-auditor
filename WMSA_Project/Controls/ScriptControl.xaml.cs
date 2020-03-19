@@ -22,7 +22,9 @@ namespace WMSA_Project.Controls
     /// </summary>
     public partial class ScriptControl : UserControl
     {
+        private ScriptControl _prevComparison;
         private Script _script;
+
 
         private int _totalAdds, _totalDrops;
         public ScriptControl(Script script)
@@ -38,17 +40,25 @@ namespace WMSA_Project.Controls
 
         public EventHandler<RoutedEventArgs> StackTransExpanderStateChange;
 
-        public Script Script 
+        public Script Script
         {
             get { return _script; }
-            
-            set 
+
+            set
             {
                 _script = value;
                 _script.ScriptReset += ClearTotals;
             }
         }
-        public ScriptControl PrevComparison { get; set; }
+        public ScriptControl PrevComparison
+        {
+            get { return _prevComparison; }
+            set
+            {
+                _prevComparison = value;
+                TxtBlck_PrevComp.Text = $" from {(value as ScriptControl)?.Script.BuildVersion}";
+            }
+        }
         public int TotalAdds
         {
             set
@@ -56,7 +66,7 @@ namespace WMSA_Project.Controls
                 _totalAdds = value;
                 TxtBlck_TotalAdds.Text = $"(+{_totalAdds.ToString()})";
             }
-        }        
+        }
         public int TotalDrops
         {
             set

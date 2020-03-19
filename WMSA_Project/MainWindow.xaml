@@ -5,25 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMSA_Project"
         mc:Ignorable="d"
-        Title="Webload Script Tool" Height="900" Width="1080" Background="WhiteSmoke">
+        Title="Webload Script Tool" Height="800" Width="1080" Background="WhiteSmoke">
     <Grid Width="auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
-            <!--<RowDefinition Height="*"/>-->
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="0.25*"/>
         </Grid.RowDefinitions>
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>-->
-        <Menu Grid.Row="0" Grid.ColumnSpan="2" Background="WhiteSmoke">
+        <Menu Grid.Row="0"  Background="WhiteSmoke" x:Name="Grd_Main">
             <MenuItem Header="_File" Background="WhiteSmoke">
                 <MenuItem Header="_Import" Click="MenuItem_Import_Click"/>
+                <Separator/>
                 <MenuItem Header="E_xit" Click="MenuItem_Exit_CLick"/>
             </MenuItem>
         </Menu>
-        <ScrollViewer Grid.Column="0" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <ScrollViewer  Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <StackPanel x:Name="StkPnl_Main" Orientation="Horizontal" HorizontalAlignment="Left" Width="auto"/>
         </ScrollViewer>
+        <GridSplitter Grid.Row="2" Height="6" Background="DarkGray" HorizontalAlignment="Stretch" Visibility="Visible"/>
+        <Grid Grid.Row="3" Background="LightCoral" Visibility="Visible" x:Name="Grd_Delta">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel  x:Name="StkPnl_CtrlPanel" 
+                         Orientation="Horizontal" 
+                         HorizontalAlignment="Stretch" 
+                         VerticalAlignment="Center" 
+                         Height="28"
+                         Visibility="Visible">
+                <Button FontSize="10"  Content="Deltas By Script"/>
+                <Button FontSize="10" Height="auto" Content="Deltas By Trans"/>
+            </StackPanel>
+            <StackPanel  x:Name="StkPnl_ExportCtrls"
+                         Grid.Column="1"
+                         Orientation="Horizontal" 
+                         HorizontalAlignment="Right" 
+                         VerticalAlignment="Center" 
+                         Height="28"
+                         Visibility="Visible">
+                <Button FontSize="10" Height="auto" Content="Export CSV"/>
+            </StackPanel>
+            <ScrollViewer x:Name="ScrlVwr_Delta" 
+                          Grid.Row="1" Grid.ColumnSpan="2" 
+                          VerticalScrollBarVisibility="Auto" 
+                          HorizontalScrollBarVisibility="Auto" 
+                          Background="LightBlue" >
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Window>

@@ -35,7 +35,7 @@ namespace WMSA_Project.Repositories
                 return _collection;
             }
         }
-        public List<ScriptContainerControl> ScriptContainerList => _linkedList.ToList();
+        public List<ScriptContainerControl> List => _linkedList.ToList();
 
         #region handlers
 

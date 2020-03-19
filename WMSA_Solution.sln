@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.852
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMSA_Project", "WMSA_Project\WMSA_Project.csproj", "{F3178419-479C-4805-848E-E7CB6E07ACA0}"
 EndProject
@@ -10,6 +10,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMSA_DAL", "WMSA_DAL\WMSA_DAL.csproj", "{892991B7-3F57-439D-B3A8-F6720196B177}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMSA.Entities", "WMSA.Entities\WMSA.Entities.csproj", "{EB3FEBE5-82BD-46E5-B4AE-9D239AB858AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5D852D94-D525-43C9-B68C-309FDBAFE734}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
