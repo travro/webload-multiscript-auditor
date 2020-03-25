@@ -39,8 +39,9 @@
                          VerticalAlignment="Center" 
                          Height="28"
                          Visibility="Visible">
-                <Button FontSize="10"  Content="Deltas By Script"/>
-                <Button FontSize="10" Height="auto" Content="Deltas By Trans"/>
+                <!--Delta Buttons-->
+                <Button FontSize="10"  Content="Deltas By Script" Visibility="Collapsed"/>
+                <Button FontSize="10" Height="auto" Content="Deltas By Trans" Visibility="Collapsed"/>
             </StackPanel>
             <StackPanel  x:Name="StkPnl_ExportCtrls"
                          Grid.Column="1"

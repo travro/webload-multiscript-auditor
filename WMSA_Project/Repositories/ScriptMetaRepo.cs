@@ -5,6 +5,8 @@ using System.Linq;
 using System.Collections.Generic;
 using WMSA_DAL.Service;
 using IScript = WMSA.Entities.Interfaces.IScript;
+using WMSA_Project.Windows;
+using Microsoft.Win32;
 
 namespace WMSA_Project.Repositories
 {
@@ -55,12 +57,42 @@ namespace WMSA_Project.Repositories
             _testNameFilter = args.PropertyName;
         }
         public void ExportScript(IScript script)
-        {          
+        {
             try
             {
-                var scriptService = new ScriptService(script);
-                var exportedScript = scriptService.SaveScript();
-                _sessionUploads.Add(exportedScript);
+                var exprtScrptWin = new ExportScriptWindow();
+                exprtScrptWin.ExportStrategySelected += (object sender, RoutedEventArgs ars) =>
+                {
+                    var xsw = (sender as ExportScriptWindow);
+                    if (xsw.ExportStrategy == Models.ScriptExportStrategy.ToCSVFile)
+                    {
+                        var saveFileDialoge = new SaveFileDialog()
+                        {
+                            Title = "Save CSV File As",
+                            Filter = "CSV Files (*csv)| *.csv",                            
+                        };
+                        
+
+                        if(saveFileDialoge.ShowDialog() == true)
+                        {
+                            try
+                            {
+                                WMSA_Project.Utilities.CSVExporter.ExportScriptCSV(script, saveFileDialoge.FileName);
+                            }
+                            catch(System.Exception saveFileException)
+                            {
+                                MessageBox.Show(saveFileException.ToString());
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var scriptService = new ScriptService(script);
+                        var exportedScript = scriptService.SaveScript();
+                        _sessionUploads.Add(exportedScript);
+                    }
+                };
+                exprtScrptWin.ShowDialog();
             }
             catch (Exception ex)
             {

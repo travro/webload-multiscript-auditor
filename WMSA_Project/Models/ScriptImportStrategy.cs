@@ -2,7 +2,7 @@
 {
     public enum ScriptImportStrategy
     {
-        FromProjFile = 1,
-        FromDB = 2
+        FromProjFile = 0,
+        FromDB = 1
     }
 }
