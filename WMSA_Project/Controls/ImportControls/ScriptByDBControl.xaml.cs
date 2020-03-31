@@ -46,21 +46,6 @@ namespace WMSA_Project.Controls.ImportControls
             return ScriptFactory.GetScriptFromDB((Lst_Results.SelectedItem as IScript).Id);
         }
         #region handlers
-        //private void UpdateSelectionList(object sender, PropertyChangedEventArgs args)
-        //{
-        //    ScriptList = SciptMetaRepo.ThisRepo.Scripts;
-
-        //    if (DBQ_Ctrl.SAC_Test.SelectedValue != null && DBQ_Ctrl.SAC_Test.SelectedValue != DBQ_Ctrl.SAC_Test.DefaultValue)
-        //        ScriptList = ScriptList.Where(s => s.TestName == DBQ_Ctrl.SAC_Test.SelectedValue);
-
-        //    if (DBQ_Ctrl.SAC_Build.SelectedValue != null && DBQ_Ctrl.SAC_Build.SelectedValue != DBQ_Ctrl.SAC_Build.DefaultValue)
-        //        ScriptList = ScriptList.Where(s => s.BuildVersion == DBQ_Ctrl.SAC_Build.SelectedValue);
-
-        //    if (DBQ_Ctrl.SAC_Script.SelectedValue != null && DBQ_Ctrl.SAC_Script.SelectedValue != DBQ_Ctrl.SAC_Script.DefaultValue)
-        //        ScriptList = ScriptList.Where(s => s.Name == DBQ_Ctrl.SAC_Script.SelectedValue);
-
-        //    //Lst_Results.ItemsSource = ScriptList;
-        //}
 
         private void DBQ_Ctrl_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {

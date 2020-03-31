@@ -81,31 +81,6 @@ namespace WMSA_Project.Controls.ImportControls
         {
             SAC_Script.Clear();
             Dt_Pckr.SelectedDate = null;
-
-            //if (sender == SAC_Test)
-            //{
-            //    SAC_Build.Clear();
-            //}
-            //if (sender == SAC_Build)
-            //{
-            //    SAC_Script.Clear();
-            //}
-
-            //if (SAC_Test.IsValid() && SAC_Build.IsValid())
-            //{
-            //    SAC_Script.Clear();
-
-            //    if (_dbAvailable)
-            //    {
-            //        SciptMetaRepo.ThisRepo.BuildScriptCollection(SAC_Test.SelectedValue);
-            //    }
-            //    SAC_Script.IsEnabled = true;
-            //}
-            //else
-            //{
-            //    SAC_Script.IsEnabled = false;
-            //    Dt_Pckr.SelectedDate = null;
-            //}
         }
         private void UpdateScriptList(object sender, PropertyChangedEventArgs args)
         {
