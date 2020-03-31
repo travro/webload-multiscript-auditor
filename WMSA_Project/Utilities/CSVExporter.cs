@@ -20,7 +20,7 @@ namespace WMSA_Project.Utilities
 
                 foreach( var trans in script.Transactions)
                 {
-                    var record = $"{script.TestName},{script.Name},{script.BuildVersion},{script.RecordedDate},{trans.Name},{trans.Sleep},";
+                    var record = $"{script.TestName},{script.Name},{script.BuildVersion},{script.RecordedDate},{trans.Name},{trans.Sleep}";
 
                     foreach(var req in trans.Requests)
                     {
