@@ -52,7 +52,7 @@ namespace WMSA_Project.Controls.AttributeControls
             }
             private set
             {
-                _selectedValue = Txt_Blk.Text = value;
+                _selectedValue = Txt_Bx.Text = value;
                 if (PropertyChanged != null)
                 {
                     PropertyChanged(this, new PropertyChangedEventArgs(_selectedValue));
@@ -94,5 +94,10 @@ namespace WMSA_Project.Controls.AttributeControls
             SelectedValue = e.SelectedValue;
         }
         #endregion
+
+        private void Txt_Bx_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            SelectedValue = Txt_Bx.Text;
+        }
     }
 }

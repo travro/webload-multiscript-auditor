@@ -86,9 +86,9 @@ namespace WMSA_Project.Controls.ImportControls
         {
             ScriptList = SciptMetaRepo.ThisRepo.Scripts;
 
-            if (SAC_Test.IsValid()) ScriptList = ScriptList.Where(s => s.TestName == SAC_Test.SelectedValue);
-            if (SAC_Build.IsValid()) ScriptList = ScriptList.Where(s => s.BuildVersion == SAC_Build.SelectedValue);
-            if (SAC_Script.IsValid()) ScriptList = ScriptList.Where(s => s.Name == SAC_Script.SelectedValue);
+            if (SAC_Test.IsValid()) ScriptList = ScriptList.Where(s => s.TestName.Contains(SAC_Test.SelectedValue));
+            if (SAC_Build.IsValid()) ScriptList = ScriptList.Where(s => s.BuildVersion.Contains(SAC_Build.SelectedValue));
+            if (SAC_Script.IsValid()) ScriptList = ScriptList.Where(s => s.Name.Contains(SAC_Script.SelectedValue));
             OnCollectionChanged();
         }
         private void CheckAttributesReady(object sender, EventArgs args)

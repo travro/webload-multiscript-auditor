@@ -32,7 +32,7 @@
                 <uc:ScriptAttributesControl x:Name="SAC_Script" Attribute="ScriptName" />
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Center">
-                <TextBlock Text="Select the date the script was recorded: "/>
+                <TextBlock x:Name="Dt_Pckr_TxtBlk" Text="Select the date the script was recorded: "/>
                 <DatePicker x:Name="Dt_Pckr" Width="120" Margin="5,0,0,0"/>
             </WrapPanel>
         </StackPanel>
