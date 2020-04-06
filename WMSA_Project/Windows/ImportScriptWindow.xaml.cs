@@ -50,6 +50,7 @@ namespace WMSA_Project.Windows
         #region handlers
         private void Btn_Next_Click(object sender, RoutedEventArgs e)
         {
+
             if (_selectPathCtrl.Strategy == ScriptImportStrategy.FromProjFile)
             {
                 _scrptImprtCtrl = new ScriptByFileControl();
@@ -61,6 +62,7 @@ namespace WMSA_Project.Windows
             _scrptImprtCtrl.ScriptReady += ((object ctrlSender, ScriptReadyEventArgs args) => { Btn_Imprt.IsEnabled = true; });
             Content_Control.Content = _scrptImprtCtrl;
             Btn_Imprt.Visibility = Btn_Back.Visibility = Visibility.Visible;
+            Btn_Imprt.IsEnabled = false;
             Btn_Next.Visibility = Visibility.Collapsed;
         }
         private void Btn_Cancel_Click(object sender, RoutedEventArgs e)

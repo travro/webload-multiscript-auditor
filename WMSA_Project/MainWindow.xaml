@@ -49,7 +49,7 @@
                          HorizontalAlignment="Right" 
                          VerticalAlignment="Center" 
                          Height="28"
-                         Visibility="Visible">
+                         Visibility="Collapsed">
                 <Button FontSize="10" Height="auto" Content="Export CSV"/>
             </StackPanel>
             <ScrollViewer x:Name="ScrlVwr_Delta" 
