@@ -60,5 +60,10 @@ namespace WMSA_Project
         {
             Application.Current.Shutdown();
         }
+
+        private void Btn_ExportDelta_Click(object sender, RoutedEventArgs e)
+        {
+            WMSA_Project.Utilities.CSVExporter.ExportDeltasCSV(_table);
+        }
     }
 }

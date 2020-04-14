@@ -49,8 +49,8 @@
                          HorizontalAlignment="Right" 
                          VerticalAlignment="Center" 
                          Height="28"
-                         Visibility="Collapsed">
-                <Button FontSize="10" Height="auto" Content="Export CSV"/>
+                         Visibility="Visible">
+                <Button x:Name="Btn_ExportDelta" FontSize="10" Height="auto" Content="Export CSV" Click="Btn_ExportDelta_Click"/>
             </StackPanel>
             <ScrollViewer x:Name="ScrlVwr_Delta" 
                           Grid.Row="1" Grid.ColumnSpan="2" 

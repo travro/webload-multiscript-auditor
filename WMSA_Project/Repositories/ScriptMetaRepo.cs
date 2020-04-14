@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using WMSA_DAL.Service;
 using IScript = WMSA.Entities.Interfaces.IScript;
 using WMSA_Project.Windows;
-using Microsoft.Win32;
 
 namespace WMSA_Project.Repositories
 {
@@ -66,23 +65,13 @@ namespace WMSA_Project.Repositories
                     var xsw = (sender as ExportScriptWindow);
                     if (xsw.ExportStrategy == Models.ScriptExportStrategy.ToCSVFile)
                     {
-                        var saveFileDialoge = new SaveFileDialog()
+                        try
                         {
-                            Title = "Save CSV File As",
-                            Filter = "CSV Files (*csv)| *.csv",                            
-                        };
-                        
-
-                        if(saveFileDialoge.ShowDialog() == true)
+                            WMSA_Project.Utilities.CSVExporter.ExportScriptCSV(script);
+                        }
+                        catch (System.Exception saveFileException)
                         {
-                            try
-                            {
-                                WMSA_Project.Utilities.CSVExporter.ExportScriptCSV(script, saveFileDialoge.FileName);
-                            }
-                            catch(System.Exception saveFileException)
-                            {
-                                MessageBox.Show(saveFileException.ToString());
-                            }
+                            MessageBox.Show(saveFileException.ToString());
                         }
                     }
                     else
@@ -92,6 +81,7 @@ namespace WMSA_Project.Repositories
                         _sessionUploads.Add(exportedScript);
                     }
                 };
+
                 exprtScrptWin.ShowDialog();
             }
             catch (Exception ex)
