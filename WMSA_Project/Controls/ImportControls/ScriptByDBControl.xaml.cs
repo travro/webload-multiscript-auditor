@@ -29,13 +29,12 @@ namespace WMSA_Project.Controls.ImportControls
     {
         public event EventHandler<ScriptReadyEventArgs> ScriptReady;
 
-
         public ScriptByDBControl()
         {
             InitializeComponent();
             DataContext = this;
             DBQ_Ctrl.AddButtonsVisible = false;
-            DBQ_Ctrl.Dt_Pckr.Visibility = DBQ_Ctrl.Dt_Pckr_TxtBlk.Visibility = Visibility.Hidden;
+            DBQ_Ctrl.DatePickerVisible = false;
             DBQ_Ctrl.CollectionChanged += DBQ_Ctrl_CollectionChanged;
             Lst_Results.SelectionChanged += Lst_Results_SelectionChanged;
         }

@@ -27,17 +27,13 @@ namespace WMSA_Project.Controls.ImportControls
     /// </summary>
     public partial class ScriptByFileControl : UserControl, IScriptImportControl
     {
-        string _scriptTestName;
-        string _scriptBuildVers;
-        string _scriptScriptName;
-        DateTime _scriptDate;
         bool _attributesReady = false;
 
         public ScriptByFileControl()
         {
             InitializeComponent();
             DBQ_Ctrl.AddButtonsVisible = false;
-            DBQ_Ctrl.AttributesReady += OnAttributesReady;
+            //DBQ_Ctrl.AttributesReady += OnAttributesReady;
         }
 
         public event EventHandler<ScriptReadyEventArgs> ScriptReady;
@@ -56,14 +52,10 @@ namespace WMSA_Project.Controls.ImportControls
         public Script GetScript()
         {
             var script = ScriptFactory.GetScriptFromFilePath(FilePath);
-
-            if(_scriptTestName != null && _scriptBuildVers != null && _scriptScriptName != null && _scriptDate != null)
-            {
-                script.TestName = _scriptTestName;
-                script.BuildVersion = _scriptBuildVers;
-                script.Name = _scriptScriptName;
-                script.RecordedDate = _scriptDate;
-            }
+            script.TestName = DBQ_Ctrl.TestValue;
+            script.BuildVersion = DBQ_Ctrl.BuildValue;
+            script.Name = (DBQ_Ctrl.ScriptNameValue != null)?  DBQ_Ctrl.ScriptNameValue: script.Name;
+            script.RecordedDate = DBQ_Ctrl.DateValue;
             return script;
         }
 
@@ -92,15 +84,6 @@ namespace WMSA_Project.Controls.ImportControls
         }
         #endregion
         #region helpermethods
-        private void OnAttributesReady(object sender, AttributesReadyEventArgs args)
-        {
-            _scriptTestName = args.SelectedTestName;
-            _scriptBuildVers = args.SelectedBuildVersion;
-            _scriptScriptName = args.SelectedScriptName;
-            _scriptDate = args.SelectedDate;
-
-            AttributesReady = true;
-        }
         private void OnScriptReady()
         {
             if (FilePath != null && FilePath != "" /*&& AttributesReady*/)

@@ -21,19 +21,19 @@
                        TextWrapping="Wrap"/>
             <WrapPanel HorizontalAlignment="Center">
                 <TextBlock Text="Select test group: " Width="160"  />
-                <uc:ScriptAttributesControl x:Name="SAC_Test" Attribute="TestName" />
+                <uc:ScriptAttributesControl x:Name="SAC_Test" x:FieldModifier="private" Attribute="TestName" />
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Center">
                 <TextBlock Text="Select the build: " Width="160"  />
-                <uc:ScriptAttributesControl x:Name="SAC_Build" Attribute="BuildName" />
+                <uc:ScriptAttributesControl x:Name="SAC_Build" x:FieldModifier="private" Attribute="BuildName" />
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Center">
                 <TextBlock Text="Select script from test group: " Width="160" />
-                <uc:ScriptAttributesControl x:Name="SAC_Script" Attribute="ScriptName" />
+                <uc:ScriptAttributesControl x:Name="SAC_Script" x:FieldModifier="private" Attribute="ScriptName" />
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Center">
-                <TextBlock x:Name="Dt_Pckr_TxtBlk" Text="Select the date the script was recorded: "/>
-                <DatePicker x:Name="Dt_Pckr" Width="120" Margin="5,0,0,0"/>
+                <TextBlock x:Name="Dt_Pckr_TxtBlk" x:FieldModifier="private" Text="Select the date the script was recorded: "/>
+                <DatePicker x:Name="Dt_Pckr" x:FieldModifier="private" Width="120" Margin="5,0,0,0"/>
             </WrapPanel>
         </StackPanel>
     </GroupBox>

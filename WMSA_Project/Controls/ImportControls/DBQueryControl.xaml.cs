@@ -40,20 +40,28 @@ namespace WMSA_Project.Controls.ImportControls
             DataContext = this;
             SAC_Test.PropertyChanged += ClearScriptandDate;
             SAC_Build.PropertyChanged += ClearScriptandDate;
-            SAC_Script.PropertyChanged += CheckAttributesReady;
-            Dt_Pckr.SelectedDateChanged += CheckAttributesReady;
             CheckDBStatus();
         }
 
-        public event EventHandler<AttributesReadyEventArgs> AttributesReady;
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
+        public string TestValue => SAC_Test.SelectedValue;
+        public string BuildValue => SAC_Build.SelectedValue;
+        public string ScriptNameValue => SAC_Script.SelectedValue;
+        public DateTime DateValue => Dt_Pckr.SelectedDate ?? DateTime.Now;
         public IEnumerable<IScript> ScriptList { get; private set; }
         public bool AddButtonsVisible
         {
             set
             {
                 SAC_Test.Btn_Add.Visibility = SAC_Build.Btn_Add.Visibility = SAC_Script.Btn_Add.Visibility = (value) ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+        public bool DatePickerVisible
+        {
+            set
+            {
+                Dt_Pckr.Visibility = Dt_Pckr_TxtBlk.Visibility = (value) ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 
@@ -91,36 +99,10 @@ namespace WMSA_Project.Controls.ImportControls
             if (SAC_Script.IsValid()) ScriptList = ScriptList.Where(s => s.Name.Contains(SAC_Script.SelectedValue));
             OnCollectionChanged();
         }
-        private void CheckAttributesReady(object sender, EventArgs args)
-        {
-            if (SAC_Test.IsValid() && SAC_Build.IsValid() && SAC_Script.IsValid() && Dt_Pckr.SelectedDate != null)
-            {
-                OnAttributesReady();
-            }
-        }
         private void OnCollectionChanged()
         {
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
-        
-        private void OnAttributesReady()
-        {
-            AttributesReady?.Invoke(this, new AttributesReadyEventArgs()
-            {
-                SelectedTestName = SAC_Test.SelectedValue,
-                SelectedBuildVersion = SAC_Build.SelectedValue,
-                SelectedScriptName = SAC_Script.SelectedValue,
-                SelectedDate = Dt_Pckr.SelectedDate.Value
-            });
-        }
         #endregion
-    }
-
-    public class AttributesReadyEventArgs : EventArgs
-    {
-        public string SelectedTestName { get; set; }
-        public string SelectedBuildVersion { get; set; }
-        public string SelectedScriptName { get; set; }
-        public DateTime SelectedDate { get; set; }
     }
 }
