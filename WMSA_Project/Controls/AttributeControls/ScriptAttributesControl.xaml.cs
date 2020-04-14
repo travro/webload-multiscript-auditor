@@ -52,11 +52,8 @@ namespace WMSA_Project.Controls.AttributeControls
             }
             private set
             {
-                _selectedValue = Txt_Bx.Text = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(_selectedValue));
-                }
+                _selectedValue = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(_selectedValue));
             }
         }
 
@@ -91,7 +88,7 @@ namespace WMSA_Project.Controls.AttributeControls
         #region helpermethods 
         private void UpdateSelectedValue(object sender, ClosedWithAttributeEventArgs e)
         {
-            SelectedValue = e.SelectedValue;
+            Txt_Bx.Text = e.SelectedValue;
         }
         #endregion
 

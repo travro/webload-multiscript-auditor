@@ -12,7 +12,7 @@
         <TextBox Grid.Column="0" x:Name="Txt_Bx" MinWidth="230"
                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="AliceBlue"
                    Style="{StaticResource textBlock}"
-                 SelectionChanged="Txt_Bx_SelectionChanged"
+                 TextChanged="Txt_Bx_SelectionChanged"
                  />
         <Button   x:Name="Btn_Add" Content="Add" Click="Add_Button_Click" Visibility="Collapsed"/>
         <Button   x:Name="Btn_Select" Content="Select from DB" Click="Select_Button_Click" IsEnabled="False"/>
