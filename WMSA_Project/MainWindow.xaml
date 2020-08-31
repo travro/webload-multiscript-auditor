@@ -21,7 +21,7 @@
             </MenuItem>
         </Menu>
         <ScrollViewer  Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <StackPanel x:Name="StkPnl_Main" Orientation="Horizontal" HorizontalAlignment="Left" Width="auto"/>
+            <StackPanel x:Name="StkPnl_Main" Orientation="Horizontal" HorizontalAlignment="Center" Width="auto"/>
         </ScrollViewer>
         <GridSplitter Grid.Row="2" Height="6" Background="DarkGray" HorizontalAlignment="Stretch" Visibility="Visible"/>
         <Grid Grid.Row="3" Background="LightCoral" Visibility="Visible" x:Name="Grd_Delta">
