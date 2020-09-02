@@ -30,7 +30,7 @@ namespace WMSA_Project.Controls
         public ScriptControl(Script script)
         {
             InitializeComponent();
-            Grd_Attributes.Background = ColorDispenser.Dispenser.GetNextColor();
+            Brdr_Meta.BorderBrush = ColorDispenser.Dispenser.GetNextColor();
             TxtBlck_Name.Text = $"{script.TestName}";
             TxtBlck_Build.Text = $"{script.BuildVersion}";
             TxtBlck_Script.Text = $"{script.Name}";
@@ -90,13 +90,13 @@ namespace WMSA_Project.Controls
         }
         private void Btn_AllExpndrs_Click(object sender, RoutedEventArgs e)
         {
-            if (Btn_AllExpndrs.Content == "\u02c5")
+            if (Btn_AllExpndrs.Content == "\u02c5\u02c5\u02c5")
             {
                 foreach (Expander expander in Stack_Transactions.Children)
                 {
                     expander.IsExpanded = true;
                 }
-                Btn_AllExpndrs.Content = "\u02c4";
+                Btn_AllExpndrs.Content = "\u02c4\u02c4\u02c4";
             }
             else
             {
@@ -104,7 +104,7 @@ namespace WMSA_Project.Controls
                 {
                     expander.IsExpanded = false;
                 }
-                Btn_AllExpndrs.Content = "\u02c5";
+                Btn_AllExpndrs.Content = "\u02c5\u02c5\u02c5";
             }
         }
         private void ClearTotals(object sender, ScriptResetEventArgs args)

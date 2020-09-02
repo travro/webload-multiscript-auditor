@@ -4,44 +4,56 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WMSA_Project.Controls"
-             mc:Ignorable="d"  MaxWidth="600">
+             mc:Ignorable="d"  Width="640">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border Margin="2,4,4,2" BorderBrush="DarkGray" BorderThickness="1.5">
-            <Grid Grid.Row="0" x:Name="Grd_Attributes">
+        <Border Margin="2,4,4,2" BorderBrush="DarkGray" BorderThickness="1.5" x:Name="Brdr_Meta">
+            <Grid Grid.Row="0" x:Name="Grd_Attributes" Background="#293241">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height=".4*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width=".9*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.Resources>
                     <Style TargetType="TextBlock">
                         <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="FontSize" Value="13"/>
-                        <Setter Property="Margin" Value="5,0,0,0"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="Margin" Value="4,0,2,0"/>
                     </Style>
                 </Grid.Resources>
-                <TextBlock x:Name="TxtBlck_Name" Grid.Row="0" Grid.Column="0">ContinuousIntegration</TextBlock>
-                <TextBlock x:Name="TxtBlck_Script" Grid.Row="0" Grid.Column="1" Margin="5,0,4.53,0">03_Organization_Method</TextBlock>
-                <TextBlock x:Name="TxtBlck_Build" Grid.Row="0" Grid.Column="2" Margin="5.47,0,4.53,0">19.2.0.0-288</TextBlock>
-                <TextBlock x:Name="TxtBlck_Date" Grid.Row="0" Grid.Column="3" Margin="5.47,0,4.53,0">8/18/2019</TextBlock>
-                <Button x:Name="Btn_AllExpndrs" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" 
-                        Height="20" Width="20" Background="WhiteSmoke" Margin="2,0,0,2" ToolTip="Expand/Collapse All"
-                        Click="Btn_AllExpndrs_Click" Content="&#709;">
+                <TextBlock  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="2,0,4,0">Test Group:</TextBlock>
+                <TextBlock  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="2,0,4,0">Script:</TextBlock>
+                <TextBlock  Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="2,0,4,0">Build:</TextBlock>
+                <TextBlock  Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Margin="2,0,4,0">Date Recorded:</TextBlock>
+                <TextBlock x:Name="TxtBlck_Name" Grid.Row="0" Grid.Column="1">ContinuousIntegration</TextBlock>
+                <TextBlock x:Name="TxtBlck_Script" Grid.Row="1" Grid.Column="1" >03_Organization_Method</TextBlock>
+                <TextBlock x:Name="TxtBlck_Build" Grid.Row="2" Grid.Column="1" >19.2.0.0-288</TextBlock>
+                <TextBlock x:Name="TxtBlck_Date" Grid.Row="3" Grid.Column="1" >8/18/2019</TextBlock>
+                <Button x:Name="Btn_AllExpndrs" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="4"
+                         Background="WhiteSmoke"  
+                        ToolTip="Expand/Collapse All" 
+                        Width="auto" Height="12"
+                        Click="Btn_AllExpndrs_Click" 
+                        Content="&#709;&#709;&#709;" 
+                        FontSize="6"  ClickMode="Release">
                     <!--&#708;-->
                 </Button>
-                <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Background="LightGray">
-                    <StackPanel Orientation="Horizontal">
+                <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Grid.ColumnSpan="2" 
+                        Background="#98c1d9">
+                    <StackPanel Orientation="Vertical">
                         <TextBlock HorizontalAlignment="Stretch" 
-                           VerticalAlignment="Center" Foreground="Black" Margin="0">Total Changes: </TextBlock>
+                           VerticalAlignment="Center" Foreground="White" >Total Changes:</TextBlock>
                         <TextBlock x:Name="TxtBlck_TotalAdds" Foreground="Green" VerticalAlignment="Center"/>
                         <TextBlock x:Name="TxtBlck_TotalDrops" Foreground="Red" VerticalAlignment="Center"/>
                         <TextBlock x:Name="TxtBlck_PrevComp" Foreground="Black" VerticalAlignment="Center"/>
