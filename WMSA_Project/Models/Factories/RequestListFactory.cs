@@ -21,7 +21,7 @@ namespace WMSA_Project.Models.Factories
             new[]{ "[TenantKey]", "contentengine/TCAPI/", "/"},
             new[]{ "[UserId]", "gamification/summaries/", null},
             new[]{ "[CommunityId]", "/communities/", null},
-            new[]{ "[DiscussionId]", "api/social/discuss", null},
+            new[]{ "[DiscussionId]", "api/social/discuss/", null},
         };
         public static List<Request> GetRequestsFromXElement(XElement xElement, bool addNonVisibles = true)
         {
@@ -90,7 +90,6 @@ namespace WMSA_Project.Models.Factories
             if (line.StartsWith(" GET")) return RequestVerb.GET;
             return RequestVerb.GET;
         }
-
         private static string ParseRequestUrl(XElement xElement)
         {
             string line = xElement.Attribute("Text").Value;
@@ -102,6 +101,7 @@ namespace WMSA_Project.Models.Factories
             int paramIndex = line.IndexOfAny(new[] { '?', '%', ' ' }, domainLastIndex);
             string filteredUrl = line.Substring(domainLastIndex, paramIndex - domainLastIndex);
 
+            //filter dynamic values
             foreach (string[] rule in _boundRules)
             {
                 if (!filteredUrl.Contains(rule[1])) continue;
@@ -112,22 +112,26 @@ namespace WMSA_Project.Models.Factories
                 if (lBIndex >= filteredUrl.Length - 1) break;
 
                 int rBIndex; 
-                string originalValue;
+                string targetValue;
 
                 if(rule[2] != null)
                 {
                     rBIndex = filteredUrl.IndexOf(rule[2], lBIndex);
-                    originalValue = filteredUrl.Substring(lBIndex, rBIndex - lBIndex);
+                    targetValue = filteredUrl.Substring(lBIndex, rBIndex - lBIndex);
                 }
                 else
                 {
-                    originalValue = filteredUrl.Substring(lBIndex);
+                    targetValue = filteredUrl.Substring(lBIndex);
+                    if (targetValue.Contains("/"))
+                    {
+                        int slashIndex = targetValue.IndexOf('/');
+                        targetValue = targetValue.Substring(0, slashIndex);
+                    }
                 }
                 var strBuilder = new StringBuilder(filteredUrl);
 
-                strBuilder.Replace(originalValue, rule[0]);
+                strBuilder.Replace(targetValue, rule[0]);
                 filteredUrl = strBuilder.ToString();
-                break;
             }
 
             //truncate ending front slash
