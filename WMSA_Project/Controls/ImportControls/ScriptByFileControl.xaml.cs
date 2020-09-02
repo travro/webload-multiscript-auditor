@@ -54,7 +54,7 @@ namespace WMSA_Project.Controls.ImportControls
             var script = ScriptFactory.GetScriptFromFilePath(FilePath);
             script.TestName = DBQ_Ctrl.TestValue;
             script.BuildVersion = DBQ_Ctrl.BuildValue;
-            script.Name = (DBQ_Ctrl.ScriptNameValue != null)?  DBQ_Ctrl.ScriptNameValue: script.Name;
+            script.Name = (DBQ_Ctrl.ScriptNameValue != null && DBQ_Ctrl.ScriptNameValue != "")?  DBQ_Ctrl.ScriptNameValue: script.Name;
             script.RecordedDate = DBQ_Ctrl.DateValue;
             return script;
         }
