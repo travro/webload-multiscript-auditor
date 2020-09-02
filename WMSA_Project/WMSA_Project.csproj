@@ -73,6 +73,15 @@
     <Compile Include="Controls\AttributeControls\ScriptAttributesControl.xaml.cs">
       <DependentUpon>ScriptAttributesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ContentControls\ScriptViewControl.xaml.cs">
+      <DependentUpon>ScriptViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ContentControls\SutViewControl.xaml.cs">
+      <DependentUpon>SutViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ContentControls\TableViewControl.xaml.cs">
+      <DependentUpon>TableViewControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DeltaDatagridControl.xaml.cs">
       <DependentUpon>DeltaDatagridControl.xaml</DependentUpon>
     </Compile>
@@ -110,6 +119,7 @@
     <Compile Include="Models\Factories\TransactionListFactory.cs" />
     <Compile Include="Models\ScriptAttribute.cs" />
     <Compile Include="Utilities\ColorDispenser.cs" />
+    <Compile Include="Utilities\ContentLoader.cs" />
     <Compile Include="Utilities\CSVExporter.cs" />
     <Compile Include="Utilities\Factories\StackPanelFactory.cs" />
     <Compile Include="Utilities\ScriptTransactionsComparer.cs" />
@@ -127,6 +137,18 @@
     </Compile>
     <Compile Include="Windows\Interfaces\IScriptAttributeWindow.cs" />
     <Page Include="Controls\AttributeControls\ScriptAttributesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ContentControls\ScriptViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ContentControls\SutViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ContentControls\TableViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WMSA_Project.Controls;
+using WMSA_Project.Utilities;
 using WMSA_Project.Repositories;
 
 namespace WMSA_Project
@@ -23,33 +23,22 @@ namespace WMSA_Project
     /// </summary>
     public partial class MainWindow : Window
     {
+        ContentLoader _loader;
         public MainWindow()
         {
             InitializeComponent();
+            _loader = new ContentLoader();
+            ScriptCollectionContainer.ThisContainer.CollectionChanged += (object sender, NotifyCollectionChangedEventArgs args) => CntntCtrl_Main.Content =  _loader.LoadScriptView();
 
-            foreach (var scc in ScriptCollectionContainer.ThisContainer.List)
-            {
-                StkPnl_Main.Children.Add(scc);
-            }
-
-            if (ScriptCollectionContainer.ThisContainer != null)
-            {
-                ScriptCollectionContainer.ThisContainer.CollectionChanged += UpdateList;
-                ScriptCollectionContainer.ThisContainer.CollectionChanged += UpdateDeltaGrid;
-            }
+            //if (ScriptCollectionContainer.ThisContainer != null)
+            //{
+            //    ScriptCollectionContainer.ThisContainer.CollectionChanged += UpdateList;
+            //    //ScriptCollectionContainer.ThisContainer.CollectionChanged += UpdateDeltaGrid;
+            //}
         }
 
         #region handlers
-        private void UpdateList(object sender, NotifyCollectionChangedEventArgs args)
-        {
-            StkPnl_Main.Children.Clear();
 
-            foreach (var scc in ScriptCollectionContainer.ThisContainer.List)
-            {
-                StkPnl_Main.Children.Add(scc);                
-            }
-        }
-        #endregion
 
         private void MenuItem_Import_Click(object sender, RoutedEventArgs e)
         {
@@ -61,9 +50,21 @@ namespace WMSA_Project
             Application.Current.Shutdown();
         }
 
-        private void Btn_ExportDelta_Click(object sender, RoutedEventArgs e)
+
+        private void Btn_ScrptView_Click(object sender, RoutedEventArgs e)
         {
-            WMSA_Project.Utilities.CSVExporter.ExportDeltasCSV(_table);
+            CntntCtrl_Main.Content = _loader.LoadScriptView();
         }
+
+        private void Btn_TblView_Click(object sender, RoutedEventArgs e)
+        {
+            CntntCtrl_Main.Content = _loader.LoadTableView();
+        }
+
+        private void Btn_SutView_Click(object sender, RoutedEventArgs e)
+        {
+            CntntCtrl_Main.Content = _loader.LoadTableView();
+        }
+        #endregion
     }
 }

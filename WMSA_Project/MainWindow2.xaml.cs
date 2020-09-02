@@ -16,11 +16,11 @@ namespace WMSA_Project
                 var deltaDatagridCtrl = new DeltaDatagridControl();
                 _table = deltaDatagridCtrl.BuildDeltaByScriptTable();
 
-                ScrlVwr_Delta.Content = deltaDatagridCtrl;
+                //ScrlVwr_Delta.Content = deltaDatagridCtrl;
             }
             else
             {
-                ScrlVwr_Delta.Content = null;
+               // ScrlVwr_Delta.Content = null;
             }
         }
 
