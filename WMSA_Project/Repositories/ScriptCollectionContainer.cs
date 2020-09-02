@@ -55,7 +55,7 @@ namespace WMSA_Project.Repositories
                     if (caller.Container != null)
                     {
                         caller.Container = scrptCtrl;
-                        OnNodeContainerChanged();
+                        OnCollectionChanged();
                     }
                     else
                     {
