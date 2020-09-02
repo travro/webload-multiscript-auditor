@@ -40,12 +40,6 @@
             <Button x:Name="Btn_TblView" Grid.Row="1" Content="Table" Click="Btn_TblView_Click"/>
             <Button x:Name="Btn_SutView" Grid.Row="2" Content="SUTs" Click="Btn_SutView_Click"/>
         </Grid>
-        <!--<ScrollViewer  Grid.Row="2" Grid.Column="1" VerticalScrollBarVisibility="Auto" 
-                       HorizontalScrollBarVisibility="Auto" Background="#edf2f4">
-            <StackPanel x:Name="StkPnl_Main" Orientation="Horizontal" HorizontalAlignment="Left" Width="auto" />
-        </ScrollViewer>-->
-        <ContentControl Grid.Row="2" Grid.Column="1" x:Name="CntntCtrl_Main">
-            
-        </ContentControl>
+        <ContentControl Grid.Row="2" Grid.Column="1" x:Name="CntntCtrl_Main"/>
     </Grid>
 </Window>

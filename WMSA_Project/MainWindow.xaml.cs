@@ -29,12 +29,6 @@ namespace WMSA_Project
             InitializeComponent();
             _loader = new ContentLoader();
             ScriptCollectionContainer.ThisContainer.CollectionChanged += (object sender, NotifyCollectionChangedEventArgs args) => CntntCtrl_Main.Content =  _loader.LoadScriptView();
-
-            //if (ScriptCollectionContainer.ThisContainer != null)
-            //{
-            //    ScriptCollectionContainer.ThisContainer.CollectionChanged += UpdateList;
-            //    //ScriptCollectionContainer.ThisContainer.CollectionChanged += UpdateDeltaGrid;
-            //}
         }
 
         #region handlers
@@ -63,7 +57,7 @@ namespace WMSA_Project
 
         private void Btn_SutView_Click(object sender, RoutedEventArgs e)
         {
-            CntntCtrl_Main.Content = _loader.LoadTableView();
+            CntntCtrl_Main.Content = _loader.LoadSUTView();
         }
         #endregion
     }
