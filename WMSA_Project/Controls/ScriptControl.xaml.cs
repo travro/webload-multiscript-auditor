@@ -107,6 +107,7 @@ namespace WMSA_Project.Controls
                 Btn_AllExpndrs.Content = "\u02c5\u02c5\u02c5";
             }
         }
+
         private void ClearTotals(object sender, ScriptResetEventArgs args)
         {
             TxtBlck_TotalAdds.Text = TxtBlck_TotalDrops.Text = "";

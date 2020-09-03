@@ -43,7 +43,7 @@ namespace WMSA_Project.Models.Factories
 
         public static Script GetComparativeScriptFromControls(ScriptControl baseControl)
         {
-            baseControl.Script.ClearUnmatchedRequests();
+            baseControl.Script.ClearRequestsDropped();
             int adds = 0;
             int drops = 0;
             baseControl.Script.Transactions.ForEach((t) =>
@@ -55,7 +55,7 @@ namespace WMSA_Project.Models.Factories
                     Transaction prevTransaction = baseControl.PrevComparison.Script.Transactions[thisTransIndex];
                     ScriptTransactionsComparer.MatchRequests(t, prevTransaction);
                     adds += t.Requests.Where(r => r.Matched == false).Count();
-                    drops += t.UnmatchedRequests.Count();
+                    drops += t.RequestsDropped.Count();
 
                 }
             });

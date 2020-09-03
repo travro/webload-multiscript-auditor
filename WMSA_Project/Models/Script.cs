@@ -38,9 +38,9 @@ namespace WMSA_Project.Models
         }
         public bool Contains(Transaction t) => Transactions.Exists(element => element.Name == t.Name);
         public bool Contains(string s) => Transactions.Exists(element => element.Name == s);
-        public void ClearUnmatchedRequests()
+        public void ClearRequestsDropped()
         {
-            Transactions.ForEach((t) => t.UnmatchedRequests.Clear());
+            Transactions.ForEach((t) => t.RequestsDropped.Clear());
             ScriptReset?.Invoke(this, new ScriptResetEventArgs() { Message = "This Script Reset" });
         } 
     }

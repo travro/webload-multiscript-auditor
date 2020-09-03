@@ -32,8 +32,6 @@ namespace WMSA_Project
         }
 
         #region handlers
-
-
         private void MenuItem_Import_Click(object sender, RoutedEventArgs e)
         {
             ScriptCollectionContainer.ThisContainer.ImportScriptToEndOfList();
@@ -43,7 +41,6 @@ namespace WMSA_Project
         {
             Application.Current.Shutdown();
         }
-
 
         private void Btn_ScrptView_Click(object sender, RoutedEventArgs e)
         {

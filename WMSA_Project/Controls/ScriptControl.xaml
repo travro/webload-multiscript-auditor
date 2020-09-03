@@ -71,13 +71,6 @@
                     <EventSetter Event="Collapsed" Handler="OnStackTransExpanderStateChange"/>
                     <EventSetter Event="Expanded" Handler="OnStackTransExpanderStateChange"/>
                 </Style>
-                <Style TargetType="TreeView">
-                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                </Style>
-                <Style TargetType="TreeViewItem">
-                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                    <Setter Property="ToolTip" Value="{Binding Header}"/>
-                </Style>
             </StackPanel.Resources>
         </StackPanel>
     </Grid>
