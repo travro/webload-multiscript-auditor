@@ -25,13 +25,13 @@ namespace WMSA_Project.Utilities
         public UserControl LoadTableView()
         {
             if (_tableViewControl == null) { _tableViewControl = new TableViewControl(); }
-            return _tableViewControl ?? new TableViewControl();
+            return _tableViewControl;
         }
 
         public UserControl LoadSUTView()
         {
             if (_sutViewControl == null) { _sutViewControl = new SutViewControl(); }
-            return _sutViewControl ?? new SutViewControl();
+            return _sutViewControl;
         }
 
     }
