@@ -35,6 +35,7 @@ namespace WMSA_Project.Controls.ContentControls
             if (ScriptCollectionContainer.ThisContainer != null)
             {
                 ScriptCollectionContainer.ThisContainer.CollectionChanged += UpdateDeltaGrid;
+                UpdateDeltaGrid(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset) { });
             }
         }
 
@@ -101,9 +102,9 @@ namespace WMSA_Project.Controls.ContentControls
                         }
                     }
 
-                    if (transaction.UnmatchedRequests != null && transaction.UnmatchedRequests.Count() >= 1)
+                    if (transaction.RequestsDropped != null && transaction.RequestsDropped.Count() >= 1)
                     {
-                        foreach (var req in transaction.UnmatchedRequests)
+                        foreach (var req in transaction.RequestsDropped)
                         {
                             DataRow row = table.NewRow();
                             row["Script"] = transaction.Script.Name;
