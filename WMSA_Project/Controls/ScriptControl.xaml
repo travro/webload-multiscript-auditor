@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WMSA_Project.Controls"
              xmlns:models="clr-namespace:WMSA_Project.Models"
-             mc:Ignorable="d"  Width="640">
+             mc:Ignorable="d"  Width="540">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -18,12 +18,11 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height=".4*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.Resources>
@@ -51,20 +50,20 @@
                     <!--&#708;-->
                 </Button>
                 <Border BorderThickness="1" BorderBrush="Gray" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Grid.ColumnSpan="2" 
-                        Background="#98c1d9">
+                        >
                     <StackPanel Orientation="Vertical">
                         <TextBlock HorizontalAlignment="Stretch" 
                            VerticalAlignment="Center" Foreground="White" >Total Changes:</TextBlock>
                         <TextBlock x:Name="TxtBlck_TotalAdds" Foreground="Green" VerticalAlignment="Center"/>
                         <TextBlock x:Name="TxtBlck_TotalDrops" Foreground="Red" VerticalAlignment="Center"/>
-                        <TextBlock x:Name="TxtBlck_PrevComp" Foreground="Black" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="TxtBlck_PrevComp" Foreground="White" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Border>
 
             </Grid>
         </Border>
         <StackPanel Grid.Row="1" x:Name="Stack_Transactions" Margin="2,2,2,2">
-            <StackPanel.Resources>
+            <!--<StackPanel.Resources>
                 <Style TargetType="Expander">
                     <Setter Property="IsExpanded" Value="False"/>
                     <Setter Property="Background" Value="LightGray"/>
@@ -72,7 +71,7 @@
                     <EventSetter Event="Collapsed" Handler="OnStackTransExpanderStateChange"/>
                     <EventSetter Event="Expanded" Handler="OnStackTransExpanderStateChange"/>
                 </Style>
-            </StackPanel.Resources>
+            </StackPanel.Resources>-->
         </StackPanel>
     </Grid>
 </UserControl>

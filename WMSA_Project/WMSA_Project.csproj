@@ -101,6 +101,9 @@
       <DependentUpon>SelectScriptPathControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Interfaces\IScriptImportControl.cs" />
+    <Compile Include="Controls\TransactionBlockControl.xaml.cs">
+      <DependentUpon>TransactionBlockControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow2.xaml.cs" />
     <Compile Include="Models\DeltaMode.cs" />
     <Compile Include="Models\ScriptExportStrategy.cs" />
@@ -170,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ImportControls\SelectScriptPathControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TransactionBlockControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

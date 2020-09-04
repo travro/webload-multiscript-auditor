@@ -38,7 +38,7 @@ namespace WMSA_Project.Controls
             Script = script;
         }
 
-        public EventHandler<RoutedEventArgs> StackTransExpanderStateChange;
+        public EventHandler<RoutedEventArgs> TransBlockClicked;
 
         public Script Script
         {
@@ -76,33 +76,27 @@ namespace WMSA_Project.Controls
             }
         }
         public SolidColorBrush LabelColor { get; set; }
-        public void OnStackTransExpanderStateChange(object sender, RoutedEventArgs args)
+        public void OnTransBlockClicked(object sender, RoutedEventArgs args)
         {
-            StackTransExpanderStateChange?.Invoke(this, args);
         }
         public void ToggleExpander(object sender, RoutedEventArgs args)
         {
-            var callingExpndr = (args.Source as Expander);
-            int callingExpndrIdx = (sender as ScriptControl).Stack_Transactions.Children.IndexOf(callingExpndr);
-
-            (this.Stack_Transactions.Children[callingExpndrIdx] as Expander).IsExpanded = callingExpndr.IsExpanded;
-
         }
         private void Btn_AllExpndrs_Click(object sender, RoutedEventArgs e)
         {
             if (Btn_AllExpndrs.Content == "\u02c5\u02c5\u02c5")
             {
-                foreach (Expander expander in Stack_Transactions.Children)
+                foreach (TransactionBlockControl  transBlock in Stack_Transactions.Children)
                 {
-                    expander.IsExpanded = true;
+                    transBlock.Expndr_Trans.IsExpanded = true;
                 }
                 Btn_AllExpndrs.Content = "\u02c4\u02c4\u02c4";
             }
             else
             {
-                foreach (Expander expander in Stack_Transactions.Children)
+                foreach ( TransactionBlockControl transBlock in Stack_Transactions.Children)
                 {
-                    expander.IsExpanded = false;
+                    transBlock.Expndr_Trans.IsExpanded = false;
                 }
                 Btn_AllExpndrs.Content = "\u02c5\u02c5\u02c5";
             }

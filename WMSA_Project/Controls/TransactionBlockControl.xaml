@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="WMSA_Project.Controls.TransactionBlockControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WMSA_Project.Controls"
+             xmlns:models ="clr-namespace:WMSA_DAL.Models;assembly=WMSA_DAL"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="640">
+    <Expander x:Name="Expndr_Trans" IsExpanded="False" Background="LightGray" FontSize="10"
+              Expanded="Expndr_Trans_Clicked">
+        <ListView x:Name="LstVw_Reqs">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Method" Width="40" DisplayMemberBinding="{Binding Verb}"/>
+                    <GridViewColumn Header="URL" Width="440" DisplayMemberBinding="{Binding URL}"/>
+                    <GridViewColumn Header="Corrs" Width="40" DisplayMemberBinding="{Binding Correlations.Count}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Expander>
+</UserControl>

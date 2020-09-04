@@ -50,7 +50,6 @@ namespace WMSA_Project.Repositories
                 if (args.ScriptOnClose != null && CanAdd(args.ScriptOnClose, caller))
                 {
                     var scrptCtrl = new ScriptControl(args.ScriptOnClose);
-                    scrptCtrl.StackTransExpanderStateChange += OnScriptControlExpanderStateChange;
 
                     if (caller.Container != null)
                     {
@@ -134,13 +133,6 @@ namespace WMSA_Project.Repositories
             else
             {
                 return ScriptTransactionsComparer.CompareCount(newScript, _linkedList.First.Value.Container.Script);
-            }
-        }
-        private void OnScriptControlExpanderStateChange(object sender, RoutedEventArgs args)
-        {
-            foreach (var scc in _linkedList)
-            {
-                scc.Container.ToggleExpander(sender, args);
             }
         }
         private void OnNodeContainerChanged()
