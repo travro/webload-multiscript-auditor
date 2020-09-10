@@ -38,7 +38,7 @@ namespace WMSA_Project.Controls
             Script = script;
         }
 
-        public EventHandler<RoutedEventArgs> TransBlockClicked;
+        //public EventHandler<RoutedEventArgs> TransBlockClicked;
 
         public Script Script
         {
@@ -59,6 +59,7 @@ namespace WMSA_Project.Controls
                 TxtBlck_PrevComp.Text = $" from {(value as ScriptControl)?.Script.BuildVersion}";
             }
         }
+        public ScriptControl NextComparison { get; set; }
         public int TotalAdds
         {
             set
@@ -76,17 +77,26 @@ namespace WMSA_Project.Controls
             }
         }
         public SolidColorBrush LabelColor { get; set; }
-        public void OnTransBlockClicked(object sender, RoutedEventArgs args)
+
+        #region handlers
+        public void OnExpanderChanged(object sender, RoutedEventArgs args)
         {
-        }
-        public void ToggleExpander(object sender, RoutedEventArgs args)
-        {
+            int tBlockIndx = Stack_Transactions.Children.IndexOf((sender as TransactionBlockControl));
+            //TransBlockClicked?.Invoke(sender, args);
+            if (PrevComparison != null)
+            {
+                PrevComparison.ReceiveMessage(this, tBlockIndx);
+            }
+            if (NextComparison != null)
+            {
+                NextComparison.ReceiveMessage(this, tBlockIndx);
+            }
         }
         private void Btn_AllExpndrs_Click(object sender, RoutedEventArgs e)
         {
             if (Btn_AllExpndrs.Content == "\u02c5\u02c5\u02c5")
             {
-                foreach (TransactionBlockControl  transBlock in Stack_Transactions.Children)
+                foreach (TransactionBlockControl transBlock in Stack_Transactions.Children)
                 {
                     transBlock.Expndr_Trans.IsExpanded = true;
                 }
@@ -94,17 +104,27 @@ namespace WMSA_Project.Controls
             }
             else
             {
-                foreach ( TransactionBlockControl transBlock in Stack_Transactions.Children)
+                foreach (TransactionBlockControl transBlock in Stack_Transactions.Children)
                 {
                     transBlock.Expndr_Trans.IsExpanded = false;
                 }
                 Btn_AllExpndrs.Content = "\u02c5\u02c5\u02c5";
             }
         }
-
         private void ClearTotals(object sender, ScriptResetEventArgs args)
         {
             TxtBlck_TotalAdds.Text = TxtBlck_TotalDrops.Text = "";
         }
+        #endregion
+        #region helper methods
+        public void ReceiveMessage(ScriptControl sender, int index)
+        {
+            if ((this.Stack_Transactions.Children[index] as TransactionBlockControl).Expndr_Trans.IsExpanded != (sender.Stack_Transactions.Children[index] as TransactionBlockControl).Expndr_Trans.IsExpanded)
+            {
+                (this.Stack_Transactions.Children[index] as TransactionBlockControl).Expndr_Trans.IsExpanded = (sender.Stack_Transactions.Children[index] as TransactionBlockControl).Expndr_Trans.IsExpanded;
+            }
+            else return;
+        }
+        #endregion
     }
 }

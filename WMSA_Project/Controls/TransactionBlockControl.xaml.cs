@@ -32,22 +32,21 @@ namespace WMSA_Project.Controls
             InitializeComponent();
             BubbleMouseWheelEvent();
             FormatExpanderHeader(t, firstColumn);
-            FormatListView(t, firstColumn);
+            FormatListView(t, firstColumn);            
         }
         public EventHandler<RoutedEventArgs> ExpanderChanged;
 
         #region handlers
-
-        private void LstView_Selected(object sender, RoutedEventArgs e)
+        private void LstVwItm_Selected(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("selected");
         }
-
-        private void Expndr_Trans_Clicked(object sender, RoutedEventArgs e)
+        private void OnExpanderChanged(object sender, RoutedEventArgs e)
         {
             ExpanderChanged?.Invoke(this, e);
         }
         #endregion
+
         #region helpermethods
         private void BubbleMouseWheelEvent()
         {
@@ -67,7 +66,7 @@ namespace WMSA_Project.Controls
         private void FormatExpanderHeader(Transaction t, bool firstColumn)
         {
             var transStackPanel = new StackPanel() { Orientation = Orientation.Horizontal };
-            transStackPanel.Children.Add(new TextBlock() { Text = t.Name });
+            transStackPanel.Children.Add(new TextBlock() { Text = t.Name  });
 
             if (t.Sleep != null) transStackPanel.Children.Add(new TextBlock() { Text = $" slp:{t.Sleep}" });
 
@@ -105,7 +104,7 @@ namespace WMSA_Project.Controls
                 {
                     lstViewItem = new ListViewItem() { Content = r };
 
-                    lstViewItem.Selected += LstView_Selected;
+                    lstViewItem.Selected += LstVwItm_Selected;
 
                     if (!firstColumn && !r.Matched)
                     {
@@ -129,7 +128,6 @@ namespace WMSA_Project.Controls
                 }
             }
         }
-
         #endregion
     }
 }

@@ -7,9 +7,8 @@
              xmlns:models ="clr-namespace:WMSA_DAL.Models;assembly=WMSA_DAL"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="640">
-    <Expander x:Name="Expndr_Trans" IsExpanded="False" Background="LightGray" FontSize="10"
-              Expanded="Expndr_Trans_Clicked" Collapsed="Expndr_Trans_Clicked">
-        <ListView x:Name="LstVw_Reqs">
+    <Expander x:Name="Expndr_Trans" IsExpanded="False" Background="LightGray" FontSize="10" Expanded="OnExpanderChanged" Collapsed="OnExpanderChanged">
+        <ListView x:Name="LstVw_Reqs" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Method" Width="40" DisplayMemberBinding="{Binding Verb}"/>

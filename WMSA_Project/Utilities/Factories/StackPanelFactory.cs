@@ -22,12 +22,10 @@ namespace WMSA_Project.Utilities.Factories
 
             if (sccLinkList.Count > 1)
             {
-                ConfigNodeRelations(sccLinkList.First.Next);
+                ConfigNodeRelations(sccLinkList.First);
+                EqualizeBlockHeights(sccLinkList);
             }
-            EqualizeBlockHeights(sccLinkList);
         }
-
-
 
         #region helpermethods
         private static void ConfigNodeRelations(LinkedListNode<ScriptContainerControl> node)
@@ -37,12 +35,14 @@ namespace WMSA_Project.Utilities.Factories
             var thisContainer = node.Value.Container;
             var previousContainer = (node.Previous != null) ? node.Previous.Value.Container : null;
 
-            if (previousContainer != thisContainer.PrevComparison)
+            if (previousContainer != null && previousContainer != thisContainer.PrevComparison)
             {
                 thisContainer.PrevComparison = previousContainer;
                 thisContainer.Script = ScriptFactory.GetComparativeScriptFromControls(thisContainer);
                 AddTransBlocks(thisContainer);
             }
+            thisContainer.NextComparison = (node.Next != null) ? node.Next.Value.Container : null;
+
             ConfigNodeRelations(node.Next);
         }
         private static void AddTransBlocks(ScriptControl scriptControl, bool isFirst = false)
@@ -52,13 +52,12 @@ namespace WMSA_Project.Utilities.Factories
             foreach(var t in scriptControl.Script.Transactions)
             {
                 var transBlockCtrl = new TransactionBlockControl(t, isFirst);
-                transBlockCtrl.ExpanderChanged += scriptControl.OnTransBlockClicked;                
+                transBlockCtrl.ExpanderChanged += scriptControl.OnExpanderChanged;                
                 scriptControl.Stack_Transactions.Children.Add(transBlockCtrl);
             }
         }
         private static void EqualizeBlockHeights(LinkedList<ScriptContainerControl> sccLinkList)
         {
-            if (sccLinkList.Count < 2) return;
             var firstNode = sccLinkList.First;
             int transCt = firstNode.Value.Container.Stack_Transactions.Children.Count;
             double maxHt;
@@ -69,7 +68,6 @@ namespace WMSA_Project.Utilities.Factories
                 SetMaxHeight(firstNode, i, maxHt);
             }
         }
-
         private static void SetMaxHeight(LinkedListNode<ScriptContainerControl> node, int stackIndex, double maxHt)
         {
             if (node == null) return ;
@@ -83,7 +81,6 @@ namespace WMSA_Project.Utilities.Factories
                 return;
             }
         }
-
         private static double GetMaxHeight(LinkedListNode<ScriptContainerControl> node, int stackIndex, double currentHeight)
         {
             if (node == null) return -1;
@@ -94,20 +91,11 @@ namespace WMSA_Project.Utilities.Factories
 
                 ht = (ht < currentHeight) ? currentHeight : ht;
                 return GetMaxHeight(node.Next, stackIndex, ht);
-                //if (ht < currentHeight)
-                //{
-                //    return GetMaxHeight(node.Next, stackIndex, currentHeight);
-                //}
-                //else
-                //{
-                //   return GetMaxHeight(node.Next, stackIndex, ht);
-                //}
             }
             else
             {
                 return ht;
-            }         
-                
+            }                         
         }
         #endregion
         #region handlers
