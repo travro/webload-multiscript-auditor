@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WMSA_Project.Controls"
              xmlns:models="clr-namespace:WMSA_Project.Models"
-             mc:Ignorable="d"  Width="540">
+             mc:Ignorable="d"  MaxWidth="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

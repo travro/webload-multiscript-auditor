@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="640">
     <Expander x:Name="Expndr_Trans" IsExpanded="False" Background="LightGray" FontSize="10"
-              Expanded="Expndr_Trans_Clicked">
+              Expanded="Expndr_Trans_Clicked" Collapsed="Expndr_Trans_Clicked">
         <ListView x:Name="LstVw_Reqs">
             <ListView.View>
                 <GridView>

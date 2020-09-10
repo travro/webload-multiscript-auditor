@@ -9,6 +9,7 @@ using WMSA_Project.Repositories;
 using WMSA_Project.Models.Factories;
 using System.Windows;
 using System.Windows.Data;
+using System;
 
 namespace WMSA_Project.Utilities.Factories
 {
@@ -23,7 +24,10 @@ namespace WMSA_Project.Utilities.Factories
             {
                 ConfigNodeRelations(sccLinkList.First.Next);
             }
+            EqualizeBlockHeights(sccLinkList);
         }
+
+
 
         #region helpermethods
         private static void ConfigNodeRelations(LinkedListNode<ScriptContainerControl> node)
@@ -51,6 +55,59 @@ namespace WMSA_Project.Utilities.Factories
                 transBlockCtrl.ExpanderChanged += scriptControl.OnTransBlockClicked;                
                 scriptControl.Stack_Transactions.Children.Add(transBlockCtrl);
             }
+        }
+        private static void EqualizeBlockHeights(LinkedList<ScriptContainerControl> sccLinkList)
+        {
+            if (sccLinkList.Count < 2) return;
+            var firstNode = sccLinkList.First;
+            int transCt = firstNode.Value.Container.Stack_Transactions.Children.Count;
+            double maxHt;
+
+            for(int i = 0; i < transCt; i++)
+            {
+                maxHt = GetMaxHeight(firstNode, i, 0.0);
+                SetMaxHeight(firstNode, i, maxHt);
+            }
+        }
+
+        private static void SetMaxHeight(LinkedListNode<ScriptContainerControl> node, int stackIndex, double maxHt)
+        {
+            if (node == null) return ;
+            ((node.Value?.Container?.Stack_Transactions.Children[stackIndex] as TransactionBlockControl).Expndr_Trans.Content as ListView).Height = maxHt;
+            if(node.Next != null)
+            {
+                SetMaxHeight(node.Next, stackIndex, maxHt);
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private static double GetMaxHeight(LinkedListNode<ScriptContainerControl> node, int stackIndex, double currentHeight)
+        {
+            if (node == null) return -1;
+            double ht = 24.0 + ((node.Value?.Container?.Stack_Transactions.Children[stackIndex] as TransactionBlockControl).Expndr_Trans.Content as ListView).Items.Count * 20.0;
+
+            if (node.Next != null)
+            {
+
+                ht = (ht < currentHeight) ? currentHeight : ht;
+                return GetMaxHeight(node.Next, stackIndex, ht);
+                //if (ht < currentHeight)
+                //{
+                //    return GetMaxHeight(node.Next, stackIndex, currentHeight);
+                //}
+                //else
+                //{
+                //   return GetMaxHeight(node.Next, stackIndex, ht);
+                //}
+            }
+            else
+            {
+                return ht;
+            }         
+                
         }
         #endregion
         #region handlers
