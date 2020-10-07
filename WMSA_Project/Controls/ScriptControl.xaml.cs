@@ -38,8 +38,6 @@ namespace WMSA_Project.Controls
             Script = script;
         }
 
-        //public EventHandler<RoutedEventArgs> TransBlockClicked;
-
         public Script Script
         {
             get { return _script; }
@@ -82,7 +80,6 @@ namespace WMSA_Project.Controls
         public void OnExpanderChanged(object sender, RoutedEventArgs args)
         {
             int tBlockIndx = Stack_Transactions.Children.IndexOf((sender as TransactionBlockControl));
-            //TransBlockClicked?.Invoke(sender, args);
             if (PrevComparison != null)
             {
                 PrevComparison.ReceiveMessage(this, tBlockIndx);
