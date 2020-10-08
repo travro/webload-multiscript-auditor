@@ -30,7 +30,7 @@
         </Menu>
         <Border BorderBrush="#98c1d9" BorderThickness="1" Grid.Row="1"/>
         <DockPanel Grid.Row="2" LastChildFill="True">
-            <Grid x:Name="Grd_Menu" DockPanel.Dock="Left" Background="#293241" Width="10" MouseEnter="Grd_Menu_MouseEnter" MouseLeave="Grd_Menu_MouseLeave" IsEnabled="False">
+            <Grid x:Name="Grd_Menu" DockPanel.Dock="Left" Background="#293241" Width="10" MouseEnter="Grd_Menu_MouseEnter" MouseLeave="Grd_Menu_MouseLeave" Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>

@@ -31,7 +31,7 @@ namespace WMSA_Project
             ScriptCollectionContainer.ThisContainer.CollectionChanged += (object sender, NotifyCollectionChangedEventArgs args) =>
             {
                 CntntCtrl_Main.Content = _loader.LoadScriptView();
-                Grd_Menu.IsEnabled = (ScriptCollectionContainer.ThisContainer.Count > 1) ? true : false;
+                Grd_Menu.Visibility = (ScriptCollectionContainer.ThisContainer.Count > 1) ? Visibility.Visible : Visibility.Collapsed;
             };
         }
 
