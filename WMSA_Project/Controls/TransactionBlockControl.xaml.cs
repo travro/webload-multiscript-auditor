@@ -106,7 +106,8 @@ namespace WMSA_Project.Controls
 
                     lstViewItem.Selected += (object sender, RoutedEventArgs args) =>
                     {
-                        MessageBox.Show($"You selected: {r.GetInfoString()}");
+                        var reqDataWindow = new WMSA_Project.Windows.RequestDataWindow();
+                        reqDataWindow.Show();
                     };
 
                     if (!firstColumn && !r.Matched)

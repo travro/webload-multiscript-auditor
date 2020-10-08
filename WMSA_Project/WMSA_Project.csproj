@@ -136,6 +136,9 @@
       <DependentUpon>ImportScriptWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Interfaces\IScriptAttributeWindow.cs" />
+    <Compile Include="Windows\RequestDataWindow.xaml.cs">
+      <DependentUpon>RequestDataWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\AttributeControls\ScriptAttributesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -205,6 +208,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ImportScriptWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\RequestDataWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
