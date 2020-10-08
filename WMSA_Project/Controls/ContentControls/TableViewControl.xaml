@@ -22,9 +22,9 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type GroupItem}">
-                                        <Expander IsExpanded="True" Background="#FFFF7400">
+                                        <Expander IsExpanded="True" Background="#FFA66630">
                                             <Expander.Header>
-                                                    <TextBlock Foreground="White" Text="{Binding Name}"/>
+                                                <TextBlock Foreground="White" Text="{Binding Name}"/>
                                             </Expander.Header>
                                             <Expander.Content>
                                                 <ItemsPresenter/>

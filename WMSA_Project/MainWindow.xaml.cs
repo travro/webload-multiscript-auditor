@@ -31,6 +31,7 @@ namespace WMSA_Project
             ScriptCollectionContainer.ThisContainer.CollectionChanged += (object sender, NotifyCollectionChangedEventArgs args) =>
             {
                 CntntCtrl_Main.Content = _loader.LoadScriptView();
+                Grd_Menu.IsEnabled = (ScriptCollectionContainer.ThisContainer.Count > 1) ? true : false;
             };
         }
 
@@ -58,7 +59,21 @@ namespace WMSA_Project
         private void Btn_SutView_Click(object sender, RoutedEventArgs e)
         {
             CntntCtrl_Main.Content = _loader.LoadSUTView();
+        }        
+        
+        private void Grd_Menu_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Grd_Menu.Width = Double.NaN;
+            Btn_TblView.Visibility = Btn_ScrptView.Visibility = Visibility.Visible;
+        }
+
+        private void Grd_Menu_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Grd_Menu.Width = 16.0;
+            Btn_TblView.Visibility = Btn_ScrptView.Visibility = Visibility.Hidden;
         }
         #endregion
+
+
     }
 }

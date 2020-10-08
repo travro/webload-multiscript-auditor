@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="Webload Script Tool" Height="900" Width="1200" Background="WhiteSmoke" >
     <Grid Width="auto" x:Name="Grd_Main" >
-        <Grid.ColumnDefinitions>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="12*"/>
-        </Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>-->
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="2"/>
@@ -28,18 +28,33 @@
                 <MenuItem Header="E_xit" Click="MenuItem_Exit_CLick"/>
             </MenuItem>
         </Menu>
-        <Border BorderBrush="#98c1d9" BorderThickness="1" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
-        <Grid x:Name="Grd_Menu" Grid.Row="2" Grid.Column="0"  Background="#293241" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="8*"/>
-            </Grid.RowDefinitions>
-            <Button x:Name="Btn_ScrptView" Grid.Row="0" Content="Scripts" Click="Btn_ScrptView_Click" ToolTip="Scripts"/>
-            <Button x:Name="Btn_TblView" Grid.Row="1" Content="Deltas" Click="Btn_TblView_Click" ToolTip="DeltaTable" />
-            <!--<Button x:Name="Btn_SutView" Grid.Row="2" Content="SUTs" Click="Btn_SutView_Click"/>-->
-        </Grid>
-        <ContentControl Grid.Row="2" Grid.Column="1" x:Name="CntntCtrl_Main"/>
+        <Border BorderBrush="#98c1d9" BorderThickness="1" Grid.Row="1"/>
+        <DockPanel Grid.Row="2" LastChildFill="True">
+            <Grid x:Name="Grd_Menu" DockPanel.Dock="Left" Background="#293241" Width="10" MouseEnter="Grd_Menu_MouseEnter" MouseLeave="Grd_Menu_MouseLeave" IsEnabled="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <!--<RowDefinition Height="*"/>-->
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="4"/>
+                        <Setter Property="Background" Value="#293241"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="FontSize" Value="54"/>
+                        <Setter Property="Margin" Value="4"/>
+                        <Setter Property="MinWidth" Value="80"/>
+                    </Style>
+                </Grid.Resources>
+                <Button x:Name="Btn_ScrptView" Grid.Row="0" Content="&#9783;" Click="Btn_ScrptView_Click" ToolTip="Scripts" Visibility="Hidden"/>
+                <Button x:Name="Btn_TblView" Grid.Row="1" Content="&#916;" Click="Btn_TblView_Click" ToolTip="DeltaTable" Visibility="Hidden" />
+                <!--<Button x:Name="Btn_SutView" Grid.Row="2" Content="SUTs" Click="Btn_SutView_Click"/>-->
+            </Grid>
+            <ContentControl DockPanel.Dock="Left"   x:Name="CntntCtrl_Main"/>
+        </DockPanel>
+
+
     </Grid>
 </Window>
