@@ -33,7 +33,6 @@ namespace WMSA_Project.Controls.ContentControls
             InitializeComponent();
             DataContext = this;
             ScriptDeltas = new ObservableCollection<ScriptDelta>();
-
             if (ScriptCollectionContainer.ThisContainer != null)
             {
                 ScriptCollectionContainer.ThisContainer.CollectionChanged += UpdateObsCollection;
