@@ -36,7 +36,7 @@ namespace WMSA_Project.Repositories
             }
         }
         public List<ScriptContainerControl> List => _linkedList.ToList();
-
+        public int Count => _linkedList.Count;
         #region handlers
 
 
