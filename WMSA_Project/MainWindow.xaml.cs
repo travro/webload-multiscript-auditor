@@ -28,7 +28,10 @@ namespace WMSA_Project
         {
             InitializeComponent();
             _loader = new ContentLoader();
-            ScriptCollectionContainer.ThisContainer.CollectionChanged += (object sender, NotifyCollectionChangedEventArgs args) => CntntCtrl_Main.Content =  _loader.LoadScriptView();
+            ScriptCollectionContainer.ThisContainer.CollectionChanged += (object sender, NotifyCollectionChangedEventArgs args) =>
+            {
+                CntntCtrl_Main.Content = _loader.LoadScriptView();
+            };
         }
 
         #region handlers
