@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMSA_Project.Windows"
         mc:Ignorable="d"
-        Title="RequestDataWindow" Height="450" Width="800" WindowStyle="None" LostFocus="Window_LostFocus" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <TextBlock Text="hello"/>
-    </Grid>
+        Title="{Binding RDWTitle}" Height="450"  WindowStyle="ToolWindow"  WindowStartupLocation="CenterScreen">
+
+    <WrapPanel x:Name="StkPnl_Corrs" Orientation="Vertical"/>
+
 </Window>

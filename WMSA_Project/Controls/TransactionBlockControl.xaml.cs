@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -106,8 +107,8 @@ namespace WMSA_Project.Controls
 
                     lstViewItem.Selected += (object sender, RoutedEventArgs args) =>
                     {
-                        var reqDataWindow = new WMSA_Project.Windows.RequestDataWindow();
-                        reqDataWindow.Show();
+                        var reqDataWindow = new WMSA_Project.Windows.RequestDataWindow(r);
+                        reqDataWindow.ShowDialog();
                     };
 
                     if (!firstColumn && !r.Matched)
