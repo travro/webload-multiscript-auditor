@@ -67,7 +67,7 @@ namespace WMSA_Project.Windows
         }
         private void Btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            Hide();
         }
         private void Btn_Back_Click(object sender, RoutedEventArgs e)
         {
@@ -99,7 +99,7 @@ namespace WMSA_Project.Windows
             {
                 ScriptOnClose = Script
             });
-            Close();
+            Hide();
         }
         #endregion
     }

@@ -45,7 +45,7 @@ namespace WMSA_Project.Repositories
         #region helpermethods
         public void ImportScript(ScriptContainerControl caller)
         {
-            if (importScriptWindow == null) importScriptWindow = new ImportScriptWindow();
+            if(importScriptWindow == null)importScriptWindow = new ImportScriptWindow();
             importScriptWindow.ClosedWithScript += (object sender, ClosedWithScriptEventArgs args) =>
             {
                 if (args.ScriptOnClose != null && CanAdd(args.ScriptOnClose, caller))
