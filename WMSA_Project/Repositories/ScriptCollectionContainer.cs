@@ -16,7 +16,7 @@ namespace WMSA_Project.Repositories
     {
         private static ScriptCollectionContainer _collection;
         private LinkedList<ScriptContainerControl> _linkedList;
-        private ImportScriptWindow importScriptWindow;
+        private ImportScriptWindow _importWin;
 
         private ScriptCollectionContainer()
         {
@@ -45,8 +45,9 @@ namespace WMSA_Project.Repositories
         #region helpermethods
         public void ImportScript(ScriptContainerControl caller)
         {
-            if(importScriptWindow == null)importScriptWindow = new ImportScriptWindow();
-            importScriptWindow.ClosedWithScript += (object sender, ClosedWithScriptEventArgs args) =>
+            if (_importWin == null) _importWin = new ImportScriptWindow();
+            _importWin.ClearEvents();
+            _importWin.ClosedWithScript += (object sender, ClosedWithScriptEventArgs args) =>
             {
                 if (args.ScriptOnClose != null && CanAdd(args.ScriptOnClose, caller))
                 {
@@ -67,7 +68,7 @@ namespace WMSA_Project.Repositories
                     MessageBox.Show("This script's transactions do not match those of the script(s) currently loaded");
                 }
             };
-            importScriptWindow.ShowDialog();
+            _importWin.ShowDialog();
         }
         public void ImportScriptBefore(ScriptContainerControl caller)
         {

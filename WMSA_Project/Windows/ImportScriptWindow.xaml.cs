@@ -93,6 +93,10 @@ namespace WMSA_Project.Windows
         }
         #endregion
         #region helpermethods
+        public void ClearEvents()
+        {
+            ClosedWithScript = null;
+        }
         private void OnClosedWithScript()
         {
             ClosedWithScript?.Invoke(this, new ClosedWithScriptEventArgs()
